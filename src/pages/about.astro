@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About | Crown and Compass"
+  description="Brian Mangum founded Crown and Compass because he needed it. The story, the philosophy, and why peer-led men's community works."
+>
+
+  <!-- Page Hero -->
+  <section class="about-hero">
+    <div class="section-container">
+      <p class="overline">About</p>
+      <h1 class="about-headline">A community built by a man<br class="d-break" /> who needed one.</h1>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="about-body section-pad">
+    <div class="section-container about-layout">
+
+      <div class="about-content prose-cc">
+
+        <!-- Origin -->
+        <section class="about-section">
+          <h2>Where This Started</h2>
+          <p>
+            Crown and Compass started simply: a few men, a book, a Saturday morning. No strategy,
+            no program, no launch plan. A man named what he needed — honest company, a structure
+            for growth, other men willing to go first — and invited a few others to try it with him.
+          </p>
+          <p>
+            That was the beginning. The community has been small by design ever since.
+          </p>
+          <p>
+            It's named for two things. The Crown belongs to Christ — the foundation and the
+            authority. The Compass is for The Walk — the direction, the map, the orientation
+            that keeps a man from drifting. Put them together and you have the frame: a
+            community built under Christ's authority and pointed in a clear direction.
+          </p>
+        </section>
+
+        <!-- Brian's Role -->
+        <section class="about-section">
+          <h2>Brian's Role</h2>
+          <p>
+            Brian is the Founder. That means he set the table, named the thing, held the first
+            meeting, and carries the vision. It does not mean he is the permanent host, the only
+            Guide, or the authority on every question.
+          </p>
+          <p>
+            His job is to be the first voice and to shape the culture in the early years. He decides
+            which books CC reads. He identifies and invites the first Guides. He holds the standard
+            of what the Round should feel like when it's done right. He is Barnabas to the group —
+            the one who encourages, who sees the potential in a man before the man sees it himself.
+          </p>
+          <p>
+            As CC grows, Brian's role becomes less operational and more foundational. The goal is
+            a community that runs on shared culture, not Brian's personal bandwidth. That transition
+            happens slowly, through Guides developing and Chapters multiplying. It does not happen
+            by accident.
+          </p>
+        </section>
+
+        <!-- The Walk Philosophy -->
+        <section class="about-section">
+          <h2>The Walk</h2>
+          <p>
+            Everything in Crown and Compass lives under one phrase: <em>Long. Slow. Together.</em>
+          </p>
+          <p>
+            Long, because the kind of formation we're after does not happen in a weekend retreat
+            or a six-week program. It happens over years. A man who stays in a Chapter long enough
+            will look back and be unable to name the exact moment things changed — only that they
+            did.
+          </p>
+          <p>
+            Slow, because we resist the pressure to optimize. We are not trying to produce the
+            maximum amount of growth in the minimum amount of time. We are trying to walk faithfully
+            in a direction worth walking. That takes longer than most men expect and gives more
+            than most men imagine.
+          </p>
+          <p>
+            Together, because the entire premise rests on this: a man does not grow in isolation.
+            He grows when other men are watching, asking, and walking alongside. The community is
+            not the bonus feature. It is the point.
+          </p>
+        </section>
+
+        <!-- What CC Is Not -->
+        <section class="about-section">
+          <h2>What This Is Not</h2>
+          <p>
+            Crown and Compass is not a men's retreat with a follow-up newsletter. It is an
+            ongoing community. The relationship doesn't end when the event ends.
+          </p>
+          <p>
+            It is not a self-improvement program. Self-improvement is a solo project. What we
+            do requires other people. A man cannot Crown and Compass himself.
+          </p>
+          <p>
+            It is not broadly spiritual or interfaith. Crown and Compass is Christian. The Bible
+            is our text alongside whatever book we're reading. Prayer is normal. Faith in Christ
+            is the foundation. A man who is curious about faith is welcome. A man looking for a
+            faith-neutral self-development group will find something better suited elsewhere.
+          </p>
+          <p>
+            It is not free because it's cheap. It is free because the Gospel is free and because
+            the best communities — F3, AA, the early church — have never charged for belonging.
+          </p>
+        </section>
+
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="about-sidebar">
+        <div class="sidebar-card">
+          <p class="sidebar-label">The Walk</p>
+          <blockquote class="sidebar-quote">
+            "Long. Slow. Together."
+          </blockquote>
+        </div>
+        <div class="sidebar-card">
+          <p class="sidebar-label">Founded</p>
+          <p class="sidebar-stat">2025</p>
+        </div>
+        <div class="sidebar-card">
+          <p class="sidebar-label">Community size</p>
+          <p class="sidebar-stat">Small by design.</p>
+          <p class="sidebar-note">
+            Chapters cap at 8 Brothers. When a Chapter is full, a new one forms.
+          </p>
+        </div>
+        <div class="sidebar-card sidebar-cta">
+          <p class="sidebar-label">Ready to walk?</p>
+          <a href="/join" class="btn-amber" style="font-size: 0.875rem; padding: 0.5rem 1.25rem;">
+            Get Connected
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </article>
+
+</BaseLayout>
+
+<style>
+  .about-hero {
+    padding: 5rem 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overline {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .about-headline {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .d-break {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .d-break { display: inline; }
+  }
+
+  /* Layout */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  @media (min-width: 900px) {
+    .about-layout {
+      grid-template-columns: 1fr 18rem;
+      align-items: start;
+    }
+  }
+
+  /* Content */
+  .about-content {
+    /* prose-cc styles from global.css */
+  }
+
+  .about-section {
+    margin-bottom: 3rem;
+  }
+
+  .about-section:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Sidebar */
+  .about-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background-color: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  @media (min-width: 900px) {
+    .about-sidebar {
+      position: sticky;
+      top: 5rem;
+    }
+  }
+
+  .sidebar-card {
+    background-color: var(--bg-card);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .sidebar-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .sidebar-quote {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .sidebar-stat {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .sidebar-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .sidebar-cta {
+    gap: 0.75rem;
+  }
+</style>

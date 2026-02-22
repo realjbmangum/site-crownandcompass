@@ -1,0 +1,413 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Join a Chapter | Crown and Compass"
+  description="Crown and Compass is free. No application. No commitment. Show up on a Saturday morning and see what happens."
+>
+
+  <!-- Page Hero -->
+  <section class="join-hero">
+    <div class="section-container">
+      <p class="overline">Join a Chapter</p>
+      <h1 class="join-headline">Show up once.<br />See what happens.</h1>
+      <p class="join-subtext">
+        There is no application. No commitment required for the first visit. A man comes once,
+        sits in the room, and decides for himself.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="section-pad">
+    <div class="section-container join-layout">
+
+      <!-- Left: What joining looks like + cost -->
+      <div class="join-info">
+
+        <div class="info-block">
+          <h2 class="info-heading">What joining looks like</h2>
+          <p>
+            The current Chapter meets on Saturday mornings at 7am. Brian Guides the first session
+            for any new Brother. You read the assigned section of the current book beforehand —
+            that's the only preparation required.
+          </p>
+          <p>
+            The meeting has structure: discussion of the book, then The Round. Three moves:
+            a check-in (<em>where are you, really?</em>), The Ask (prayer and accountability),
+            and The Close (a verse or a thought to carry into the week). It runs about an hour.
+          </p>
+          <p>
+            You do not need to perform. You do not need to have your life together. You need
+            a willingness to show up and say something true. That's the whole requirement.
+          </p>
+        </div>
+
+        <div class="info-block">
+          <h2 class="info-heading">What it costs</h2>
+          <div class="free-callout">
+            <p class="free-text">Nothing.</p>
+            <p class="free-sub">
+              Crown and Compass is free because the Gospel is free, and because the best
+              communities — F3, AA, the early church — have never charged for belonging.
+              A man doesn't pay to belong here. He belongs because he shows up.
+            </p>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <h2 class="info-heading">The current book</h2>
+          <p>
+            Every Chapter reads the same book at the same time. The book is the common ground
+            that makes honest conversation possible. Without it, men default to small talk or
+            complaint. With it, they have a shared text to push against: to agree with,
+            to argue with, to hold up as a mirror.
+          </p>
+          <p>
+            Reach out to find out what we're reading now and where to get a copy.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Right: Form -->
+      <div class="join-form-col">
+        <div class="form-card">
+          <h2 class="form-heading">Get connected</h2>
+          <p class="form-subtext">
+            Fill this out and Brian will be in touch within a day or two. No pressure.
+            Just a conversation.
+          </p>
+
+          <!-- Web3Forms — replace ACCESS_KEY with your key from web3forms.com -->
+          <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            class="cc-form"
+          >
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+            <input type="hidden" name="subject" value="New Crown & Compass inquiry" />
+            <input type="hidden" name="from_name" value="Crown and Compass Website" />
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+
+            <div class="field-group">
+              <label for="name" class="field-label">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="Your name"
+                class="field-input"
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="email" class="field-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="you@example.com"
+                class="field-input"
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="how" class="field-label">How did you hear about Crown and Compass?</label>
+              <textarea
+                id="how"
+                name="how_you_heard"
+                rows="3"
+                placeholder="A friend, word of mouth, just found it..."
+                class="field-input field-textarea"
+              ></textarea>
+            </div>
+
+            <div class="field-group">
+              <label for="message" class="field-label">Anything else you want Brian to know? <span class="optional">(optional)</span></label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                placeholder="Where you're at, what you're looking for, questions you have..."
+                class="field-input field-textarea"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-amber submit-btn">
+              Send it
+            </button>
+
+            <p class="form-note">
+              Brian reads every message personally. You'll hear from him, not an autoresponder.
+            </p>
+          </form>
+        </div>
+
+        <!-- Alternative contact -->
+        <div class="alt-contact">
+          <p class="alt-label">Or reach out directly</p>
+          <p class="alt-text">
+            If forms aren't your thing, find Brian at
+            <a href="https://x.com/realjbmangum" target="_blank" rel="noopener noreferrer" class="alt-link">
+              @realjbmangum
+            </a>
+            on X (Twitter). A direct message works fine.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .join-hero {
+    padding: 5rem 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overline {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .join-headline {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.15;
+    margin: 0 0 1rem;
+  }
+
+  .join-subtext {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 38rem;
+  }
+
+  /* Layout */
+  .join-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .join-layout {
+      grid-template-columns: 1fr 22rem;
+    }
+  }
+
+  /* Info blocks */
+  .info-block {
+    margin-bottom: 3rem;
+  }
+
+  .info-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .info-heading {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .info-block p {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .info-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Free callout */
+  .free-callout {
+    border-left: 3px solid var(--accent);
+    padding: 0.25rem 0 0.25rem 1.5rem;
+  }
+
+  .free-text {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem !important;
+  }
+
+  .free-sub {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-muted) !important;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* Form card */
+  .form-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+  }
+
+  .form-heading {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+  }
+
+  .form-subtext {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 1.75rem;
+  }
+
+  /* Form fields */
+  .cc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .field-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .optional {
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .field-input {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    padding: 0.625rem 0.875rem;
+    border-radius: 2px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s ease;
+  }
+
+  .field-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  .field-input:focus {
+    border-color: var(--accent);
+  }
+
+  .field-textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6;
+  }
+
+  .submit-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.8125rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 0.25rem;
+  }
+
+  .form-note {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  /* Alt contact */
+  .alt-contact {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+  }
+
+  .alt-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+
+  .alt-text {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .alt-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .alt-link:hover {
+    color: var(--accent-light);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 900px) {
+    .join-form-col {
+      position: sticky;
+      top: 5rem;
+    }
+  }
+</style>

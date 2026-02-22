@@ -1,0 +1,64 @@
+---
+interface Props {
+  name: string;
+  hook: string;
+  href: string;
+}
+
+const { name, hook, href } = Astro.props;
+---
+
+<a href={href} class="pillar-card">
+  <span class="pillar-name">{name}</span>
+  <span class="pillar-hook">{hook}</span>
+  <span class="pillar-arrow">→</span>
+</a>
+
+<style>
+  .pillar-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.75rem 1.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--cc-border, #2e2c26);
+    border-top: 2px solid var(--accent);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .pillar-card:hover {
+    background-color: var(--bg-surface);
+    border-top-color: var(--accent-light);
+  }
+
+  .pillar-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .pillar-hook {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.125rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .pillar-arrow {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .pillar-card:hover .pillar-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+</style>

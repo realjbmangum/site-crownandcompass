@@ -1,0 +1,281 @@
+/* Google Fonts — must precede @tailwind directives */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------------------
+   CSS Custom Properties
+---------------------------------------- */
+:root {
+  --bg-base:      #0f1117;
+  --bg-card:      #1a1a20;
+  --bg-surface:   #22222a;
+  --text-primary: #f0ebe2;
+  --text-muted:   #8a8070;
+  --accent:       #c9853a;
+  --accent-light: #e8a055;
+  --border:       #2e2c26;
+}
+
+/* ----------------------------------------
+   Base
+---------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ----------------------------------------
+   Typography
+---------------------------------------- */
+.font-garamond {
+  font-family: 'EB Garamond', Georgia, serif;
+}
+
+h1, h2, h3 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+p {
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ----------------------------------------
+   Grain Texture Utility
+   Add .grain-bg to any section
+---------------------------------------- */
+.grain-bg {
+  position: relative;
+}
+
+.grain-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grain-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ----------------------------------------
+   Buttons
+---------------------------------------- */
+.btn-amber {
+  display: inline-block;
+  background-color: var(--accent);
+  color: var(--bg-base);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.03em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-amber:hover {
+  background-color: var(--accent-light);
+}
+
+.btn-ghost {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  letter-spacing: 0.03em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+/* ----------------------------------------
+   Section containers
+---------------------------------------- */
+.section-container {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-pad {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (max-width: 640px) {
+  .section-pad {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* ----------------------------------------
+   Divider
+---------------------------------------- */
+.section-divider {
+  height: 1px;
+  background: var(--border);
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+/* ----------------------------------------
+   Prose (long-form reading)
+---------------------------------------- */
+.prose-cc {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.0625rem, 2vw, 1.1875rem);
+  line-height: 1.85;
+  color: var(--text-primary);
+}
+
+.prose-cc h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose-cc h3 {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  color: var(--accent);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+
+.prose-cc h4 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-cc p {
+  margin-bottom: 1.25rem;
+}
+
+.prose-cc ol {
+  counter-reset: list;
+  padding: 0;
+  list-style: none;
+}
+
+.prose-cc ol li {
+  counter-increment: list;
+  padding-left: 2rem;
+  position: relative;
+  margin-bottom: 0.875rem;
+}
+
+.prose-cc ol li::before {
+  content: counter(list) '.';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.prose-cc ul {
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.prose-cc ul li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-cc ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ----------------------------------------
+   Scripture callout
+---------------------------------------- */
+.scripture-block {
+  border-left: 3px solid var(--accent);
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--bg-card);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.0625rem;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.75;
+}
+
+/* ----------------------------------------
+   Questions card
+---------------------------------------- */
+.questions-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.questions-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}

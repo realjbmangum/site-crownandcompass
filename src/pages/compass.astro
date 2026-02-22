@@ -1,0 +1,872 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pillars = [
+  { id: 'body', name: 'Body' },
+  { id: 'being', name: 'Being' },
+  { id: 'balance', name: 'Balance' },
+  { id: 'business', name: 'Business' },
+];
+---
+
+<BaseLayout
+  title="The Compass | Crown and Compass"
+  description="The Compass is a map. Four pillars — Body, Being, Balance, Business — to help a man see where he stands and where he could go. Public. No login required."
+>
+
+  <!-- Compass Hero -->
+  <section class="compass-hero grain-bg">
+    <div class="section-container">
+      <p class="overline">The Curriculum</p>
+      <h1 class="compass-headline">The Compass</h1>
+      <p class="compass-sub">
+        A map, not a syllabus. Four pillars. Four stages. One honest starting point.
+      </p>
+      <div class="pillar-nav-pills">
+        {pillars.map(p => (
+          <a href={`#${p.id}`} class="pill">{p.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro + Layout -->
+  <div class="compass-layout section-pad">
+    <div class="section-container compass-grid">
+
+      <!-- Sticky Sidebar (desktop) -->
+      <aside class="compass-sidebar" aria-label="Pillar navigation">
+        <p class="sidebar-heading">Pillars</p>
+        <nav>
+          <ul class="sidebar-nav-list">
+            {pillars.map(p => (
+              <li>
+                <a href={`#${p.id}`} class="sidebar-link">{p.name}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div class="sidebar-divider"></div>
+        <a href="/join" class="sidebar-join btn-amber">Join a Chapter</a>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="compass-content prose-cc">
+
+        <!-- What This Is -->
+        <section class="compass-intro">
+          <p class="lead-prose">
+            The Compass is not a self-help program. It is not a syllabus to be taught or a
+            curriculum to be completed. It is a map. A man picks it up knowing roughly where he
+            stands and uses it to walk. The destination is not mastery. It is faithfulness.
+          </p>
+          <p>
+            There are four pillars: <strong>Body</strong>, <strong>Being</strong>,
+            <strong>Balance</strong>, <strong>Business</strong>. They are not sequential. A man
+            does not finish one before beginning the next. He lives in all four simultaneously,
+            the way a house rests on all its footings at once. Some pillars are strong. Others
+            have cracked and settled over the years. The Compass helps a man see which ones need
+            attention — not to shame him, but to give him clarity.
+          </p>
+          <p>
+            Every pillar uses the same four stages to help a man locate himself:
+          </p>
+
+          <div class="stages-overview">
+            <div class="stage-item">
+              <span class="stage-label">The Ground</span>
+              <span class="stage-desc">Naming what is true. Most men start here longer than they admit.</span>
+            </div>
+            <div class="stage-item">
+              <span class="stage-label">The Path</span>
+              <span class="stage-desc">The first movement toward change. Small, deliberate steps.</span>
+            </div>
+            <div class="stage-item">
+              <span class="stage-label">The Walk</span>
+              <span class="stage-desc">Faithfulness over years. Marked by return, not perfection.</span>
+            </div>
+            <div class="stage-item">
+              <span class="stage-label">The Guide</span>
+              <span class="stage-desc">The man who has walked long enough to sit with another man's struggle.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================
+             BODY
+        ====================================== -->
+        <section id="body" class="pillar-section">
+          <div class="pillar-section-header">
+            <p class="pillar-label">Pillar One</p>
+            <h2 class="pillar-title">Body</h2>
+            <p class="pillar-summary">
+              Stewardship of the physical life: sleep, food, movement, and the quiet discipline
+              of tending what you have been given.
+            </p>
+          </div>
+
+          <h3>Why the Body Matters</h3>
+          <p>
+            Paul wrote that your body is a temple of the Holy Spirit (1 Corinthians 6:19–20).
+            That word, <em>temple</em>, is easy to skip past. But sit with it. A temple is not a
+            trophy case. It is a place where something sacred dwells. You do not optimize a temple.
+            You tend it. You keep the roof sound and the floors swept. You treat it with the kind
+            of steady care that says: something important lives here.
+          </p>
+          <p>
+            The stakes are practical before they are theological. A man who sleeps four hours a
+            night is short with his kids. A man who has not moved his body in years cannot play in
+            the yard with his grandchildren. The body is not separate from the life. It is the
+            vehicle for the life. When it breaks down, everything in the back seat feels it.
+          </p>
+          <p>
+            This pillar is not about aesthetics or performance. It is not about the number on the
+            scale or the weight on the bar. It is about being present, being capable, and being
+            faithful with the one body you will carry from here to the grave.
+          </p>
+
+          <h3>The Four Stages</h3>
+          <div class="stages-detail">
+            <div class="stage-block">
+              <h4>The Ground</h4>
+              <p>
+                Most men know where they actually stand with their bodies. They know about the
+                weight they've gained, the sleep they've lost, the checkup they keep postponing.
+                The Ground is not about discovering something new. It is about saying out loud
+                what you have been quietly carrying. Not shame. Just clarity.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Path</h4>
+              <p>
+                The Path is a direction, not a program. Sleep is where most men should start —
+                not because it is dramatic, but because it touches everything else. Seven to
+                eight hours. A consistent time to bed. Less screen light before sleep. Food
+                comes next, and simply. Movement follows. Find movement you will actually do
+                on a Tuesday in February.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Walk</h4>
+              <p>
+                What marks The Walk is not consistency without failure. It is return without
+                shame. The man who threw out his back and spent three months on the couch, then
+                started walking again. The man who gained thirty pounds during a hard year and
+                began, slowly, to eat with more care. Aging is part of this pillar, not an enemy
+                of it.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Guide</h4>
+              <p>
+                A Guide in the Body pillar is not a trainer or a nutritionist. He is a man who
+                has tended his own body long enough to speak honestly about what it costs and
+                what it gives. He has failed and returned. He knows the difference between
+                discipline and punishment.
+              </p>
+            </div>
+          </div>
+
+          <div class="questions-card">
+            <h3>Questions for the Chapter</h3>
+            <ol>
+              <li>When you think about your body honestly, what is one thing you have been avoiding?</li>
+              <li>What did your father teach you, by word or example, about caring for his body?</li>
+              <li>Where have you confused stewardship with vanity, or used one to avoid the other?</li>
+              <li>What is one small physical practice you have kept faithfully over time? What made it stick?</li>
+              <li>How has a season of poor health, injury, or exhaustion shaped the way you show up for the people around you?</li>
+              <li>If you are honest, do you treat your body more like a tool to use up or a place to care for?</li>
+            </ol>
+          </div>
+
+          <div class="scripture-block">
+            "Do you not know that your bodies are temples of the Holy Spirit, who is in you,
+            whom you have received from God? You are not your own; you were bought at a price.
+            Therefore honor God with your bodies." — 1 Corinthians 6:19–20
+          </div>
+
+          <div class="reading-list">
+            <h3>Recommended Reading</h3>
+            <ul>
+              <li><em>Earthen Vessels</em> — Matthew Lee Anderson. A theological case for why the body matters to the Christian life.</li>
+              <li><em>Why We Sleep</em> — Matthew Walker. Most men will finish this and go to bed earlier that night.</li>
+              <li><em>Atomic Habits</em> — James Clear. The best book on building small, sustainable practices.</li>
+              <li><em>The Body Keeps the Score</em> — Bessel van der Kolk. For the man whose body carries more than he realizes.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ======================================
+             BEING
+        ====================================== -->
+        <section id="being" class="pillar-section">
+          <div class="pillar-section-header">
+            <p class="pillar-label">Pillar Two</p>
+            <h2 class="pillar-title">Being</h2>
+            <p class="pillar-summary">
+              The inner life: prayer, self-awareness, emotional honesty, and the question
+              of who a man actually is when no one is watching.
+            </p>
+          </div>
+
+          <h3>Why Being Matters</h3>
+          <p>
+            Solomon wrote, "Above all else, guard your heart, for everything you do flows from it"
+            (Proverbs 4:23). Everything. Not some things. A man's words, his decisions, his patience
+            with his children, his capacity to love his wife well — all of it flows from the inner
+            life. When the inner life is neglected, everything downstream suffers.
+          </p>
+          <p>
+            A man can look like he has it together. He can show up to church, lead his family to
+            the car on Sunday morning, say the right things at the men's breakfast. And still be
+            hollow. Still be running on fumes from a faith he inherited but never made his own.
+            The gap between what a man does in public and who he is at 10pm on a Tuesday — that
+            is the territory of Being.
+          </p>
+          <p>
+            Most men do not drift from God or from themselves in a dramatic moment. They drift
+            slowly. Prayer gets shorter, then stops. Self-reflection feels indulgent. Emotions
+            get compressed into two settings: fine and angry. And one day a man realizes he cannot
+            name what he feels, what he believes, or what he actually wants.
+          </p>
+
+          <h3>The Four Stages</h3>
+          <div class="stages-detail">
+            <div class="stage-block">
+              <h4>The Ground</h4>
+              <p>
+                The inner life has gone unexamined, maybe for decades. Emotions are either suppressed
+                or expressed as frustration. A man at The Ground is reactive. He does not know why
+                certain conversations make him shut down. This is not a place of shame. It is a
+                place of naming. "Search me, God, and know my heart" (Psalm 139:23).
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Path</h4>
+              <p>
+                The Path is where a man starts paying attention. He notices his patterns. He begins
+                to name what he feels, even when the vocabulary is clumsy. This looks quiet from
+                the outside: five minutes with an open Bible, a prayer that drops the formal language
+                and says what is actually true. A man telling another man, for the first time, that
+                he is struggling.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Walk</h4>
+              <p>
+                Years pass. A man who stays on The Path will encounter seasons when God feels distant.
+                The Walk is long obedience in the same direction. He has walked through doubt and
+                come out the other side, not with all the answers, but with something sturdier than
+                answers. He knows that faith held in the dark is worth more than faith that has
+                never been tested.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Guide</h4>
+              <p>
+                A Guide in Being is a man who has done enough inner work that he can sit with
+                another man's doubt, confusion, or pain without flinching. He does not rush to fix
+                it. He does not quote a verse to close the conversation. His inner life is integrated
+                — he is largely the same man in public and in private. He says: "I have been where
+                you are. I stayed. Here is what I found."
+              </p>
+            </div>
+          </div>
+
+          <div class="questions-card">
+            <h3>Questions for the Chapter</h3>
+            <ol>
+              <li>When was the last time you told God the truth about where you actually are with Him?</li>
+              <li>What are you afraid you might find if you actually got quiet and listened?</li>
+              <li>How do you know the difference between peace and numbness?</li>
+              <li>What is one thing you believe about yourself that you have never said out loud?</li>
+              <li>Where in your life are you performing instead of being present?</li>
+              <li>What would change if the men in this room knew the real you?</li>
+            </ol>
+          </div>
+
+          <div class="scripture-block">
+            "You have searched me, Lord, and you know me. You know when I sit and when I rise;
+            you perceive my thoughts from afar." — Psalm 139:1–2
+          </div>
+
+          <div class="reading-list">
+            <h3>Recommended Reading</h3>
+            <ul>
+              <li><em>Emotionally Healthy Spirituality</em> — Peter Scazzero. Connects emotional health to spiritual maturity in a way most church books avoid.</li>
+              <li><em>The Ragamuffin Gospel</em> — Brennan Manning. For the man who knows he is supposed to believe in grace but has never felt it.</li>
+              <li><em>A Hidden Wholeness</em> — Parker Palmer. About the gap between the inner life and the outer life, and what it costs to close it.</li>
+              <li><em>Strengthening the Soul of Your Leadership</em> — Ruth Haley Barton. For the man who leads others but has neglected his own interior.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ======================================
+             BALANCE
+        ====================================== -->
+        <section id="balance" class="pillar-section">
+          <div class="pillar-section-header">
+            <p class="pillar-label">Pillar Three</p>
+            <h2 class="pillar-title">Balance</h2>
+            <p class="pillar-summary">
+              Relationships: marriage, fatherhood, friendship, rest.
+              The question is simple and hard: who gets the actual you?
+            </p>
+          </div>
+
+          <h3>Why Balance Matters</h3>
+          <p>
+            A man can be faithful in the technical sense and still be absent. He comes home. He
+            provides. He is there for the important events. But being there and being present are
+            two different things. His wife knows the difference. His children feel it even if they
+            cannot say it.
+          </p>
+          <p>
+            The stakes here are not abstract. A marriage can survive years of distance before
+            either person names what is wrong. Children grow up watching a father who is physically
+            in the room but mentally somewhere else, and they learn that this is what love looks
+            like: a man who shows up but never arrives.
+          </p>
+          <p>
+            Balance also includes rest. The Sabbath is a command, and a strange one — God tells
+            His people to stop. To trust that the world will hold together for a day without their
+            effort. Most men treat rest as weakness. The Sabbath reframes it as faith.
+          </p>
+          <p>
+            And it includes friendship. "A friend loves at all times, and a brother is born for
+            adversity" (Proverbs 17:17). Most men have acquaintances. They have colleagues. They
+            do not have someone who knows how they are actually doing. The Balance pillar asks why.
+          </p>
+
+          <h3>The Four Stages</h3>
+          <div class="stages-detail">
+            <div class="stage-block">
+              <h4>The Ground</h4>
+              <p>
+                The drift is slow. Staying late at work one extra night, then two, then it becomes
+                normal. The phone replaces conversation. The evening becomes parallel silence. A
+                man at the Ground has usually made peace with this arrangement. He tells himself
+                his family understands. But if he is honest, something has gone cold.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Path</h4>
+              <p>
+                One real conversation with your wife this week. Not about the schedule — a
+                conversation where you ask her something and listen to the whole answer. One evening
+                where the phone stays in the drawer. Sabbath enters here as a practice, not a rule.
+                One day where you stop producing and sit with your family without an agenda.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Walk</h4>
+              <p>
+                The marriage that has survived a hard season, a real one, where both people wanted
+                to leave and neither did. The father whose adult children still call, not because
+                they have to but because they want to. At sixty, The Walk looks like a man whose
+                family actually knows him. Not the public version. The real one.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Guide</h4>
+              <p>
+                A Guide in Balance can sit across from another man whose marriage is struggling
+                and not flinch. He asks: how are things at home, really? And he stays quiet long
+                enough to hear the actual answer. He has earned the right to ask because he has
+                been honest about his own failures.
+              </p>
+            </div>
+          </div>
+
+          <div class="questions-card">
+            <h3>Questions for the Chapter</h3>
+            <ol>
+              <li>If your wife described your presence at home this past month, what would she say? Would you agree?</li>
+              <li>When was the last time you had a conversation with your wife that was not about logistics or schedules?</li>
+              <li>What do your children know about you beyond your role as provider?</li>
+              <li>Where does rest rank in your life? Do you treat it as earned or as given?</li>
+              <li>Is there a friendship in your life where someone knows how you are actually doing?</li>
+              <li>If your kids grow up and build marriages like the one they are watching right now, would you be at peace with that?</li>
+            </ol>
+          </div>
+
+          <div class="scripture-block">
+            "Husbands, love your wives, as Christ loved the church and gave himself up for her."
+            — Ephesians 5:25
+            <br /><br />
+            "Come to me, all who labor and are heavy laden, and I will give you rest." — Matthew 11:28
+          </div>
+
+          <div class="reading-list">
+            <h3>Recommended Reading</h3>
+            <ul>
+              <li><em>The Meaning of Marriage</em> — Timothy Keller. The most honest book on Christian marriage most men will ever read.</li>
+              <li><em>The Tech-Wise Family</em> — Andy Crouch. A practical look at how technology reshapes family life.</li>
+              <li><em>The Four Loves</em> — C.S. Lewis. Affection, friendship, eros, and charity. Essential reading.</li>
+              <li><em>Sabbath</em> — Wayne Muller. A gentle, persistent argument that rest is not laziness.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ======================================
+             BUSINESS
+        ====================================== -->
+        <section id="business" class="pillar-section">
+          <div class="pillar-section-header">
+            <p class="pillar-label">Pillar Four</p>
+            <h2 class="pillar-title">Business</h2>
+            <p class="pillar-summary">
+              Work, money, vocation. Not about building wealth — but whether a man's
+              labor serves his life, or his life has become fuel for his work.
+            </p>
+          </div>
+
+          <h3>Why Business Matters</h3>
+          <p>
+            A man's work reveals what he believes about himself. Not what he says he believes.
+            What he actually believes: what he's worth, what he owes, what he's afraid of losing.
+          </p>
+          <p>
+            Most men never stop to ask what their work is for. They were taught to provide, and
+            they do. But somewhere between the first paycheck and the twentieth year, work became
+            the thing that defined them. Ask a man who he is, and he will tell you what he does.
+            That is not an accident. It is a confession.
+          </p>
+          <p>
+            Paul writes that a man's work belongs to God, not to him. "Your labor is an offering,
+            not an identity." The moment a man grasps that distinction, his relationship to work
+            changes completely. The parable of the talents is not about financial returns — it is
+            about what a man does with what he has been given. Fear buries. Faithfulness builds.
+          </p>
+
+          <h3>The Four Stages</h3>
+          <div class="stages-detail">
+            <div class="stage-block">
+              <h4>The Ground</h4>
+              <p>
+                Most men are working hard and not asking questions. A man earns, he spends, he
+                provides. His identity and his occupation are fused together. Money is the other
+                silence — most men do not know, with any honesty, where they stand financially.
+                They carry debt or anxiety or both, and they carry it alone.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Path</h4>
+              <p>
+                The Path begins with honesty, not strategy. A man looks at his actual numbers:
+                what comes in, what goes out, what he owes. Then a small step: give something
+                away. Regularly. Generosity is not a financial strategy. It is a declaration that
+                money does not own you. The question: is what I am building worth what it is
+                costing me?
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Walk</h4>
+              <p>
+                Measured in decades, not quarters. The man who lost the business at 38 and learned
+                that he was not his company. The man who changed careers at 45 because the work no
+                longer matched the man he had become. A man at The Walk holds his work loosely. He
+                still shows up fully, still brings excellence — but he is no longer gripping.
+              </p>
+            </div>
+            <div class="stage-block">
+              <h4>The Guide</h4>
+              <p>
+                A Guide in Business is not a financial advisor. He is a man who has wrestled with
+                work and money long enough to sit with another man's fear. When a man confesses
+                he is drowning in debt, the Guide does not lecture. He says: "I have been there.
+                Let me sit with you while you look at this."
+              </p>
+            </div>
+          </div>
+
+          <div class="questions-card">
+            <h3>Questions for the Chapter</h3>
+            <ol>
+              <li>If you lost your job tomorrow, who would you be? What would remain?</li>
+              <li>Do you know, honestly, what you earn and what you spend? When did you last look?</li>
+              <li>What is your work costing you that does not show up on a balance sheet?</li>
+              <li>Who taught you what it means to provide? What did they get right? What did they get wrong?</li>
+              <li>When was the last time you gave something away and felt it?</li>
+              <li>Is there a conversation about money or work you have been avoiding?</li>
+              <li>If your work is an offering, who is it being offered to right now?</li>
+            </ol>
+          </div>
+
+          <div class="scripture-block">
+            "Whatever you do, work at it with all your heart, as working for the Lord, not for
+            human masters, since you know that you will receive an inheritance from the Lord as
+            a reward. It is the Lord Christ you are serving." — Colossians 3:23–24
+          </div>
+
+          <div class="reading-list">
+            <h3>Recommended Reading</h3>
+            <ul>
+              <li><em>Every Good Endeavor</em> — Timothy Keller. The best book on work and Christian vocation.</li>
+              <li><em>Business for the Glory of God</em> — Wayne Grudem. A short, clear case that profit and ambition can honor God.</li>
+              <li><em>The Total Money Makeover</em> — Dave Ramsey. For the man who has never looked at his numbers honestly.</li>
+              <li><em>Visions of Vocation</em> — Steven Garber. For the man asking what his work is for.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ======================================
+             HOW TO USE
+        ====================================== -->
+        <section class="how-to-use-section">
+          <h2>How a Guide Uses The Compass</h2>
+          <p>
+            A Guide does not teach The Compass like a class. He navigates from it. Before a Chapter
+            meeting, he reads the section most relevant to the current book. If the book this week
+            touches marriage or family, he opens Balance. If it touches prayer or the inner life,
+            he opens Being. The Compass follows the book. It deepens the conversation the book has
+            already started.
+          </p>
+          <p>
+            Pick one section within a pillar — not the whole thing. Read a short passage aloud.
+            Start with yourself. Before you ask the men in the room where they stand, tell them
+            where you stand. The room will only go as deep as you go first.
+          </p>
+          <p>
+            End with The Round. Each man says one thing he is taking with him from the conversation.
+            One sentence. No commentary from the group. Just a man naming what landed.
+          </p>
+          <div class="how-to-cta">
+            <a href="/join" class="btn-amber">Ready to join a Chapter?</a>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .compass-hero {
+    background-color: var(--bg-base);
+    padding: 5rem 1.5rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overline {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .compass-headline {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+
+  .compass-sub {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 2rem;
+    max-width: 36rem;
+  }
+
+  .pillar-nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pill {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.3125rem 0.875rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .pill:hover {
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+  }
+
+  /* Layout */
+  .compass-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .compass-grid {
+      grid-template-columns: 12rem 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  /* Sidebar */
+  .compass-sidebar {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .compass-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: sticky;
+      top: 5rem;
+    }
+  }
+
+  .sidebar-heading {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+
+  .sidebar-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .sidebar-link {
+    display: block;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    padding: 0.375rem 0.625rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .sidebar-link:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+  }
+
+  .sidebar-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0.75rem 0;
+  }
+
+  .sidebar-join {
+    font-size: 0.8125rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  /* Intro */
+  .compass-intro {
+    margin-bottom: 4rem;
+  }
+
+  .lead-prose {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(1.125rem, 2.5vw, 1.3125rem);
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .stages-overview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background-color: var(--border);
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .stages-overview {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .stage-item {
+    background-color: var(--bg-card);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .stage-label {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .stage-desc {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* Pillar sections */
+  .pillar-section {
+    margin-bottom: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .pillar-section:first-of-type {
+    border-top: none;
+  }
+
+  .pillar-section-header {
+    margin-bottom: 2rem;
+  }
+
+  .pillar-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.375rem;
+  }
+
+  .pillar-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+    line-height: 1.1;
+  }
+
+  .pillar-summary {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 38rem;
+    margin: 0;
+  }
+
+  /* Stage detail blocks */
+  .stages-detail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .stages-detail {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .stage-block {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .stage-block h4 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.625rem;
+  }
+
+  .stage-block p {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Reading list */
+  .reading-list {
+    margin: 2rem 0;
+  }
+
+  .reading-list h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+
+  .reading-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .reading-list ul li {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .reading-list ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+
+  .reading-list em {
+    color: var(--text-primary);
+    font-style: italic;
+  }
+
+  /* How to use section */
+  .how-to-use-section {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .how-to-cta {
+    margin-top: 2.5rem;
+  }
+</style>
