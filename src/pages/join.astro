@@ -80,71 +80,119 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             Just a conversation.
           </p>
 
-          <!-- Web3Forms — replace ACCESS_KEY with your key from web3forms.com -->
-          <form
-            action="https://api.web3forms.com/submit"
-            method="POST"
-            class="cc-form"
-          >
-            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-            <input type="hidden" name="subject" value="New Crown & Compass inquiry" />
-            <input type="hidden" name="from_name" value="Crown and Compass Website" />
-            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+          <div id="form-wrap">
+            <form
+              id="join-form"
+              action="/api/join"
+              method="POST"
+              class="cc-form"
+            >
+              <div class="field-group">
+                <label for="name" class="field-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  class="field-input"
+                />
+              </div>
 
-            <div class="field-group">
-              <label for="name" class="field-label">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                placeholder="Your name"
-                class="field-input"
-              />
-            </div>
+              <div class="field-group">
+                <label for="email" class="field-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                  class="field-input"
+                />
+              </div>
 
-            <div class="field-group">
-              <label for="email" class="field-label">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                placeholder="you@example.com"
-                class="field-input"
-              />
-            </div>
+              <div class="field-group">
+                <label for="how" class="field-label">How did you hear about Crown and Compass?</label>
+                <textarea
+                  id="how"
+                  name="how_you_heard"
+                  rows="3"
+                  placeholder="A friend, word of mouth, just found it..."
+                  class="field-input field-textarea"
+                ></textarea>
+              </div>
 
-            <div class="field-group">
-              <label for="how" class="field-label">How did you hear about Crown and Compass?</label>
-              <textarea
-                id="how"
-                name="how_you_heard"
-                rows="3"
-                placeholder="A friend, word of mouth, just found it..."
-                class="field-input field-textarea"
-              ></textarea>
-            </div>
+              <div class="field-group">
+                <label for="message" class="field-label">Anything else you want Brian to know? <span class="optional">(optional)</span></label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Where you're at, what you're looking for, questions you have..."
+                  class="field-input field-textarea"
+                ></textarea>
+              </div>
 
-            <div class="field-group">
-              <label for="message" class="field-label">Anything else you want Brian to know? <span class="optional">(optional)</span></label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Where you're at, what you're looking for, questions you have..."
-                class="field-input field-textarea"
-              ></textarea>
-            </div>
+              <div id="form-error" class="form-error" style="display:none"></div>
 
-            <button type="submit" class="btn-amber submit-btn">
-              Send it
-            </button>
+              <button type="submit" id="submit-btn" class="btn-amber submit-btn">
+                Send it
+              </button>
 
-            <p class="form-note">
-              Brian reads every message personally. You'll hear from him, not an autoresponder.
-            </p>
-          </form>
+              <p class="form-note">
+                Brian reads every message personally. You'll hear from him, not an autoresponder.
+              </p>
+            </form>
+          </div>
+
+          <script>
+            const form = document.getElementById('join-form') as HTMLFormElement;
+            const formWrap = document.getElementById('form-wrap') as HTMLDivElement;
+            const errorEl = document.getElementById('form-error') as HTMLDivElement;
+            const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+            form.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              errorEl.style.display = 'none';
+              submitBtn.disabled = true;
+              submitBtn.textContent = 'Sending...';
+
+              const data = {
+                name: (form.querySelector('#name') as HTMLInputElement).value,
+                email: (form.querySelector('#email') as HTMLInputElement).value,
+                how_you_heard: (form.querySelector('#how') as HTMLTextAreaElement).value,
+                message: (form.querySelector('#message') as HTMLTextAreaElement).value,
+              };
+
+              try {
+                const res = await fetch('/api/join', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(data),
+                });
+                const json = await res.json() as { success?: boolean; error?: string };
+
+                if (json.success) {
+                  formWrap.innerHTML = `
+                    <div class="success-message">
+                      <p class="success-headline">Good.</p>
+                      <p class="success-body">Brian will reach out soon. In the meantime, keep walking.</p>
+                    </div>
+                  `;
+                } else {
+                  errorEl.textContent = json.error || 'Something went wrong. Try again.';
+                  errorEl.style.display = 'block';
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = 'Send it';
+                }
+              } catch {
+                errorEl.textContent = 'Something went wrong. Try again.';
+                errorEl.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send it';
+              }
+            });
+          </script>
         </div>
 
         <!-- Alternative contact -->
@@ -402,6 +450,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .alt-link:hover {
     color: var(--accent-light);
     text-decoration: underline;
+  }
+
+  /* Form error */
+  .form-error {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: #e07070;
+    background-color: rgba(224, 112, 112, 0.08);
+    border: 1px solid rgba(224, 112, 112, 0.25);
+    padding: 0.625rem 0.875rem;
+    border-radius: 2px;
+  }
+
+  /* Success state */
+  .success-message {
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  .success-headline {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .success-body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
   }
 
   @media (min-width: 900px) {

@@ -1,13 +1,15 @@
 # site-crownandcompass
 
-Crown and Compass public website. Static Astro site deployed to Cloudflare Pages.
+Crown and Compass public website. Astro hybrid site deployed to Cloudflare Pages.
 
 ## Stack
 
-- **Framework:** Astro 4.x (static output)
+- **Framework:** Astro 4.x (`output: 'hybrid'` — 4 static pages + 1 API route)
+- **Adapter:** `@astrojs/cloudflare`
 - **Styling:** Tailwind CSS 3.x + custom CSS variables in `src/styles/global.css`
 - **Hosting:** Cloudflare Pages (auto-deploy from GitHub)
-- **Forms:** Web3Forms (join form — free tier, 250/month)
+- **Database:** Cloudflare D1 (`DB` binding) — subscribers table
+- **Email:** SendGrid — new subscriber notification to NOTIFICATION_EMAIL
 - **Fonts:** EB Garamond + DM Sans via Google Fonts
 
 ## Design System
@@ -62,11 +64,23 @@ npm install
 npm run dev
 ```
 
-## Web3Forms Setup
+## Backend Setup (D1 + SendGrid)
 
-1. Go to [web3forms.com](https://web3forms.com/) and get a free access key
-2. Replace `YOUR_WEB3FORMS_ACCESS_KEY` in `src/pages/join.astro`
-3. Test a form submission before launching
+### Cloudflare D1
+1. `wrangler d1 create crownandcompass` — note the database_id
+2. Update `database_id` in `wrangler.toml`
+3. `wrangler d1 execute crownandcompass --file=data/schema.sql` — create table
+4. In Cloudflare Pages → Settings → Bindings: add D1 binding `DB` → `crownandcompass`
+
+### SendGrid
+1. Add `SENDGRID_API_KEY` + `NOTIFICATION_EMAIL` to Cloudflare Pages env vars
+2. Test via form submission — Brian receives email, row appears in D1
+
+### Local dev
+```bash
+npx wrangler pages dev dist --d1=DB
+```
+Run `npm run build` first, then use wrangler to serve with D1 binding.
 
 ## Logo
 
@@ -84,14 +98,29 @@ a different rendering approach or add `filter: brightness(0) invert(1)` for pure
 
 ## Session Log
 
-### Feb 21, 2026
+### Feb 21, 2026 — Session 1
 - Initial build from plan. All 4 pages created.
 - Design system: dark atmospheric, EB Garamond + DM Sans, amber accent
 - Grain texture via CSS-only SVG turbulence filter
 - Sticky sidebar on Compass page (CSS-only, no JS)
-- Web3Forms integrated in Join page (needs access key)
+- Web3Forms integrated in Join page
 - Logo copied from AI/CC/brand/
-- TODO: Run npm install + verify build
-- TODO: Add Web3Forms access key before launch
-- TODO: Test form submission
-- TODO: Push to GitHub + connect Cloudflare Pages
+
+### Feb 21, 2026 — Session 2
+- Upgraded from `output: 'static'` → `output: 'hybrid'`
+- Added `@astrojs/cloudflare` adapter
+- Created `wrangler.toml` with D1 binding config
+- Created `data/schema.sql` — subscribers table
+- Created `src/pages/api/join.ts` — D1 insert + SendGrid notify
+- Replaced Web3Forms with first-party `/api/join` endpoint
+- Join form: JS fetch with CC-voice success state ("Good. Brian will reach out soon.")
+- Added video hero layer to `index.astro` (`hero-bg.mp4`, opacity 0.18, graceful fallback)
+- Created `.env.example`
+- Created `prompts/hero-video-prompt.md` (Runway, Kling, Luma prompts)
+- Build confirmed clean: 4 static + 1 API route
+- TODO: Create D1 database (`wrangler d1 create crownandcompass`)
+- TODO: Update `database_id` in wrangler.toml
+- TODO: Run schema migration
+- TODO: Add SendGrid key + NOTIFICATION_EMAIL to Cloudflare Pages env
+- TODO: Push to GitHub
+- TODO: Generate hero-bg.mp4 using prompts in `prompts/hero-video-prompt.md`
