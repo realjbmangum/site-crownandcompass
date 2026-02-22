@@ -1,0 +1,41 @@
+# site-crownandcompass Progress
+
+---
+
+## Session — Feb 21, 2026
+
+**Completed:**
+- Replaced white-background `logo.png` with inline SVG compass rose in Header + Footer
+- SVG uses `currentColor` → inherits amber accent, no white box on dark bg
+- Created `brand/` folder inside repo — all CC brand content lives here now
+- `brand/brand-standards.md` — full design reference (logo brief, colors, type, graphic language, asset wishlist, AI image prompts)
+- `brand/voice.md` — CC writing voice guide (moved from AI/ notes)
+- `brand/logo-mark.svg` — standalone 200×200 SVG for design work
+- Identified logo art direction: Heraldic Crest + Vintage Badge hybrid
+- Wrote 4 style prompts + 1 final combined prompt for Grok mockups
+
+**Files Changed:**
+- `src/components/Header.astro` — PNG → inline SVG compass rose
+- `src/components/Footer.astro` — PNG → inline SVG compass rose
+- `brand/brand-standards.md` — created
+- `brand/voice.md` — created (moved from AI/CC/brand/)
+- `brand/logo-mark.svg` — created
+- `CLAUDE.md` — updated content sources to point to brand/
+
+**Decisions:**
+- All CC content (brand, planning, content) lives in this repo, not AI/ notes folder
+- Logo style: Heraldic Crest + Vintage Badge hybrid — circular badge, shield, compass rose, crown, distressed texture, amber on dark, perimeter text
+- Dev server runs on compiled dist — must `npm run build` before previewing changes locally
+
+**Next Steps:**
+- [ ] Take Grok logo mockups and pick a direction
+- [ ] Refine chosen logo in Figma or commission vector version
+- [ ] Create OG image (1200×630) using final logo
+- [ ] Swap favicon from Astro default to compass mark
+- [ ] Add SendGrid API key + NOTIFICATION_EMAIL to Cloudflare Pages env vars (backend not live yet)
+- [ ] Test join form end-to-end in production (D1 insert + email notification)
+
+**Gotchas:**
+- Dev server (`npx wrangler pages dev dist`) serves compiled dist, not source — always `npm run build` first
+- AI/ folder is its own git repo — can't stage files from it in the monorepo
+- All CC content should live in site-crownandcompass repo going forward
