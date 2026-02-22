@@ -31,6 +31,9 @@ import AvatarCard from '../components/AvatarCard.astro';
         <a href="/join" class="btn-amber">Join a Chapter</a>
       </div>
     </div>
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <span class="scroll-line"></span>
+    </div>
   </section>
 
   <!-- ======================================================
@@ -38,7 +41,7 @@ import AvatarCard from '../components/AvatarCard.astro';
   ====================================================== -->
   <section class="section-pad">
     <div class="section-container">
-      <div class="what-cc-grid">
+      <div class="what-cc-grid reveal">
         <div class="what-cc-label">
           <p class="overline">What This Is</p>
         </div>
@@ -75,18 +78,21 @@ import AvatarCard from '../components/AvatarCard.astro';
   ====================================================== -->
   <section class="section-pad">
     <div class="section-container">
-      <p class="overline">Who It's For</p>
-      <h2 class="section-heading">Three kinds of men find their way here.</h2>
+      <p class="overline reveal">Who It's For</p>
+      <h2 class="section-heading reveal">Three kinds of men find their way here.</h2>
       <div class="cards-grid-3">
         <AvatarCard
+          number="01"
           headline="The man who built something but feels it's not enough."
           description="He has a job, maybe a family, maybe a faith he grew up with but hasn't touched in years. He's competent. He's responsible. And there's a low-grade sense that something is missing. Most of his friendships are transactional."
         />
         <AvatarCard
+          number="02"
           headline="The man who is in over his head."
           description="His marriage is strained, or his business is struggling, or his health is a mess he keeps meaning to address. He's tired of performing okay. He wants someone to ask the real question and actually want the real answer."
         />
         <AvatarCard
+          number="03"
           headline="The man who is doing well and knows he can't sustain it alone."
           description="He's read the books, he goes to church, he's done some therapy. He knows the territory. What he needs is men doing the same work. Men who will go with him. Iron sharpens iron. He's looking for the iron."
         />
@@ -105,10 +111,10 @@ import AvatarCard from '../components/AvatarCard.astro';
   ====================================================== -->
   <section class="section-pad how-it-works-section">
     <div class="section-container">
-      <p class="overline">How It Works</p>
-      <h2 class="section-heading">Four things, all connected.</h2>
+      <p class="overline reveal">How It Works</p>
+      <h2 class="section-heading reveal">Four things, all connected.</h2>
       <div class="how-grid">
-        <div class="how-item">
+        <div class="how-item reveal">
           <div class="how-icon" aria-hidden="true">
             <!-- Chapters icon: group -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -126,7 +132,7 @@ import AvatarCard from '../components/AvatarCard.astro';
           </p>
         </div>
 
-        <div class="how-item">
+        <div class="how-item reveal reveal-delay-1">
           <div class="how-icon" aria-hidden="true">
             <!-- Guides icon: compass -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -141,7 +147,7 @@ import AvatarCard from '../components/AvatarCard.astro';
           </p>
         </div>
 
-        <div class="how-item">
+        <div class="how-item reveal reveal-delay-2">
           <div class="how-icon" aria-hidden="true">
             <!-- The Round icon: circle with three dots -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -158,7 +164,7 @@ import AvatarCard from '../components/AvatarCard.astro';
           </p>
         </div>
 
-        <div class="how-item">
+        <div class="how-item reveal reveal-delay-3">
           <div class="how-icon" aria-hidden="true">
             <!-- The Compass icon: four directions -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -224,9 +230,9 @@ import AvatarCard from '../components/AvatarCard.astro';
   <!-- ======================================================
        A WORD FROM BRIAN
   ====================================================== -->
-  <section class="section-pad">
+  <section class="section-pad brian-section grain-bg">
     <div class="section-container">
-      <div class="brian-quote-wrapper">
+      <div class="brian-quote-wrapper reveal">
         <blockquote class="brian-quote">
           <p>
             I started Crown and Compass because I needed it. Not because I had answers — because
@@ -288,6 +294,12 @@ import AvatarCard from '../components/AvatarCard.astro';
     pointer-events: none;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video {
+      display: none;
+    }
+  }
+
   .hero-inner {
     position: relative;
     z-index: 2;
@@ -343,6 +355,31 @@ import AvatarCard from '../components/AvatarCard.astro';
   }
   @media (min-width: 640px) {
     .desktop-only { display: inline; }
+  }
+
+  /* Scroll cue */
+  .hero-scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.15); }
   }
 
   /* ---- Overline / section label ---- */
@@ -515,6 +552,10 @@ import AvatarCard from '../components/AvatarCard.astro';
   }
 
   /* ---- Brian's Quote ---- */
+  .brian-section {
+    background-color: var(--bg-card);
+  }
+
   .brian-quote-wrapper {
     max-width: 42rem;
     margin: 0 auto;
