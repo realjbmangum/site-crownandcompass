@@ -1,0 +1,27 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+
+  <!-- Background (delete in Figma if you want transparent) -->
+  <rect width="200" height="200" fill="#0f1117"/>
+
+  <!-- Outer ring -->
+  <circle cx="100" cy="100" r="92" stroke="#c9853a" stroke-width="3"/>
+
+  <!-- North point (dominant — full opacity) -->
+  <polygon points="100,14 107,88 100,100 93,88" fill="#c9853a"/>
+
+  <!-- South point -->
+  <polygon points="100,186 93,112 100,100 107,112" fill="#c9853a" opacity="0.55"/>
+
+  <!-- East point -->
+  <polygon points="186,100 112,93 100,100 112,107" fill="#c9853a" opacity="0.55"/>
+
+  <!-- West point -->
+  <polygon points="14,100 88,107 100,100 88,93" fill="#c9853a" opacity="0.55"/>
+
+  <!-- Inner ring -->
+  <circle cx="100" cy="100" r="34" stroke="#c9853a" stroke-width="2" opacity="0.35"/>
+
+  <!-- Center dot -->
+  <circle cx="100" cy="100" r="7" fill="#c9853a"/>
+
+</svg>
