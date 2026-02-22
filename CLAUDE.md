@@ -47,14 +47,22 @@ Crown and Compass public website. Astro hybrid site deployed to Cloudflare Pages
 | About | `/about` | Origin story + Brian's role |
 | Join | `/join` | Web3Forms contact form |
 
+## Brand
+
+All CC brand content lives in this repo under `brand/`:
+
+| File | What It Is |
+|------|-----------|
+| `brand/brand-standards.md` | Full design reference — logo, colors, type, graphic language, asset wishlist, AI image prompts |
+| `brand/voice.md` | Writing voice guide — tone, character, what NOT to do |
+
 ## Content Sources
 
 | Page Section | Source File |
 |---|---|
-| What CC Is, How It Works | `AI/CC/planning/cc-platform-definition.md` |
-| Who It's For | `cc-platform-definition.md` section 2 |
-| The Compass | `AI/CC/planning/the-compass.md` |
-| Brand Voice | `AI/CC/brand/voice.md` |
+| What CC Is, How It Works | `brand/` or site copy (inline) |
+| Brand Voice | `brand/voice.md` |
+| Design Decisions | `brand/brand-standards.md` |
 
 ## Setup
 
