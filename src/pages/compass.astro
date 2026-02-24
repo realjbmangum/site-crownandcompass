@@ -17,7 +17,8 @@ const pillars = [
   <!-- Compass Hero -->
   <section class="compass-hero grain-bg">
     <div class="section-container">
-      <p class="overline">The Curriculum</p>
+      <p class="label-flanked">The Curriculum</p>
+      <div class="rule-heraldic"></div>
       <h1 class="compass-headline">The Compass</h1>
       <p class="compass-sub">
         A map, not a syllabus. Four pillars. Four stages. One honest starting point.
@@ -95,8 +96,10 @@ const pillars = [
         <!-- ======================================
              BODY
         ====================================== -->
+        <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
         <section id="body" class="pillar-section">
           <div class="pillar-section-header">
+            <div class="rule-heraldic"></div>
             <p class="pillar-label">Pillar One</p>
             <h2 class="pillar-title">Body</h2>
             <p class="pillar-summary">
@@ -179,7 +182,7 @@ const pillars = [
             </ol>
           </div>
 
-          <div class="scripture-block">
+          <div class="scripture-block crest-corners">
             "Do you not know that your bodies are temples of the Holy Spirit, who is in you,
             whom you have received from God? You are not your own; you were bought at a price.
             Therefore honor God with your bodies." — 1 Corinthians 6:19–20
@@ -199,8 +202,10 @@ const pillars = [
         <!-- ======================================
              BEING
         ====================================== -->
+        <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
         <section id="being" class="pillar-section">
           <div class="pillar-section-header">
+            <div class="rule-heraldic"></div>
             <p class="pillar-label">Pillar Two</p>
             <h2 class="pillar-title">Being</h2>
             <p class="pillar-summary">
@@ -285,7 +290,7 @@ const pillars = [
             </ol>
           </div>
 
-          <div class="scripture-block">
+          <div class="scripture-block crest-corners">
             "You have searched me, Lord, and you know me. You know when I sit and when I rise;
             you perceive my thoughts from afar." — Psalm 139:1–2
           </div>
@@ -304,8 +309,10 @@ const pillars = [
         <!-- ======================================
              BALANCE
         ====================================== -->
+        <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
         <section id="balance" class="pillar-section">
           <div class="pillar-section-header">
+            <div class="rule-heraldic"></div>
             <p class="pillar-label">Pillar Three</p>
             <h2 class="pillar-title">Balance</h2>
             <p class="pillar-summary">
@@ -390,7 +397,7 @@ const pillars = [
             </ol>
           </div>
 
-          <div class="scripture-block">
+          <div class="scripture-block crest-corners">
             "Husbands, love your wives, as Christ loved the church and gave himself up for her."
             — Ephesians 5:25
             <br /><br />
@@ -411,8 +418,10 @@ const pillars = [
         <!-- ======================================
              BUSINESS
         ====================================== -->
+        <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
         <section id="business" class="pillar-section">
           <div class="pillar-section-header">
+            <div class="rule-heraldic"></div>
             <p class="pillar-label">Pillar Four</p>
             <h2 class="pillar-title">Business</h2>
             <p class="pillar-summary">
@@ -493,7 +502,7 @@ const pillars = [
             </ol>
           </div>
 
-          <div class="scripture-block">
+          <div class="scripture-block crest-corners">
             "Whatever you do, work at it with all your heart, as working for the Lord, not for
             human masters, since you know that you will receive an inheritance from the Lord as
             a reward. It is the Lord Christ you are serving." — Colossians 3:23–24
@@ -736,11 +745,6 @@ const pillars = [
   .pillar-section {
     margin-bottom: 5rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .pillar-section:first-of-type {
-    border-top: none;
   }
 
   .pillar-section-header {
@@ -792,7 +796,11 @@ const pillars = [
 
   .stage-block {
     background-color: var(--bg-card);
-    border: 1px solid var(--border);
+    border: none;
+    border-top: 2px solid var(--accent);
+    border-left: 1px solid rgba(201, 133, 58, 0.15);
+    border-right: 1px solid rgba(201, 133, 58, 0.15);
+    border-bottom: 1px solid var(--border);
     padding: 1.25rem 1.5rem;
   }
 
@@ -868,5 +876,21 @@ const pillars = [
 
   .how-to-cta {
     margin-top: 2.5rem;
+  }
+
+  /* Heraldic: badge-frame on questions cards */
+  .questions-card {
+    border: 1px solid var(--accent);
+    outline: 1px solid rgba(201, 133, 58, 0.2);
+    outline-offset: -6px;
+  }
+
+  /* Heraldic: badge-frame on sidebar nav */
+  .compass-sidebar {
+    border: 1px solid var(--accent);
+    outline: 1px solid rgba(201, 133, 58, 0.2);
+    outline-offset: -6px;
+    background-color: var(--bg-card);
+    padding: 1.25rem;
   }
 </style>

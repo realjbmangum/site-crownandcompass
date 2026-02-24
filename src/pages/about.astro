@@ -10,7 +10,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- Page Hero -->
   <section class="about-hero">
     <div class="section-container">
-      <p class="overline">About</p>
+      <p class="label-flanked">About</p>
+      <div class="rule-heraldic"></div>
       <h1 class="about-headline">A community built by a man<br class="d-break" /> who needed one.</h1>
     </div>
   </section>
@@ -23,6 +24,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- Origin -->
         <section class="about-section">
+          <div class="rule-heraldic"></div>
           <h2>Where This Started</h2>
           <p>
             Crown and Compass started simply: a few men, a book, a Saturday morning. No strategy,
@@ -42,6 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- Brian's Role -->
         <section class="about-section">
+          <div class="rule-heraldic"></div>
           <h2>Brian's Role</h2>
           <p>
             Brian is the Founder. That means he set the table, named the thing, held the first
@@ -64,6 +67,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- The Walk Philosophy -->
         <section class="about-section">
+          <div class="rule-heraldic"></div>
           <h2>The Walk</h2>
           <p>
             Everything in Crown and Compass lives under one phrase: <em>Long. Slow. Together.</em>
@@ -89,6 +93,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- What CC Is Not -->
         <section class="about-section">
+          <div class="rule-heraldic"></div>
           <h2>What This Is Not</h2>
           <p>
             Crown and Compass is not a men's retreat with a follow-up newsletter. It is an
@@ -116,7 +121,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <aside class="about-sidebar">
         <div class="sidebar-card">
           <p class="sidebar-label">The Walk</p>
-          <blockquote class="sidebar-quote">
+          <blockquote class="sidebar-quote sidebar-quote-flanked">
             "Long. Slow. Together."
           </blockquote>
         </div>
@@ -208,8 +213,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     flex-direction: column;
     gap: 1px;
-    background-color: var(--border);
-    border: 1px solid var(--border);
+    border: 1px solid var(--accent);
+    outline: 1px solid rgba(201, 133, 58, 0.2);
+    outline-offset: -6px;
+    background-color: var(--bg-card);
   }
 
   @media (min-width: 900px) {
@@ -266,5 +273,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .sidebar-cta {
     gap: 0.75rem;
+  }
+
+  /* Flanked rules on sidebar quote */
+  .sidebar-quote-flanked {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .sidebar-quote-flanked::before,
+  .sidebar-quote-flanked::after {
+    content: '';
+    width: 1.5rem;
+    height: 1px;
+    background-color: var(--accent);
+    opacity: 0.3;
+    flex-shrink: 0;
   }
 </style>

@@ -313,3 +313,162 @@ a {
     transform: none;
   }
 }
+
+/* ========================================
+   HERALDIC UTILITIES
+   Crown & Compass redesign — badge / crest
+   character layer on top of the base system.
+======================================== */
+
+/* ----------------------------------------
+   Ornamental Divider
+   A centered diamond flanked by two amber lines.
+   Use between major page sections for heraldic rhythm.
+---------------------------------------- */
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-ornament::before {
+  background: linear-gradient(to right, transparent, var(--border));
+}
+
+.divider-ornament::after {
+  background: linear-gradient(to left, transparent, var(--border));
+}
+
+.divider-ornament-mark {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--accent);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* ----------------------------------------
+   Flanked Label
+   Eyebrow text with short amber rules on either side.
+   Use for section labels that need heraldic weight.
+---------------------------------------- */
+.label-flanked {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.75rem;
+}
+
+.label-flanked::before,
+.label-flanked::after {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background-color: var(--accent);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------
+   Badge Frame
+   Double-border single-element via outline trick.
+   Vintage badge / embroidered patch feel.
+   Apply to any card or container.
+---------------------------------------- */
+.badge-frame {
+  border: 1px solid var(--accent);
+  outline: 1px solid rgba(201, 133, 58, 0.25);
+  outline-offset: -6px;
+  padding: 2rem;
+  background-color: var(--bg-card);
+}
+
+/* ----------------------------------------
+   Heraldic Section Rule
+   A thick amber line used above major section headings.
+   Reads as the top bar of a shield.
+---------------------------------------- */
+.rule-heraldic {
+  width: 3rem;
+  height: 2px;
+  background-color: var(--accent);
+  margin-bottom: 1.25rem;
+  opacity: 0.7;
+}
+
+/* ----------------------------------------
+   Crest Corner Accents
+   Decorative corner marks for a framed, certified look.
+   Apply to blockquotes, feature callouts, or hero sections.
+---------------------------------------- */
+.crest-corners {
+  position: relative;
+  padding: 2.5rem;
+}
+
+.crest-corners::before,
+.crest-corners::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: 0.4;
+}
+
+.crest-corners::before {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.crest-corners::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1px 1px 0;
+}
+
+@media (max-width: 640px) {
+  .crest-corners::before,
+  .crest-corners::after {
+    width: 14px;
+    height: 14px;
+  }
+
+  .crest-corners {
+    padding: 1.75rem;
+  }
+}
+
+/* ----------------------------------------
+   Shield Accent Border
+   Thick top, thin sides, open bottom.
+   Reads as a shield silhouette.
+---------------------------------------- */
+.shield-accent {
+  border-top: 3px solid var(--accent);
+  border-left: 1px solid rgba(201, 133, 58, 0.2);
+  border-right: 1px solid rgba(201, 133, 58, 0.2);
+  border-bottom: none;
+  padding: 1.75rem 1.5rem;
+  background-color: var(--bg-card);
+}

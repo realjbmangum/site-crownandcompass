@@ -10,7 +10,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- Page Hero -->
   <section class="join-hero">
     <div class="section-container">
-      <p class="overline">Join a Chapter</p>
+      <p class="label-flanked">Join a Chapter</p>
+      <div class="rule-heraldic"></div>
       <h1 class="join-headline">Show up once.<br />See what happens.</h1>
       <p class="join-subtext">
         There is no application. No commitment required for the first visit. A man comes once,
@@ -46,7 +47,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <div class="info-block">
           <h2 class="info-heading">What it costs</h2>
-          <div class="free-callout">
+          <div class="free-callout crest-corners">
             <p class="free-text">Nothing.</p>
             <p class="free-sub">
               Crown and Compass is free because the Gospel is free, and because the best
@@ -319,7 +320,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   /* Form card */
   .form-card {
     background-color: var(--bg-card);
-    border: 1px solid var(--border);
+    border: 1px solid var(--accent);
+    outline: 1px solid rgba(201, 133, 58, 0.2);
+    outline-offset: -6px;
     padding: 2rem;
   }
 
@@ -419,7 +422,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .alt-contact {
     margin-top: 1.5rem;
     padding: 1.25rem;
-    border: 1px solid var(--border);
+    border: none;
+    border-top: 2px solid var(--accent);
+    border-left: 1px solid rgba(201, 133, 58, 0.2);
+    border-right: 1px solid rgba(201, 133, 58, 0.2);
+    border-bottom: 1px solid var(--border);
   }
 
   .alt-label {

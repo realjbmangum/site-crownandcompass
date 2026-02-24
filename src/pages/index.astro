@@ -16,8 +16,8 @@ import AvatarCard from '../components/AvatarCard.astro';
     <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
       <source src="/bg2.mp4" type="video/mp4" />
     </video>
-    <div class="hero-inner">
-      <p class="hero-eyebrow">Crown &amp; Compass</p>
+    <div class="hero-inner crest-corners">
+      <p class="hero-eyebrow label-flanked">Crown &amp; Compass</p>
       <h1 class="hero-headline">
         The Walk is long.<br />
         No man takes it alone.
@@ -43,9 +43,10 @@ import AvatarCard from '../components/AvatarCard.astro';
     <div class="section-container">
       <div class="what-cc-grid reveal">
         <div class="what-cc-label">
-          <p class="overline">What This Is</p>
+          <p class="label-flanked">What This Is</p>
         </div>
         <div class="what-cc-content">
+          <div class="rule-heraldic"></div>
           <p class="lead-text">
             At first encounter, Crown and Compass is a small group of Christian men who read a book
             together and talk honestly about their lives. That's it. No fees, no ranks, no
@@ -71,14 +72,14 @@ import AvatarCard from '../components/AvatarCard.astro';
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
 
   <!-- ======================================================
        WHO IT'S FOR
   ====================================================== -->
   <section class="section-pad">
     <div class="section-container">
-      <p class="overline reveal">Who It's For</p>
+      <p class="label-flanked reveal">Who It's For</p>
       <h2 class="section-heading reveal">Three kinds of men find their way here.</h2>
       <div class="cards-grid-3">
         <AvatarCard
@@ -97,21 +98,23 @@ import AvatarCard from '../components/AvatarCard.astro';
           description="He's read the books, he goes to church, he's done some therapy. He knows the territory. What he needs is men doing the same work. Men who will go with him. Iron sharpens iron. He's looking for the iron."
         />
       </div>
-      <p class="cards-footer-text">
-        What these three men have in common: they want to be known, they want to grow, and they
-        don't know where to find that among men.
-      </p>
+      <div class="cards-footer-text crest-corners">
+        <p>
+          What these three men have in common: they want to be known, they want to grow, and they
+          don't know where to find that among men.
+        </p>
+      </div>
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
 
   <!-- ======================================================
        HOW IT WORKS
   ====================================================== -->
   <section class="section-pad how-it-works-section">
     <div class="section-container">
-      <p class="overline reveal">How It Works</p>
+      <p class="label-flanked reveal">How It Works</p>
       <h2 class="section-heading reveal">Four things, all connected.</h2>
       <div class="how-grid">
         <div class="how-item reveal">
@@ -125,6 +128,7 @@ import AvatarCard from '../components/AvatarCard.astro';
               <path d="M7 21c0-3 2.2-5.5 5-5.5s5 2.5 5 5.5"/>
             </svg>
           </div>
+          <div class="rule-heraldic"></div>
           <h3 class="how-title">Chapters</h3>
           <p class="how-desc">
             4–8 Brothers who read the current book together and meet to discuss it.
@@ -140,6 +144,7 @@ import AvatarCard from '../components/AvatarCard.astro';
               <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
             </svg>
           </div>
+          <div class="rule-heraldic"></div>
           <h3 class="how-title">Guides</h3>
           <p class="how-desc">
             The Guide is not the teacher or the expert. He's the man who prepared, who holds
@@ -157,6 +162,7 @@ import AvatarCard from '../components/AvatarCard.astro';
               <line x1="12" y1="16" x2="12" y2="16" stroke-width="2"/>
             </svg>
           </div>
+          <div class="rule-heraldic"></div>
           <h3 class="how-title">The Round</h3>
           <p class="how-desc">
             Closes every meeting. Three moves: the check-in (<em>where are you, really?</em>),
@@ -172,6 +178,7 @@ import AvatarCard from '../components/AvatarCard.astro';
               <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
             </svg>
           </div>
+          <div class="rule-heraldic"></div>
           <h3 class="how-title">The Compass</h3>
           <p class="how-desc">
             CC's long-arc curriculum: four pillars — Body, Being, Balance, Business.
@@ -182,7 +189,7 @@ import AvatarCard from '../components/AvatarCard.astro';
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
 
   <!-- ======================================================
        THE COMPASS STRIP
@@ -190,7 +197,7 @@ import AvatarCard from '../components/AvatarCard.astro';
   <section class="section-pad compass-strip-section">
     <div class="section-container">
       <div class="compass-strip-header">
-        <p class="overline">The Compass</p>
+        <p class="label-flanked">The Compass</p>
         <h2 class="section-heading">Four pillars. One long walk.</h2>
         <p class="compass-strip-sub">
           The Compass is not a self-help program. It is a map. A man picks it up knowing roughly
@@ -225,14 +232,14 @@ import AvatarCard from '../components/AvatarCard.astro';
     </div>
   </section>
 
-  <div class="section-divider"></div>
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
 
   <!-- ======================================================
        A WORD FROM BRIAN
   ====================================================== -->
   <section class="section-pad brian-section grain-bg">
     <div class="section-container">
-      <div class="brian-quote-wrapper reveal">
+      <div class="brian-quote-wrapper crest-corners reveal">
         <blockquote class="brian-quote">
           <p>
             I started Crown and Compass because I needed it. Not because I had answers — because
@@ -257,7 +264,8 @@ import AvatarCard from '../components/AvatarCard.astro';
        JOIN CTA
   ====================================================== -->
   <section class="join-cta grain-bg">
-    <div class="section-container join-cta-inner">
+    <div class="section-container join-cta-inner crest-corners">
+      <div class="rule-heraldic"></div>
       <h2 class="join-cta-heading">
         Crown and Compass is free.<br />It has always been free.
       </h2>
@@ -457,10 +465,6 @@ import AvatarCard from '../components/AvatarCard.astro';
   }
 
   .cards-footer-text {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: 1.0625rem;
-    font-style: italic;
-    color: var(--text-muted);
     margin: 0;
     max-width: 40rem;
   }
@@ -618,5 +622,21 @@ import AvatarCard from '../components/AvatarCard.astro';
     max-width: 36rem;
     line-height: 1.7;
     margin: 0;
+  }
+
+  /* Center the heraldic rule in centered sections */
+  .join-cta-inner .rule-heraldic {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Preserve cards-footer-text styling when wrapped in crest-corners */
+  .cards-footer-text p {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.0625rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 40rem;
   }
 </style>

@@ -10,6 +10,7 @@ const { headline, description, number } = Astro.props;
 
 <div class="avatar-card">
   <div class="card-number" aria-hidden="true">{number}</div>
+  <div class="card-rule" aria-hidden="true"></div>
   <h3 class="avatar-headline">{headline}</h3>
   <p class="avatar-description">{description}</p>
 </div>
@@ -17,7 +18,9 @@ const { headline, description, number } = Astro.props;
 <style>
   .avatar-card {
     background-color: var(--bg-card);
-    border: 1px solid var(--cc-border, #2e2c26);
+    border: 1px solid var(--accent);
+    outline: 1px solid rgba(201, 133, 58, 0.2);
+    outline-offset: -6px;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -27,11 +30,18 @@ const { headline, description, number } = Astro.props;
   .card-number {
     font-family: 'EB Garamond', Georgia, serif;
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--accent);
-    opacity: 0.45;
+    opacity: 0.35;
     line-height: 1;
     margin-bottom: 0.25rem;
+  }
+
+  .card-rule {
+    width: 1.5rem;
+    height: 1px;
+    background-color: var(--accent);
+    opacity: 0.4;
   }
 
   .avatar-headline {
