@@ -2,6 +2,54 @@
 
 ---
 
+## Session — Feb 24, 2026
+
+**Completed:**
+- Full site redesign: Heraldic Crest + Vintage Badge visual language applied site-wide (4-agent team)
+- 6 new CSS utility classes in global.css: `.divider-ornament`, `.label-flanked`, `.badge-frame`, `.rule-heraldic`, `.crest-corners`, `.shield-accent`
+- All 4 components updated: Header (double amber line, wide tracking), Footer (flanked tagline), AvatarCard (badge-frame double border), PillarCard (shield-accent border)
+- All 4 pages updated: flanked labels, compass dividers, heraldic rules, crest corners on key blocks
+- Replaced all inline SVG logos with `cc.png` (Header, Footer, Hero)
+- Favicon updated to `cc.png`
+- Hero logo sized to 160px, top padding tightened to pull logo closer to header
+- Renamed `CC LOGO.png` → `cc.png` (space in filename caused broken image)
+- Compass rose SVG embedded as data URI in `.divider-ornament-mark` — every section divider site-wide now shows the compass instead of a diamond
+
+**Files Changed:**
+- `src/styles/global.css` — 6 new heraldic utilities + compass divider mark
+- `src/components/Header.astro` — cc.png, wider tracking, amber box-shadow
+- `src/components/Footer.astro` — cc.png, flanked tagline rules
+- `src/components/AvatarCard.astro` — badge-frame, amber rule, heavier number
+- `src/components/PillarCard.astro` — shield-accent border, corner accent, em dash
+- `src/pages/index.astro` — full heraldic treatment + hero logo + padding
+- `src/pages/compass.astro` — heraldic treatment throughout
+- `src/pages/about.astro` — heraldic treatment throughout
+- `src/pages/join.astro` — heraldic treatment throughout
+- `src/components/SEOHead.astro` — favicon updated to cc.png
+- `brand/redesign-spec.md` — created by researcher agent
+- `public/cc.png` — renamed from CC LOGO.png
+
+**Decisions:**
+- All CC content lives in this repo under `brand/` — not AI/ notes folder
+- Logo: cc.png used everywhere (header, footer, hero, favicon)
+- Divider ornament mark: compass SVG via CSS data URI — scales site-wide from one CSS rule
+- CSS data URI approach = zero extra files, infinite reuse across pages
+
+**Next Steps:**
+- [ ] Investigate video not playing (check Cloudflare CDN cache, or OS prefers-reduced-motion setting)
+- [ ] Refine cc.png logo into proper vector (Figma brief in brand/brand-standards.md)
+- [ ] Create OG image (1200×630) using final logo
+- [ ] Add SendGrid API key + NOTIFICATION_EMAIL to Cloudflare Pages env vars
+- [ ] Test join form end-to-end in production (D1 insert + email notification)
+
+**Gotchas:**
+- Dev server (`npx wrangler pages dev dist`) serves compiled dist — always `npm run build` first
+- AI/ folder is its own git repo — can't stage from monorepo, use site-crownandcompass repo for all CC content
+- Filenames with spaces break as URLs — rename before adding to public/
+- CSS data URI SVGs must URL-encode special chars: `#` → `%23`, `<` → `%3C`, `>` → `%3E`, `'` stays as `'`
+
+---
+
 ## Session — Feb 21, 2026
 
 **Completed:**
@@ -14,28 +62,7 @@
 - Identified logo art direction: Heraldic Crest + Vintage Badge hybrid
 - Wrote 4 style prompts + 1 final combined prompt for Grok mockups
 
-**Files Changed:**
-- `src/components/Header.astro` — PNG → inline SVG compass rose
-- `src/components/Footer.astro` — PNG → inline SVG compass rose
-- `brand/brand-standards.md` — created
-- `brand/voice.md` — created (moved from AI/CC/brand/)
-- `brand/logo-mark.svg` — created
-- `CLAUDE.md` — updated content sources to point to brand/
-
 **Decisions:**
 - All CC content (brand, planning, content) lives in this repo, not AI/ notes folder
-- Logo style: Heraldic Crest + Vintage Badge hybrid — circular badge, shield, compass rose, crown, distressed texture, amber on dark, perimeter text
+- Logo style: Heraldic Crest + Vintage Badge hybrid
 - Dev server runs on compiled dist — must `npm run build` before previewing changes locally
-
-**Next Steps:**
-- [ ] Take Grok logo mockups and pick a direction
-- [ ] Refine chosen logo in Figma or commission vector version
-- [ ] Create OG image (1200×630) using final logo
-- [ ] Swap favicon from Astro default to compass mark
-- [ ] Add SendGrid API key + NOTIFICATION_EMAIL to Cloudflare Pages env vars (backend not live yet)
-- [ ] Test join form end-to-end in production (D1 insert + email notification)
-
-**Gotchas:**
-- Dev server (`npx wrangler pages dev dist`) serves compiled dist, not source — always `npm run build` first
-- AI/ folder is its own git repo — can't stage files from it in the monorepo
-- All CC content should live in site-crownandcompass repo going forward
