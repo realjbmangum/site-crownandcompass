@@ -17,7 +17,7 @@ import AvatarCard from '../components/AvatarCard.astro';
       <source src="/bg2.mp4" type="video/mp4" />
     </video>
     <div class="hero-inner crest-corners">
-      <p class="hero-eyebrow label-flanked">Crown &amp; Compass</p>
+      <img src="/cc.png" alt="Crown and Compass" class="hero-logo" />
       <h1 class="hero-headline">
         The Walk is long.<br />
         No man takes it alone.
@@ -318,6 +318,12 @@ import AvatarCard from '../components/AvatarCard.astro';
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+  }
+
+  .hero-logo {
+    height: 80px;
+    width: auto;
+    margin-bottom: 0.5rem;
   }
 
   .hero-eyebrow {

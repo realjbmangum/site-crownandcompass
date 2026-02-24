@@ -11,20 +11,7 @@ const currentPath = Astro.url.pathname;
   <div class="header-inner">
     <!-- Logo -->
     <a href="/" class="logo-link" aria-label="Crown and Compass — home">
-      <!-- Compass rose mark — inline SVG, no white background -->
-      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Outer circle -->
-        <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="1.2"/>
-        <!-- Cardinal points — N/S taller, E/W shorter -->
-        <polygon points="20,4 22.2,18 20,20 17.8,18" fill="currentColor"/>
-        <polygon points="20,36 17.8,22 20,20 22.2,22" fill="currentColor" opacity="0.55"/>
-        <polygon points="36,20 22,17.8 20,20 22,22.2" fill="currentColor" opacity="0.55"/>
-        <polygon points="4,20 18,22.2 20,20 18,17.8" fill="currentColor" opacity="0.55"/>
-        <!-- Center dot -->
-        <circle cx="20" cy="20" r="2.2" fill="currentColor"/>
-        <!-- Inner ring -->
-        <circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="0.8" opacity="0.35"/>
-      </svg>
+      <img src="/cc.png" alt="" class="logo-mark" aria-hidden="true" />
       <span class="logo-text">Crown &amp; Compass</span>
     </a>
 
@@ -125,9 +112,8 @@ const currentPath = Astro.url.pathname;
   }
 
   .logo-mark {
-    height: 28px;
-    width: 28px;
-    color: var(--accent);
+    height: 32px;
+    width: auto;
     flex-shrink: 0;
   }
 
