@@ -2,6 +2,30 @@
 
 ---
 
+## Session — Feb 27, 2026
+
+**Completed:**
+- Fixed hero video not playing on deployed site
+
+**Files Changed:**
+- `public/_headers` — created with `Accept-Ranges: bytes` + `Content-Type: video/mp4` for bg1.mp4 and bg2.mp4
+
+**Root Cause:**
+- Cloudflare Pages doesn't add `Accept-Ranges: bytes` by default for binary files
+- Chromium-based browsers require this header to stream/autoplay mp4 — without it, the video is treated as a non-seekable blob and silently fails
+
+**Gotchas:**
+- `_headers` file must live in `public/` — Astro copies it to `dist/` on build, Cloudflare picks it up from there
+- This is the correct fix for any mp4/video autoplay issues on Cloudflare Pages
+
+**Next Steps:**
+- [ ] Add SendGrid API key + NOTIFICATION_EMAIL to Cloudflare Pages env vars
+- [ ] Test join form end-to-end (D1 insert + email notification)
+- [ ] Refine cc.png into proper vector logo
+- [ ] Create OG image (1200×630)
+
+---
+
 ## Session — Feb 24, 2026
 
 **Completed:**

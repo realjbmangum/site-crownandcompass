@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "Wild at Heart",
+    "author": "John Eldredge",
+    "description": "The book that started more honest conversations in CC than any other. Eldredge argues that God didn't design men to be safe and passive — He designed them for adventure, battle, and beauty. The chapter on the wound is worth the whole book.",
+    "cover": "https://images-na.ssl-images-amazon.com/images/P/1400200393.01.L.jpg",
+    "category": "field-guide",
+    "currentRead": true,
+    "amazonUrl": "https://www.amazon.com/Wild-Heart-Revised-Updated-Discovering/dp/1400200393",
+    "fieldGuideUrl": null,
+    "pillars": ["being"]
+  },
+  {
+    "id": 2,
+    "title": "Mere Christianity",
+    "author": "C.S. Lewis",
+    "description": "Lewis built the intellectual foundation of the Christian faith with logic and humility. Not a feelings book — a thinking book. Every man who has ever doubted should read it. Every man who hasn't should read it to understand the men around him who have.",
+    "cover": "https://images-na.ssl-images-amazon.com/images/P/0060652926.01.L.jpg",
+    "category": "field-guide",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Mere-Christianity-C-S-Lewis/dp/0060652926",
+    "fieldGuideUrl": null,
+    "pillars": ["being"]
+  },
+  {
+    "id": 3,
+    "title": "The War of Art",
+    "author": "Steven Pressfield",
+    "description": "Pressfield calls the internal resistance that stops men from doing their real work by its name, and then shows you how to beat it. Not a Christian book, but the diagnosis is accurate and the cure maps perfectly onto how men in CC talk about calling and discipline.",
+    "cover": "https://m.media-amazon.com/images/I/71l4hnNMxnL._SL1500_.jpg",
+    "category": "field-guide",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/War-Art-Through-Creative-Battles/dp/1936891026",
+    "fieldGuideUrl": null,
+    "pillars": ["business", "being"]
+  },
+  {
+    "id": 4,
+    "title": "Man's Search for Meaning",
+    "author": "Viktor Frankl",
+    "description": "Frankl survived the Nazi death camps and came out with a philosophy of meaning that holds up under everything life throws at a man. Short. Dense. The kind of book you read once and think about for years.",
+    "cover": "https://m.media-amazon.com/images/I/71pKNuKSBpL._SL1500_.jpg",
+    "category": "field-guide",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/0807014273",
+    "fieldGuideUrl": null,
+    "pillars": ["being", "balance"]
+  },
+  {
+    "id": 5,
+    "title": "The Body Keeps the Score",
+    "author": "Bessel van der Kolk",
+    "description": "Most men carry more than they admit. This book explains, in plain language, what stress and trauma do to the body over time — and what actually works to undo the damage. Hard reading, but essential for any man taking the Body pillar seriously.",
+    "cover": "https://m.media-amazon.com/images/I/71MDk0KoiKL._SL1500_.jpg",
+    "category": "field-guide",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Body-Keeps-Score-Healing-Trauma/dp/0143127748",
+    "fieldGuideUrl": null,
+    "pillars": ["body", "being"]
+  },
+  {
+    "id": 6,
+    "title": "The Ruthless Elimination of Hurry",
+    "author": "John Mark Comer",
+    "description": "The title is the whole argument. Comer makes the case that hurry is the great spiritual disease of modern men — and walks through the ancient practices that actually slow you down. Pairs well with the Balance pillar.",
+    "cover": "https://m.media-amazon.com/images/I/71c6PjjBVEL._SL1500_.jpg",
+    "category": "field-guide",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Ruthless-Elimination-Hurry-Emotionally-Healthy/dp/0525653090",
+    "fieldGuideUrl": null,
+    "pillars": ["balance", "being"]
+  },
+  {
+    "id": 7,
+    "title": "Essentialism",
+    "author": "Greg McKeown",
+    "description": "One of the clearest business books written. McKeown's entire argument is that almost everything is noise and the job of a serious man is to figure out what isn't. Practical, counterintuitive, and convicting for anyone who says yes to too much.",
+    "cover": "https://m.media-amazon.com/images/I/71y13wqpqvL._SL1500_.jpg",
+    "category": "recommended",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Essentialism-Disciplined-Pursuit-Greg-McKeown/dp/0804137382",
+    "fieldGuideUrl": null,
+    "pillars": ["business", "balance"]
+  },
+  {
+    "id": 8,
+    "title": "Principles",
+    "author": "Ray Dalio",
+    "description": "Dalio built one of the most successful investment firms in the world and wrote down everything he learned. The first section — on life principles — is worth more than the business section. A framework for making decisions when the stakes are high.",
+    "cover": "https://m.media-amazon.com/images/I/71eBIQPt8bL._SL1500_.jpg",
+    "category": "recommended",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Principles-Life-Work-Ray-Dalio/dp/1501124021",
+    "fieldGuideUrl": null,
+    "pillars": ["business"]
+  },
+  {
+    "id": 9,
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "description": "The practical companion to any of the harder books on this list. Clear shows how small, daily systems compound into the life you're trying to build. Not a spiritual book, but it answers the question every man has after the conviction: now what?",
+    "cover": "https://m.media-amazon.com/images/I/81bGKUa1e0L._SL1500_.jpg",
+    "category": "recommended",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299",
+    "fieldGuideUrl": null,
+    "pillars": ["body", "balance", "business"]
+  },
+  {
+    "id": 10,
+    "title": "The Four Pillars of a Man's Heart",
+    "author": "Stu Weber",
+    "description": "Weber's framework for masculine identity — king, warrior, mentor, friend — maps closely to how CC thinks about a man's full life. Old enough to be overlooked, good enough that it shouldn't be.",
+    "cover": "https://m.media-amazon.com/images/I/51YmFsR18OL.jpg",
+    "category": "recommended",
+    "currentRead": false,
+    "amazonUrl": "https://www.amazon.com/Four-Pillars-Mans-Heart/dp/1590522923",
+    "fieldGuideUrl": null,
+    "pillars": ["being"]
+  }
+]

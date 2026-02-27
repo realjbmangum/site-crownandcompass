@@ -1,0 +1,420 @@
+---
+export const prerender = false;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Newsletter — Crown &amp; Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0f1117;
+      color: #f0ebe2;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    .page {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    .page-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #2e2c26;
+    }
+    .page-eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c9853a;
+      margin: 0 0 0.5rem;
+    }
+    .page-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #f0ebe2;
+      margin: 0;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 720px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+    .compose-col, .preview-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+    label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #f0ebe2;
+      letter-spacing: 0.02em;
+    }
+    .field-hint {
+      font-size: 0.75rem;
+      color: #8a8070;
+      margin: 0;
+    }
+    input[type="text"], input[type="password"], textarea {
+      background: #22222a;
+      border: 1px solid #2e2c26;
+      color: #f0ebe2;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 300;
+      padding: 0.625rem 0.875rem;
+      border-radius: 2px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.15s ease;
+    }
+    input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+      border-color: #c9853a;
+    }
+    textarea {
+      resize: vertical;
+      line-height: 1.65;
+    }
+    .section-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9853a;
+      margin: 0.5rem 0 0;
+    }
+    .send-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .btn-send {
+      background: #c9853a;
+      color: #0f1117;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      letter-spacing: 0.03em;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .btn-send:hover { background: #e8a055; }
+    .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
+    .status-msg {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+    .status-msg.success { color: #7ec87e; }
+    .status-msg.error { color: #e07070; }
+
+    /* Preview panel */
+    .preview-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8a8070;
+      margin-bottom: 0.75rem;
+    }
+    .preview-frame {
+      background: #1a1a20;
+      border: 1px solid #2e2c26;
+      border-radius: 2px;
+      padding: 1.5rem;
+      font-family: Georgia, serif;
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: #d4cfc6;
+      min-height: 300px;
+      position: sticky;
+      top: 2rem;
+    }
+    .preview-brand {
+      text-align: center;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #2e2c26;
+    }
+    .preview-brand-name {
+      font-family: Georgia, serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #f0ebe2;
+      margin: 0 0 2px;
+    }
+    .preview-brand-tag {
+      font-style: italic;
+      font-size: 0.8125rem;
+      color: #8a8070;
+    }
+    .preview-section {
+      margin-bottom: 1.25rem;
+    }
+    .preview-section-label {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c9853a;
+      margin: 0 0 6px;
+      border-top: 1px solid #c9853a;
+      padding-top: 10px;
+    }
+    .preview-subject {
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f0ebe2;
+      margin: 0 0 1rem;
+    }
+    .preview-body {
+      white-space: pre-line;
+      font-size: 0.9rem;
+    }
+    .preview-empty {
+      color: #8a8070;
+      font-style: italic;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-header">
+      <p class="page-eyebrow">Admin</p>
+      <h1 class="page-title">Send Newsletter</h1>
+    </div>
+
+    <div class="layout">
+      <!-- Compose -->
+      <div class="compose-col">
+
+        <div class="field-group">
+          <label for="admin-secret">Admin Secret</label>
+          <input type="password" id="admin-secret" placeholder="Your ADMIN_SECRET value" autocomplete="off" />
+        </div>
+
+        <div class="field-group">
+          <label for="subject">Subject Line</label>
+          <input type="text" id="subject" placeholder="e.g. Wild at Heart — Chapter 4 Notes" />
+        </div>
+
+        <div class="field-group">
+          <label for="preheader">Preheader <span style="color:#8a8070;font-weight:300;">(optional)</span></label>
+          <input type="text" id="preheader" placeholder="Short preview text shown in inbox" />
+          <p class="field-hint">40–50 chars. Shown in Gmail/Apple Mail preview. Not visible in email body.</p>
+        </div>
+
+        <p class="section-label">From the Session</p>
+
+        <div class="field-group">
+          <label for="reading-notes">Reading Notes</label>
+          <textarea id="reading-notes" rows="8" placeholder="What came up in the session. What hit. What we're still chewing on. Write it like you're telling a man who wasn't there what he missed."></textarea>
+        </div>
+
+        <p class="section-label">Optional Sections</p>
+
+        <div class="field-group">
+          <label for="announcements">Announcements <span style="color:#8a8070;font-weight:300;">(optional)</span></label>
+          <textarea id="announcements" rows="4" placeholder="Next meeting date, guest, book change, etc."></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="spotlight">Chapter Spotlight <span style="color:#8a8070;font-weight:300;">(optional)</span></label>
+          <textarea id="spotlight" rows="4" placeholder="Highlight something from the chapter — a man's story, a breakthrough, a hard question that got asked."></textarea>
+        </div>
+
+        <div class="send-row">
+          <button class="btn-send" id="send-btn">Send Newsletter</button>
+          <span class="status-msg" id="status-msg"></span>
+        </div>
+
+      </div>
+
+      <!-- Live Preview -->
+      <div class="preview-col">
+        <p class="preview-label">Live Preview</p>
+        <div class="preview-frame" id="preview-frame">
+          <div class="preview-brand">
+            <p class="preview-brand-name">Crown &amp; Compass</p>
+            <p class="preview-brand-tag">The Walk. Long. Slow. Together.</p>
+          </div>
+          <div id="preview-subject-wrap" style="margin-bottom:1rem;">
+            <p class="preview-section-label">This Week</p>
+            <p class="preview-subject" id="preview-subject"><span class="preview-empty">Subject line will appear here</span></p>
+          </div>
+          <div id="preview-notes-wrap" style="display:none;" class="preview-section">
+            <p class="preview-section-label">From the Session</p>
+            <div class="preview-body" id="preview-notes"></div>
+          </div>
+          <div id="preview-announce-wrap" style="display:none;" class="preview-section">
+            <p class="preview-section-label">Announcements</p>
+            <div class="preview-body" id="preview-announce"></div>
+          </div>
+          <div id="preview-spotlight-wrap" style="display:none;" class="preview-section">
+            <p class="preview-section-label">Chapter Spotlight</p>
+            <div class="preview-body" id="preview-spotlight"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Live preview
+    const subjectEl = document.getElementById('subject') as HTMLInputElement;
+    const notesEl = document.getElementById('reading-notes') as HTMLTextAreaElement;
+    const announceEl = document.getElementById('announcements') as HTMLTextAreaElement;
+    const spotlightEl = document.getElementById('spotlight') as HTMLTextAreaElement;
+
+    const previewSubject = document.getElementById('preview-subject') as HTMLElement;
+    const previewNotesWrap = document.getElementById('preview-notes-wrap') as HTMLElement;
+    const previewNotes = document.getElementById('preview-notes') as HTMLElement;
+    const previewAnnounceWrap = document.getElementById('preview-announce-wrap') as HTMLElement;
+    const previewAnnounce = document.getElementById('preview-announce') as HTMLElement;
+    const previewSpotlightWrap = document.getElementById('preview-spotlight-wrap') as HTMLElement;
+    const previewSpotlight = document.getElementById('preview-spotlight') as HTMLElement;
+
+    function updatePreview() {
+      const subject = subjectEl.value.trim();
+      previewSubject.innerHTML = subject
+        ? subject
+        : '<span class="preview-empty">Subject line will appear here</span>';
+
+      const notes = notesEl.value.trim();
+      if (notes) {
+        previewNotes.textContent = notes;
+        previewNotesWrap.style.display = 'block';
+      } else {
+        previewNotesWrap.style.display = 'none';
+      }
+
+      const announce = announceEl.value.trim();
+      if (announce) {
+        previewAnnounce.textContent = announce;
+        previewAnnounceWrap.style.display = 'block';
+      } else {
+        previewAnnounceWrap.style.display = 'none';
+      }
+
+      const spotlight = spotlightEl.value.trim();
+      if (spotlight) {
+        previewSpotlight.textContent = spotlight;
+        previewSpotlightWrap.style.display = 'block';
+      } else {
+        previewSpotlightWrap.style.display = 'none';
+      }
+    }
+
+    [subjectEl, notesEl, announceEl, spotlightEl].forEach(el => {
+      el.addEventListener('input', updatePreview);
+    });
+
+    // Send
+    const sendBtn = document.getElementById('send-btn') as HTMLButtonElement;
+    const statusMsg = document.getElementById('status-msg') as HTMLElement;
+    const secretEl = document.getElementById('admin-secret') as HTMLInputElement;
+
+    sendBtn.addEventListener('click', async () => {
+      const subject = subjectEl.value.trim();
+      const readingNotes = notesEl.value.trim();
+      const secret = secretEl.value.trim();
+
+      statusMsg.textContent = '';
+      statusMsg.className = 'status-msg';
+
+      if (!secret) {
+        statusMsg.textContent = 'Enter your admin secret first.';
+        statusMsg.classList.add('error');
+        return;
+      }
+      if (!subject) {
+        statusMsg.textContent = 'Subject is required.';
+        statusMsg.classList.add('error');
+        return;
+      }
+      if (!readingNotes) {
+        statusMsg.textContent = 'Reading notes are required.';
+        statusMsg.classList.add('error');
+        return;
+      }
+
+      const confirmed = window.confirm(
+        `Send this newsletter to all active subscribers?\n\nSubject: ${subject}`
+      );
+      if (!confirmed) return;
+
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch('/api/newsletter/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-secret': secret,
+          },
+          body: JSON.stringify({
+            subject,
+            preheader: (document.getElementById('preheader') as HTMLInputElement).value.trim(),
+            readingNotes,
+            announcements: announceEl.value.trim(),
+            chapterSpotlight: spotlightEl.value.trim(),
+          }),
+        });
+
+        const json = await res.json() as { success?: boolean; sent?: number; error?: string };
+
+        if (json.success) {
+          statusMsg.textContent = `Sent to ${json.sent} subscribers.`;
+          statusMsg.classList.add('success');
+          subjectEl.value = '';
+          notesEl.value = '';
+          announceEl.value = '';
+          spotlightEl.value = '';
+          (document.getElementById('preheader') as HTMLInputElement).value = '';
+          updatePreview();
+        } else {
+          statusMsg.textContent = json.error || 'Something went wrong.';
+          statusMsg.classList.add('error');
+        }
+      } catch {
+        statusMsg.textContent = 'Network error. Try again.';
+        statusMsg.classList.add('error');
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send Newsletter';
+      }
+    });
+  </script>
+</body>
+</html>

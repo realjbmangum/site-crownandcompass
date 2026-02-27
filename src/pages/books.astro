@@ -1,0 +1,555 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import books from '../data/books.json';
+
+const currentBook = books.find(b => b.currentRead);
+const fieldGuides = books.filter(b => b.category === 'field-guide' && !b.currentRead);
+const recommended = books.filter(b => b.category === 'recommended');
+
+const pillarLabels: Record<string, string> = {
+  body: 'Body',
+  being: 'Being',
+  balance: 'Balance',
+  business: 'Business',
+};
+---
+
+<BaseLayout
+  title="The Reading List | Crown and Compass"
+  description="The books Crown and Compass reads together. Field guides from past chapters, the current read, and a broader list for men who want to keep walking."
+>
+
+  <!-- Page Hero -->
+  <section class="books-hero">
+    <div class="section-container">
+      <p class="label-flanked">Books</p>
+      <div class="rule-heraldic"></div>
+      <h1 class="books-headline">The Reading List</h1>
+      <p class="books-subtext">
+        Every Chapter reads the same book at the same time. The book is the common ground
+        that makes honest conversation possible. Below is what we're reading now, what
+        we've worked through, and what we recommend for the walk.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
+
+  <!-- Current Read -->
+  {currentBook && (
+    <section class="section-pad">
+      <div class="section-container">
+        <p class="label-flanked">Now Reading</p>
+        <div class="current-read crest-corners">
+          <div class="current-cover-wrap">
+            <img
+              src={currentBook.cover}
+              alt={currentBook.title}
+              class="current-cover"
+              loading="eager"
+            />
+          </div>
+          <div class="current-body">
+            <p class="current-label">Current Chapter Book</p>
+            <h2 class="current-title">{currentBook.title}</h2>
+            <p class="current-author">{currentBook.author}</p>
+            <p class="current-desc">{currentBook.description}</p>
+            <div class="current-pillars">
+              {currentBook.pillars.map(p => (
+                <span class="pillar-tag">{pillarLabels[p]}</span>
+              ))}
+            </div>
+            <div class="current-actions">
+              <a href={currentBook.amazonUrl} target="_blank" rel="noopener noreferrer" class="btn-amber">
+                Get the book
+              </a>
+              {currentBook.fieldGuideUrl && (
+                <a href={currentBook.fieldGuideUrl} target="_blank" rel="noopener noreferrer" class="btn-ghost">
+                  Download Field Guide
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
+
+  <!-- Field Guides -->
+  {fieldGuides.length > 0 && (
+    <section class="section-pad">
+      <div class="section-container">
+        <p class="label-flanked">Field Guides</p>
+        <div class="rule-heraldic"></div>
+        <h2 class="section-heading">Books We've Walked Through</h2>
+        <p class="section-subtext">
+          These are the books past Chapters have read together. Each one has a Field Guide —
+          discussion questions, chapter summaries, and prompts for The Round — available as a
+          free download.
+        </p>
+        <div class="book-grid">
+          {fieldGuides.map(book => (
+            <div class="book-card shield-accent">
+              <div class="book-card-inner">
+                <img
+                  src={book.cover}
+                  alt={book.title}
+                  class="book-cover"
+                  loading="lazy"
+                />
+                <div class="book-info">
+                  <h3 class="book-title">{book.title}</h3>
+                  <p class="book-author">{book.author}</p>
+                  <div class="book-pillars">
+                    {book.pillars.map(p => (
+                      <span class="pillar-tag pillar-tag-sm">{pillarLabels[p]}</span>
+                    ))}
+                  </div>
+                  <p class="book-desc">{book.description}</p>
+                  <div class="book-actions">
+                    <a href={book.amazonUrl} target="_blank" rel="noopener noreferrer" class="book-link">
+                      Buy →
+                    </a>
+                    {book.fieldGuideUrl ? (
+                      <a href={book.fieldGuideUrl} target="_blank" rel="noopener noreferrer" class="book-link book-link-guide">
+                        Field Guide →
+                      </a>
+                    ) : (
+                      <span class="guide-pending">Field Guide coming</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
+
+  <!-- Recommended Reading -->
+  {recommended.length > 0 && (
+    <section class="section-pad">
+      <div class="section-container">
+        <p class="label-flanked">Recommended</p>
+        <div class="rule-heraldic"></div>
+        <h2 class="section-heading">Worth Your Time</h2>
+        <p class="section-subtext">
+          Not official CC reads, but books that have shaped how men in this community
+          think about work, faith, health, and the long walk.
+        </p>
+        <div class="rec-list">
+          {recommended.map(book => (
+            <div class="rec-card">
+              <img
+                src={book.cover}
+                alt={book.title}
+                class="rec-cover"
+                loading="lazy"
+              />
+              <div class="rec-info">
+                <div class="rec-meta">
+                  <h3 class="rec-title">{book.title}</h3>
+                  <span class="rec-author">{book.author}</span>
+                </div>
+                <div class="rec-pillars">
+                  {book.pillars.map(p => (
+                    <span class="pillar-tag pillar-tag-sm">{pillarLabels[p]}</span>
+                  ))}
+                </div>
+                <p class="rec-desc">{book.description}</p>
+                <a href={book.amazonUrl} target="_blank" rel="noopener noreferrer" class="book-link">
+                  Buy →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="divider-ornament"><span class="divider-ornament-mark"></span></div>
+
+  <!-- Suggest CTA -->
+  <section class="section-pad suggest-section">
+    <div class="section-container">
+      <div class="suggest-inner crest-corners">
+        <p class="label-flanked">Suggest a Book</p>
+        <p class="suggest-text">
+          Reading something that should be on this list? Reach out to Brian directly.
+        </p>
+        <a href="https://x.com/realjbmangum" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+          @realjbmangum on X
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .books-hero {
+    padding: 5rem 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .books-headline {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.15;
+    margin: 0 0 1rem;
+  }
+
+  .books-subtext {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 42rem;
+  }
+
+  /* Section typography */
+  .section-heading {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+  }
+
+  .section-subtext {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 2.5rem;
+    max-width: 42rem;
+  }
+
+  /* Pillar tags */
+  .pillar-tag {
+    display: inline-block;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(201, 133, 58, 0.35);
+    padding: 0.2rem 0.5rem;
+    border-radius: 1px;
+  }
+
+  .pillar-tag-sm {
+    font-size: 0.625rem;
+  }
+
+  /* ----------------------------------------
+     Current Read
+  ---------------------------------------- */
+  .current-read {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    background-color: var(--bg-card);
+    border: 1px solid var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .current-read {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .current-cover-wrap {
+    flex-shrink: 0;
+  }
+
+  .current-cover {
+    width: 140px;
+    height: auto;
+    display: block;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 640px) {
+    .current-cover {
+      width: 100px;
+    }
+  }
+
+  .current-label {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+
+  .current-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem;
+    line-height: 1.2;
+  }
+
+  .current-author {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin: 0 0 1.25rem;
+  }
+
+  .current-desc {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 1.25rem;
+  }
+
+  .current-pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .current-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  /* ----------------------------------------
+     Field Guide Grid
+  ---------------------------------------- */
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .book-card {
+    transition: border-top-color 0.2s ease;
+  }
+
+  .book-card:hover {
+    border-top-color: var(--accent-light);
+  }
+
+  .book-card-inner {
+    display: flex;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .book-cover {
+    width: 64px;
+    flex-shrink: 0;
+    height: auto;
+    display: block;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .book-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .book-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.125rem;
+    line-height: 1.3;
+  }
+
+  .book-author {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin: 0 0 0.625rem;
+  }
+
+  .book-pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .book-desc {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.65;
+    margin: 0 0 1rem;
+  }
+
+  .book-actions {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .book-link {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.15s ease;
+  }
+
+  .book-link:hover {
+    color: var(--accent-light);
+  }
+
+  .book-link-guide {
+    color: var(--text-primary);
+    opacity: 0.7;
+  }
+
+  .book-link-guide:hover {
+    color: var(--accent-light);
+    opacity: 1;
+  }
+
+  .guide-pending {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  /* ----------------------------------------
+     Recommended List
+  ---------------------------------------- */
+  .rec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .rec-card {
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.5rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    transition: border-color 0.2s ease;
+  }
+
+  .rec-card:hover {
+    border-color: rgba(201, 133, 58, 0.3);
+  }
+
+  @media (max-width: 480px) {
+    .rec-card {
+      flex-direction: column;
+    }
+  }
+
+  .rec-cover {
+    width: 56px;
+    flex-shrink: 0;
+    height: auto;
+    display: block;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .rec-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .rec-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rec-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .rec-author {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .rec-pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .rec-desc {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.65;
+    margin: 0 0 0.875rem;
+  }
+
+  /* Suggest section */
+  .suggest-section {
+    padding-top: 2rem;
+  }
+
+  .suggest-inner {
+    text-align: center;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+
+  .suggest-text {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+  }
+</style>
