@@ -6,17 +6,41 @@
 
 **Completed:**
 - Fixed hero video not playing on deployed site
+- Built `/books` page with full CC reading list (11 books, Amazon affiliate links)
+- Built newsletter system: admin compose UI + SendGrid send API
+- Wrote `SETUP-D1.md` — step-by-step guide to wire up Get Connected form + D1
 
 **Files Changed:**
-- `public/_headers` — created with `Accept-Ranges: bytes` + `Content-Type: video/mp4` for bg1.mp4 and bg2.mp4
+- `public/_headers` — Accept-Ranges fix for hero video (bg1.mp4, bg2.mp4)
+- `src/data/books.json` — 11 CC books, covers from Amazon CDN, all links use tag jbmangum27-20
+- `src/pages/books.astro` — Current Read (hero) + The Reading List grid; Field Guide button auto-appears when fieldGuideUrl is set
+- `src/components/Header.astro` — added Books to nav
+- `src/components/Footer.astro` — added Books to footer nav
+- `src/pages/api/newsletter/send.ts` — queries active D1 subscribers, sends branded HTML email via SendGrid, logs to newsletter_sends table; protected by ADMIN_SECRET header
+- `src/pages/admin/newsletter.astro` — compose UI with live preview; sections: subject, reading notes, announcements, chapter spotlight
+- `data/schema.sql` — added newsletter_sends table
+- `.env.example` — added ADMIN_SECRET
+- `SETUP-D1.md` — created wire-up guide
 
-**Root Cause:**
-- Cloudflare Pages doesn't add `Accept-Ranges: bytes` by default for binary files
-- Chromium-based browsers require this header to stream/autoplay mp4 — without it, the video is treated as a non-seekable blob and silently fails
+**Decisions:**
+- All 11 books are CC reads (no separate "recommended" category) — simplified to Current Read + The Reading List
+- Amazon affiliate tag: jbmangum27-20 — all buy links formatted as amazon.com/dp/{ASIN}?tag=jbmangum27-20
+- Newsletter is manually composed each week — no automation; Brian writes reading notes + announcements + chapter spotlight
+- Newsletter admin auth: ADMIN_SECRET env var via x-admin-secret header (no Cloudflare Access needed)
+- Field guides: R2 PDFs — fieldGuideUrl starts null, download button appears automatically once URL is set in books.json
+
+**Next Steps:**
+- [ ] Brian: run SETUP-D1.md steps to wire up D1 + SendGrid (Get Connected form goes live)
+- [ ] Upload field guide PDFs to R2, set fieldGuideUrl in books.json for each
+- [ ] Verify all book cover images render (esp. B0CXJJPSVK — newer ASIN format)
+- [ ] Refine cc.png into proper vector logo
+- [ ] Create OG image (1200×630)
 
 **Gotchas:**
-- `_headers` file must live in `public/` — Astro copies it to `dist/` on build, Cloudflare picks it up from there
-- This is the correct fix for any mp4/video autoplay issues on Cloudflare Pages
+- `_headers` file must live in `public/` — Astro copies it to `dist/`, Cloudflare picks it up from there
+- Cloudflare Pages requires Accept-Ranges: bytes for mp4 autoplay — without it browsers silently fail
+- Amazon image CDN: `images-na.ssl-images-amazon.com/images/P/{ASIN}.01.L.jpg` works for standard ISBNs; B0-prefix ASINs may need m.media-amazon.com format
+- To change current read: set currentRead: true on new book, false on old one in books.json
 
 **Next Steps:**
 - [ ] Add SendGrid API key + NOTIFICATION_EMAIL to Cloudflare Pages env vars
