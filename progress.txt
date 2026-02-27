@@ -2,6 +2,33 @@
 
 ---
 
+## Session — Feb 27, 2026 (continued)
+
+**Completed:**
+- Fixed Counterfeit Gods Amazon link + cover (ASIN B09V1ZXS7R)
+- Fixed Man in the Mirror Amazon link + cover (ASIN 0310331757)
+- Increased font sizes site-wide (body 17px → 18px, h1/h2/h3 bumped)
+- Books page: 2-column grid, larger book titles/descriptions/authors, bigger covers
+- Join page: chapter locations map (Leaflet.js, CartoDB dark tiles, 4 amber markers)
+
+**Files Changed:**
+- `src/data/books.json` — corrected ASINs and affiliate links for Counterfeit Gods + Man in the Mirror
+- `src/styles/global.css` — body font size + h1/h2/h3 increased
+- `src/pages/books.astro` — 2-col grid, font sizes bumped throughout
+- `src/pages/join.astro` — added chapter map section with Leaflet.js
+- `src/layouts/BaseLayout.astro` — added head slot for page-specific CSS/JS injection
+
+**Decisions:**
+- Map uses Leaflet + CartoDB dark_matter tiles — no API key, matches dark CC brand
+- Scroll wheel zoom disabled on map (better UX on page scroll)
+- Adding new chapters = add entry to chapters array in join.astro script block
+
+**Gotchas:**
+- B0-prefix Amazon ASINs use m.media-amazon.com for cover images, not images-na
+- BaseLayout needed a head slot to inject Leaflet CSS — now available for all pages
+
+---
+
 ## Session — Feb 27, 2026
 
 **Completed:**
