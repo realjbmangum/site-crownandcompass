@@ -164,7 +164,7 @@ const pillarLabels: Record<string, string> = {
 
   .books-subtext {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 1rem;
+    font-size: 1.0625rem;
     color: var(--text-muted);
     font-weight: 300;
     line-height: 1.7;
@@ -183,7 +183,7 @@ const pillarLabels: Record<string, string> = {
 
   .section-subtext {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.9375rem;
+    font-size: 1.0625rem;
     color: var(--text-muted);
     font-weight: 300;
     line-height: 1.7;
@@ -265,7 +265,7 @@ const pillarLabels: Record<string, string> = {
 
   .current-author {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.9375rem;
+    font-size: 1.0625rem;
     color: var(--text-muted);
     font-weight: 300;
     margin: 0 0 1.25rem;
@@ -273,7 +273,7 @@ const pillarLabels: Record<string, string> = {
 
   .current-desc {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.9375rem;
+    font-size: 1.0625rem;
     color: var(--text-muted);
     font-weight: 300;
     line-height: 1.75;
@@ -299,8 +299,14 @@ const pillarLabels: Record<string, string> = {
   ---------------------------------------- */
   .book-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 640px) {
+    .book-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .book-card {
@@ -318,7 +324,7 @@ const pillarLabels: Record<string, string> = {
   }
 
   .book-cover {
-    width: 64px;
+    width: 80px;
     flex-shrink: 0;
     height: auto;
     display: block;
@@ -332,7 +338,7 @@ const pillarLabels: Record<string, string> = {
 
   .book-title {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 1.125rem;
+    font-size: 1.3125rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0 0 0.125rem;
@@ -341,7 +347,7 @@ const pillarLabels: Record<string, string> = {
 
   .book-author {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.8125rem;
+    font-size: 0.9375rem;
     color: var(--text-muted);
     font-weight: 300;
     margin: 0 0 0.625rem;
@@ -356,7 +362,7 @@ const pillarLabels: Record<string, string> = {
 
   .book-desc {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--text-muted);
     font-weight: 300;
     line-height: 1.65;
@@ -372,7 +378,7 @@ const pillarLabels: Record<string, string> = {
 
   .book-link {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.8125rem;
+    font-size: 0.9375rem;
     font-weight: 500;
     color: var(--accent);
     text-decoration: none;
@@ -396,7 +402,7 @@ const pillarLabels: Record<string, string> = {
 
   .guide-pending {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: var(--text-muted);
     opacity: 0.5;
     font-style: italic;
