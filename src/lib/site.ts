@@ -7,7 +7,7 @@
  * Static pages take their canonical URL from Astro's `site:` config in
  * astro.config.mjs instead — set both to the same domain when it is chosen.
  */
-const FALLBACK = 'https://crownandcompass.com';
+const FALLBACK = 'https://thecrownandcompass.org';
 
 export function getSiteUrl(env: unknown): string {
   const raw = (env as Record<string, string> | undefined)?.SITE_URL || FALLBACK;
