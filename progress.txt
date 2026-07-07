@@ -2,6 +2,66 @@
 
 ---
 
+## Session — Jul 7, 2026
+
+Crown and Compass restarted as a permanent pillar of Brian's 10-year strategy.
+Approved a full-platform roadmap (plan file: `~/.claude/plans/crown-and-compass-is-clever-sunbeam.md`).
+Scope confirmed: FULL custom platform, ~10 men one group, free forever. Domain being re-chosen
+(Brian bulk-searching; Crown and Compass in the name, .org favored). This session shipped the
+domain-independent Week-1 / Phase-0 items only.
+
+**Completed:**
+- Built the CAN-SPAM unsubscribe flow (was a broken placeholder before any of this could send):
+  - `src/lib/unsubscribe.ts` — stateless HMAC-SHA256(email) tokens keyed by ADMIN_SECRET, hex,
+    with a shared constant-time compare and a URL builder.
+  - `src/pages/api/unsubscribe.ts` — GET verifies the token and shows a brand-voice confirm page
+    (never mutates, so mail-scanner prefetch can't silently unsubscribe real men); POST does the
+    unsubscribe and supports RFC 8058 one-click for deliverability.
+  - Wired `api/newsletter/send.ts` to send one message per subscriber, each with its own working
+    unsubscribe link (footer link + List-Unsubscribe headers).
+- Ran Code Review + Security Review; applied the fixes: isolated the audit-log insert so a logging
+  failure can't misreport a successful send (was a duplicate-blast risk), constant-time admin-secret
+  compare, HTML-escaped all interpolated email fields (`send.ts` + `join.ts` notification),
+  env-driven physical mailing address in the footer, and hardened `getSiteUrl` against a malformed value.
+- Introduced a single `SITE_URL` source of truth (`src/lib/site.ts`) for server-rendered links,
+  replacing the hardcoded `crownandcompass.com` in `send.ts`.
+- Retired the old paid-tier language in the strategy corpus (`AI/CC/planning/mission-and-avatars.md`
+  + `cc-strategy-f3-inspired.md`) — CC is now free-forever in those docs too.
+- Verified: clean `npm run build`; 17/17 unit checks on the token round-trip, escaping, and URL encoding.
+
+**Files Changed:**
+- `src/lib/unsubscribe.ts`, `src/lib/site.ts`, `src/lib/html.ts` — new helper modules
+- `src/pages/api/unsubscribe.ts` — new endpoint (GET confirm + POST one-click)
+- `src/pages/api/newsletter/send.ts` — per-recipient send + unsubscribe wiring + review fixes
+- `src/pages/api/join.ts` — HTML-escape the admin-notification fields
+- `.env.example` — added SITE_URL + MAILING_ADDRESS
+- `AI/CC/planning/mission-and-avatars.md`, `AI/CC/planning/cc-strategy-f3-inspired.md` — pricing language retired
+
+**Decisions:**
+- Unsubscribe GET is non-mutating (confirm page) to avoid corporate mail-scanner false unsubscribes;
+  RFC 8058 POST is the immediate one-click path for native mail-client buttons.
+- Newsletter sends one request per subscriber (correct + simple at this list size); documented the
+  Cloudflare subrequest ceiling for when the list grows.
+- ADMIN_SECRET doubles as the unsubscribe HMAC key (documented tradeoff; graceful "reply to unsubscribe"
+  fallback covers key rotation). Consider a separate UNSUBSCRIBE_SECRET later.
+
+**Next Steps (blocked on Brian — dashboard/account access):**
+- [ ] Pick the domain from the bulk search, register it, attach to the Pages project + DNS
+- [ ] Set `SITE_URL` and `MAILING_ADDRESS` env vars in Pages (plus `ADMIN_SECRET`/`SENDGRID_API_KEY`/`NOTIFICATION_EMAIL`)
+- [ ] Add `site:` to `astro.config.mjs` once the domain is chosen (reconciles SEOHead canonical)
+- [ ] Re-run `data/schema.sql` against remote D1 (local was missing `newsletter_sends`); verify remote schema
+- [ ] Live end-to-end test: join form → D1 row → notify email; then a test-segment newsletter send + unsubscribe
+- [ ] Security follow-ups (Brian-side): rate-limit `/api/newsletter/send`; Cloudflare Access on `/admin/*` (plan Week 8)
+- [ ] Confirm current book (Disciplines vs Maximized Manhood); align `books.json` currentRead
+
+**Gotchas:**
+- Web Crypto (`crypto.subtle`) is available in the Cloudflare runtime; the unsubscribe routes are
+  `prerender = false` so no build-time crypto issue.
+- Node 25 runs the `.ts` lib files directly (native type stripping) — handy for quick unit checks.
+- `astro check` is not installed; `npm run build` uses esbuild and does NOT type-check.
+
+---
+
 ## Session — Feb 27, 2026 (continued)
 
 **Completed:**

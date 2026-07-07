@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { escapeHtml } from '../../lib/html';
 
 export async function POST({ request, locals }: APIContext) {
   try {
@@ -58,10 +59,10 @@ export async function POST({ request, locals }: APIContext) {
       const emailBody = `
         <p>New Crown &amp; Compass inquiry:</p>
         <ul>
-          <li><strong>Name:</strong> ${name.trim()}</li>
-          <li><strong>Email:</strong> ${email.trim()}</li>
-          <li><strong>How they heard:</strong> ${how_you_heard?.trim() || '—'}</li>
-          <li><strong>Message:</strong> ${message?.trim() || '—'}</li>
+          <li><strong>Name:</strong> ${escapeHtml(name.trim())}</li>
+          <li><strong>Email:</strong> ${escapeHtml(email.trim())}</li>
+          <li><strong>How they heard:</strong> ${escapeHtml(how_you_heard?.trim() || '—')}</li>
+          <li><strong>Message:</strong> ${escapeHtml(message?.trim() || '—')}</li>
         </ul>
       `;
 
