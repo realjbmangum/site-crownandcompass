@@ -15,7 +15,21 @@ const { title, description } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Mark JS available before paint so scroll-reveal can animate without
+         hiding content for no-JS / failed-JS visitors. -->
+    <script is:inline>document.documentElement.classList.add('has-js');</script>
+
     <SEOHead title={title} description={description} />
+
+    <!-- Fonts: EB Garamond (display) + DM Sans (body). Non-blocking <link>,
+         not a CSS @import. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap"
+    />
+
     <slot name="head" />
   </head>
   <body>
@@ -26,16 +40,21 @@ const { title, description } = Astro.props;
     <Footer />
 
     <script>
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reveals = document.querySelectorAll('.reveal');
+      if (reduce) {
+        reveals.forEach(el => el.classList.add('visible'));
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(el => observer.observe(el));
+      }
     </script>
   </body>
 </html>

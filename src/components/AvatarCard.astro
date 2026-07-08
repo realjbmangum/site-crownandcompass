@@ -8,57 +8,54 @@ interface Props {
 const { headline, description, number } = Astro.props;
 ---
 
-<div class="avatar-card">
+<article class="avatar-card">
   <div class="card-number" aria-hidden="true">{number}</div>
-  <div class="card-rule" aria-hidden="true"></div>
   <h3 class="avatar-headline">{headline}</h3>
   <p class="avatar-description">{description}</p>
-</div>
+</article>
 
 <style>
   .avatar-card {
     background-color: var(--bg-card);
-    border: 1px solid var(--accent);
-    outline: 1px solid rgba(201, 133, 58, 0.2);
-    outline-offset: -6px;
-    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.875rem 1.625rem;
     display: flex;
     flex-direction: column;
-    gap: 0.875rem;
+    gap: 0.75rem;
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  }
+
+  .avatar-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201, 133, 58, 0.5);
+    background-color: var(--bg-card-hi);
   }
 
   .card-number {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 2.5rem;
-    font-weight: 800;
+    font-size: 1.875rem;
+    font-weight: 700;
     color: var(--accent);
-    opacity: 0.35;
+    opacity: 0.85;
     line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-
-  .card-rule {
-    width: 1.5rem;
-    height: 1px;
-    background-color: var(--accent);
-    opacity: 0.4;
   }
 
   .avatar-headline {
     font-family: 'EB Garamond', Georgia, serif;
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
-    line-height: 1.3;
-    margin: 0;
+    line-height: 1.25;
+    margin: 0.25rem 0 0;
   }
 
   .avatar-description {
     font-family: 'DM Sans', system-ui, sans-serif;
     font-size: 0.9375rem;
     color: var(--text-muted);
-    line-height: 1.7;
+    line-height: 1.65;
     margin: 0;
-    font-weight: 300;
+    font-weight: 400;
   }
 </style>

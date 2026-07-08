@@ -7,24 +7,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="Brian Mangum founded Crown and Compass because he needed it. The story, the philosophy, and why peer-led men's community works."
 >
 
-  <!-- Page Hero -->
+  <!-- ============================ HERO ============================ -->
   <section class="about-hero">
+    <div class="about-hero-bg" aria-hidden="true"></div>
     <div class="section-container">
-      <p class="label-flanked">About</p>
-      <div class="rule-heraldic"></div>
-      <h1 class="about-headline">A community built by a man<br class="d-break" /> who needed one.</h1>
+      <div class="about-hero-inner">
+        <p class="kicker">About</p>
+        <h1 class="about-headline">A community built by a man<br class="d-break" /> who needed one.</h1>
+      </div>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <article class="about-body section-pad">
+  <!-- ============================ BODY ============================ -->
+  <article class="about-body section-pad band-raise">
     <div class="section-container about-layout">
 
       <div class="about-content prose-cc">
 
         <!-- Origin -->
-        <section class="about-section">
-          <div class="rule-heraldic"></div>
+        <section class="about-section reveal">
           <h2>Where This Started</h2>
           <p>
             Crown and Compass started simply: a few men, a book, a Saturday morning. No strategy,
@@ -43,8 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </section>
 
         <!-- Brian's Role -->
-        <section class="about-section">
-          <div class="rule-heraldic"></div>
+        <section class="about-section reveal">
           <h2>Brian's Role</h2>
           <p>
             Brian is the Founder. That means he set the table, named the thing, held the first
@@ -66,8 +66,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </section>
 
         <!-- The Walk Philosophy -->
-        <section class="about-section">
-          <div class="rule-heraldic"></div>
+        <section class="about-section reveal">
           <h2>The Walk</h2>
           <p>
             Everything in Crown and Compass lives under one phrase: <em>Long. Slow. Together.</em>
@@ -92,8 +91,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </section>
 
         <!-- What CC Is Not -->
-        <section class="about-section">
-          <div class="rule-heraldic"></div>
+        <section class="about-section reveal">
           <h2>What This Is Not</h2>
           <p>
             Crown and Compass is not a men's retreat with a follow-up newsletter. It is an
@@ -119,28 +117,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Sidebar -->
       <aside class="about-sidebar">
-        <div class="sidebar-card">
-          <p class="sidebar-label">The Walk</p>
-          <blockquote class="sidebar-quote sidebar-quote-flanked">
-            "Long. Slow. Together."
-          </blockquote>
+        <div class="card info-card reveal">
+          <p class="kicker">The Walk</p>
+          <p class="walk-motto">Long. Slow. Together.</p>
         </div>
-        <div class="sidebar-card">
-          <p class="sidebar-label">Founded</p>
-          <p class="sidebar-stat">2025</p>
+        <div class="card info-card reveal reveal-delay-1">
+          <p class="kicker">Founded</p>
+          <p class="info-stat">2025</p>
         </div>
-        <div class="sidebar-card">
-          <p class="sidebar-label">Community size</p>
-          <p class="sidebar-stat">Small by design.</p>
-          <p class="sidebar-note">
+        <div class="card info-card reveal reveal-delay-2">
+          <p class="kicker">Community size</p>
+          <p class="info-stat">Small by design.</p>
+          <p class="info-note">
             Chapters cap at 8 Brothers. When a Chapter is full, a new one forms.
           </p>
         </div>
-        <div class="sidebar-card sidebar-cta">
-          <p class="sidebar-label">Ready to walk?</p>
-          <a href="/join" class="btn-amber" style="font-size: 0.875rem; padding: 0.5rem 1.25rem;">
-            Get Connected
-          </a>
+        <div class="card info-card info-cta reveal reveal-delay-3">
+          <p class="kicker">Ready to walk?</p>
+          <a href="/join" class="btn-amber info-cta-btn">Get Connected</a>
         </div>
       </aside>
 
@@ -150,103 +144,76 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
+  /* ---------- Hero ---------- */
   .about-hero {
-    padding: 5rem 1.5rem 3rem;
-    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    padding: 7rem 0 4rem;
   }
-
-  .overline {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 0.75rem;
+  @media (max-width: 640px) {
+    .about-hero { padding: 5rem 0 3rem; }
   }
+  .about-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(90% 75% at 50% -20%, rgba(201, 133, 58, 0.16), transparent 55%),
+      linear-gradient(180deg, #0a0b10 0%, var(--bg-base) 70%);
+  }
+  .about-hero .section-container { position: relative; z-index: 1; }
+  .about-hero-inner { max-width: 46rem; }
+  .about-hero .kicker { margin-bottom: 1rem; }
 
   .about-headline {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.15;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.1;
     margin: 0;
   }
 
-  .d-break {
-    display: none;
-  }
+  .d-break { display: none; }
   @media (min-width: 640px) {
     .d-break { display: inline; }
   }
 
-  /* Layout */
+  /* ---------- Layout ---------- */
   .about-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3rem;
   }
-
   @media (min-width: 900px) {
     .about-layout {
-      grid-template-columns: 1fr 18rem;
+      grid-template-columns: 1fr 19rem;
+      gap: 4rem;
       align-items: start;
     }
   }
 
-  /* Content */
-  .about-content {
-    /* prose-cc styles from global.css */
-  }
+  .about-section { margin-bottom: 2.5rem; }
+  .about-section:last-child { margin-bottom: 0; }
+  /* first heading sits tight to the top of the reading column */
+  .about-content .about-section:first-child :global(h2) { margin-top: 0; }
 
-  .about-section {
-    margin-bottom: 3rem;
-  }
-
-  .about-section:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Sidebar */
+  /* ---------- Sidebar (clean card panels, sticky) ---------- */
   .about-sidebar {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    border: 1px solid var(--accent);
-    outline: 1px solid rgba(201, 133, 58, 0.2);
-    outline-offset: -6px;
-    background-color: var(--bg-card);
+    gap: 1rem;
   }
-
   @media (min-width: 900px) {
     .about-sidebar {
       position: sticky;
-      top: 5rem;
+      top: 5.5rem;
     }
   }
 
-  .sidebar-card {
-    background-color: var(--bg-card);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+  .info-card { padding: 1.375rem 1.5rem; }
+  .info-card .kicker { margin-bottom: 0.625rem; }
 
-  .sidebar-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0;
-  }
-
-  .sidebar-quote {
+  .walk-motto {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-weight: 600;
     font-style: italic;
     color: var(--text-primary);
@@ -254,41 +221,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
-  .sidebar-stat {
+  .info-stat {
     font-family: 'EB Garamond', Georgia, serif;
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-primary);
     margin: 0;
   }
 
-  .sidebar-note {
-    font-family: 'DM Sans', sans-serif;
+  .info-note {
+    font-family: 'DM Sans', system-ui, sans-serif;
     font-size: 0.875rem;
     color: var(--text-muted);
     line-height: 1.6;
-    margin: 0;
-    font-weight: 300;
+    margin: 0.5rem 0 0;
   }
 
-  .sidebar-cta {
-    gap: 0.75rem;
-  }
-
-  /* Flanked rules on sidebar quote */
-  .sidebar-quote-flanked {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .sidebar-quote-flanked::before,
-  .sidebar-quote-flanked::after {
-    content: '';
-    width: 1.5rem;
-    height: 1px;
-    background-color: var(--accent);
-    opacity: 0.3;
-    flex-shrink: 0;
+  .info-cta { display: flex; flex-direction: column; gap: 0.875rem; align-items: flex-start; }
+  .info-cta-btn {
+    font-size: 0.875rem;
+    padding: 0.5625rem 1.25rem;
   }
 </style>

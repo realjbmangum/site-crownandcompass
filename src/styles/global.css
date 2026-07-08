@@ -1,168 +1,185 @@
-/* Google Fonts — must precede @tailwind directives */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ----------------------------------------
-   CSS Custom Properties
+   Design tokens — "Firelight"
+   Fonts are loaded via <link> in BaseLayout (no render-blocking @import).
 ---------------------------------------- */
 :root {
-  --bg-base:      #0f1117;
-  --bg-card:      #1a1a20;
-  --bg-surface:   #22222a;
-  --text-primary: #f0ebe2;
-  --text-muted:   #8a8070;
-  --accent:       #c9853a;
-  --accent-light: #e8a055;
-  --border:       #2e2c26;
+  --bg-base:      #0c0e13;  /* deep near-black ground */
+  --bg-raise:     #13151d;  /* raised band for section rhythm */
+  --bg-card:      #191b23;  /* cards */
+  --bg-card-hi:   #20222c;  /* card hover */
+  --bg-surface:   #20222c;  /* elevated surfaces (compat) */
+  --text-primary: #f4efe6;  /* warm off-white */
+  --text-muted:   #a89f90;  /* readable secondary (raised contrast) */
+  --text-faint:   #766d61;  /* meta / tertiary */
+  --accent:       #c9853a;  /* firelight amber */
+  --accent-light: #e8a055;  /* amber hover */
+  --border:       #2a2c36;  /* borders */
+  --border-soft:  #202129;  /* hairline dividers */
 }
 
-/* ----------------------------------------
-   Base
----------------------------------------- */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   font-family: 'DM Sans', system-ui, sans-serif;
-  font-weight: 300;
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
+
+/* firelit grain, fixed, very subtle */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  mix-blend-mode: screen;
+}
+
+main { position: relative; z-index: 1; }
 
 /* ----------------------------------------
    Typography
 ---------------------------------------- */
-.font-garamond {
-  font-family: 'EB Garamond', Georgia, serif;
-}
+.font-garamond { font-family: 'EB Garamond', Georgia, serif; }
 
 h1, h2, h3 {
   font-family: 'EB Garamond', Georgia, serif;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 h1 { font-size: clamp(2.75rem, 6vw, 5rem); }
-h2 { font-size: clamp(2rem, 4vw, 2.75rem); }
-h3 { font-size: clamp(1.375rem, 2.5vw, 1.625rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
-p {
-  color: var(--text-primary);
-  line-height: 1.8;
-}
+p { color: var(--text-primary); line-height: 1.7; }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
 /* ----------------------------------------
-   Grain Texture Utility
-   Add .grain-bg to any section
+   Layout helpers
 ---------------------------------------- */
-.grain-bg {
+.section-container {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 0 1.75rem;
   position: relative;
+  z-index: 1;
 }
 
+.section-pad { padding-top: 6rem; padding-bottom: 6rem; }
+
+@media (max-width: 640px) {
+  .section-pad { padding-top: 4rem; padding-bottom: 4rem; }
+}
+
+/* Raised band for section rhythm (replaces ornamental dividers) */
+.band-raise {
+  background-color: var(--bg-raise);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.section-divider { height: 1px; background: var(--border-soft); max-width: 70rem; margin: 0 auto; }
+
+/* ----------------------------------------
+   Eyebrow label
+---------------------------------------- */
+.kicker {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* kicker with a trailing amber rule */
+.kicker-rule { display: flex; align-items: center; gap: 0.75rem; }
+.kicker-rule::after { content: ''; height: 1px; width: 2.5rem; background: var(--accent); opacity: 0.45; }
+
+/* ----------------------------------------
+   Buttons
+---------------------------------------- */
+.btn-amber, .btn-ghost {
+  display: inline-block;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  padding: 0.8125rem 1.625rem;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-amber { background-color: var(--accent); color: #140f08; }
+.btn-amber:hover { background-color: var(--accent-light); }
+
+.btn-ghost {
+  background-color: rgba(244, 239, 230, 0.03);
+  color: var(--text-primary);
+  border-color: rgba(244, 239, 230, 0.22);
+}
+.btn-ghost:hover { border-color: rgba(244, 239, 230, 0.5); background-color: rgba(244, 239, 230, 0.06); }
+
+/* ----------------------------------------
+   Card
+---------------------------------------- */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.75rem 1.625rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+.card:hover { transform: translateY(-4px); border-color: rgba(201, 133, 58, 0.5); background-color: var(--bg-card-hi); }
+
+/* Firelight glow — drop into a positioned section as an ::before backdrop */
+.firelight { position: relative; }
+.firelight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 55% at 50% 30%, rgba(201, 133, 58, 0.10), transparent 70%);
+}
+.firelight > * { position: relative; z-index: 1; }
+
+/* ----------------------------------------
+   Grain texture utility (per-section, optional)
+---------------------------------------- */
+.grain-bg { position: relative; }
 .grain-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
-  opacity: 0.035;
+  opacity: 0.03;
   pointer-events: none;
   z-index: 1;
 }
-
-.grain-bg > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* ----------------------------------------
-   Buttons
----------------------------------------- */
-.btn-amber {
-  display: inline-block;
-  background-color: var(--accent);
-  color: var(--bg-base);
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-weight: 500;
-  font-size: 0.9375rem;
-  letter-spacing: 0.03em;
-  padding: 0.75rem 1.75rem;
-  border-radius: 2px;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-amber:hover {
-  background-color: var(--accent-light);
-}
-
-.btn-ghost {
-  display: inline-block;
-  background-color: rgba(240, 235, 226, 0.06);
-  color: var(--text-primary);
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-weight: 400;
-  font-size: 0.9375rem;
-  letter-spacing: 0.03em;
-  padding: 0.75rem 1.75rem;
-  border-radius: 2px;
-  border: 1px solid rgba(240, 235, 226, 0.3);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.btn-ghost:hover {
-  border-color: rgba(240, 235, 226, 0.6);
-  background-color: rgba(240, 235, 226, 0.1);
-}
-
-/* ----------------------------------------
-   Section containers
----------------------------------------- */
-.section-container {
-  max-width: 68rem;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.section-pad {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
-@media (max-width: 640px) {
-  .section-pad {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-}
-
-/* ----------------------------------------
-   Divider
----------------------------------------- */
-.section-divider {
-  height: 1px;
-  background: var(--border);
-  max-width: 68rem;
-  margin: 0 auto;
-}
+.grain-bg > * { position: relative; z-index: 2; }
 
 /* ----------------------------------------
    Prose (long-form reading)
@@ -173,76 +190,30 @@ a {
   line-height: 1.85;
   color: var(--text-primary);
 }
-
 .prose-cc h2 {
-  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-size: clamp(1.625rem, 3.5vw, 2.125rem);
   margin-top: 3rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border);
 }
-
 .prose-cc h3 {
-  font-size: clamp(1.125rem, 2vw, 1.375rem);
   color: var(--accent);
   margin-top: 2rem;
   margin-bottom: 0.5rem;
   font-family: 'DM Sans', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.75rem;
 }
-
-.prose-cc h4 {
-  font-size: 1.25rem;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.prose-cc p {
-  margin-bottom: 1.25rem;
-}
-
-.prose-cc ol {
-  counter-reset: list;
-  padding: 0;
-  list-style: none;
-}
-
-.prose-cc ol li {
-  counter-increment: list;
-  padding-left: 2rem;
-  position: relative;
-  margin-bottom: 0.875rem;
-}
-
-.prose-cc ol li::before {
-  content: counter(list) '.';
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: 500;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.prose-cc ul {
-  padding-left: 1.5rem;
-  list-style: none;
-}
-
-.prose-cc ul li {
-  position: relative;
-  padding-left: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.prose-cc ul li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-}
+.prose-cc p { margin-bottom: 1.25rem; color: var(--text-muted); }
+.prose-cc ol { counter-reset: list; padding: 0; list-style: none; }
+.prose-cc ol li { counter-increment: list; padding-left: 2rem; position: relative; margin-bottom: 0.875rem; }
+.prose-cc ol li::before { content: counter(list) '.'; position: absolute; left: 0; color: var(--accent); font-weight: 600; font-family: 'DM Sans', sans-serif; }
+.prose-cc ul { padding-left: 1.5rem; list-style: none; }
+.prose-cc ul li { position: relative; padding-left: 1rem; margin-bottom: 0.5rem; }
+.prose-cc ul li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
 
 /* ----------------------------------------
    Scripture callout
@@ -252,6 +223,7 @@ a {
   padding: 1.25rem 1.5rem;
   margin: 2rem 0;
   background: var(--bg-card);
+  border-radius: 0 4px 4px 0;
   font-family: 'EB Garamond', Georgia, serif;
   font-size: 1.0625rem;
   font-style: italic;
@@ -265,15 +237,14 @@ a {
 .questions-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: 2px;
+  border-radius: 6px;
   padding: 2rem;
   margin: 2rem 0;
 }
-
 .questions-card h3 {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -281,197 +252,21 @@ a {
 }
 
 /* ----------------------------------------
-   Scroll Reveal
+   Scroll reveal — visible by default, animates only when JS is present
+   (so content never blanks out if the observer never fires)
 ---------------------------------------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
+.reveal { opacity: 1; transform: none; }
+html.has-js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+html.has-js .reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-
-/* ----------------------------------------
-   Reduced Motion
----------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ========================================
-   HERALDIC UTILITIES
-   Crown & Compass redesign — badge / crest
-   character layer on top of the base system.
-======================================== */
-
-/* ----------------------------------------
-   Ornamental Divider
-   A centered diamond flanked by two amber lines.
-   Use between major page sections for heraldic rhythm.
----------------------------------------- */
-.divider-ornament {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  max-width: 68rem;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.divider-ornament::before,
-.divider-ornament::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-.divider-ornament::before {
-  background: linear-gradient(to right, transparent, var(--border));
-}
-
-.divider-ornament::after {
-  background: linear-gradient(to left, transparent, var(--border));
-}
-
-.divider-ornament-mark {
-  display: block;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  font-size: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none'%3E%3Ccircle cx='20' cy='20' r='18.5' stroke='%23c9853a' stroke-width='1.2' opacity='0.6'/%3E%3Cpolygon points='20,4 22.2,18 20,20 17.8,18' fill='%23c9853a' opacity='0.7'/%3E%3Cpolygon points='20,36 17.8,22 20,20 22.2,22' fill='%23c9853a' opacity='0.35'/%3E%3Cpolygon points='36,20 22,17.8 20,20 22,22.2' fill='%23c9853a' opacity='0.35'/%3E%3Cpolygon points='4,20 18,22.2 20,20 18,17.8' fill='%23c9853a' opacity='0.35'/%3E%3Ccircle cx='20' cy='20' r='2.2' fill='%23c9853a' opacity='0.7'/%3E%3Ccircle cx='20' cy='20' r='7' stroke='%23c9853a' stroke-width='0.8' opacity='0.25'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-}
-
-/* ----------------------------------------
-   Flanked Label
-   Eyebrow text with short amber rules on either side.
-   Use for section labels that need heraldic weight.
----------------------------------------- */
-.label-flanked {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 0.75rem;
-}
-
-.label-flanked::before,
-.label-flanked::after {
-  content: '';
-  width: 2rem;
-  height: 1px;
-  background-color: var(--accent);
-  opacity: 0.4;
-  flex-shrink: 0;
-}
-
-/* ----------------------------------------
-   Badge Frame
-   Double-border single-element via outline trick.
-   Vintage badge / embroidered patch feel.
-   Apply to any card or container.
----------------------------------------- */
-.badge-frame {
-  border: 1px solid var(--accent);
-  outline: 1px solid rgba(201, 133, 58, 0.25);
-  outline-offset: -6px;
-  padding: 2rem;
-  background-color: var(--bg-card);
-}
-
-/* ----------------------------------------
-   Heraldic Section Rule
-   A thick amber line used above major section headings.
-   Reads as the top bar of a shield.
----------------------------------------- */
-.rule-heraldic {
-  width: 3rem;
-  height: 2px;
-  background-color: var(--accent);
-  margin-bottom: 1.25rem;
-  opacity: 0.7;
-}
-
-/* ----------------------------------------
-   Crest Corner Accents
-   Decorative corner marks for a framed, certified look.
-   Apply to blockquotes, feature callouts, or hero sections.
----------------------------------------- */
-.crest-corners {
-  position: relative;
-  padding: 2.5rem;
-}
-
-.crest-corners::before,
-.crest-corners::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-color: var(--accent);
-  border-style: solid;
-  opacity: 0.4;
-}
-
-.crest-corners::before {
-  top: 0;
-  left: 0;
-  border-width: 1px 0 0 1px;
-}
-
-.crest-corners::after {
-  bottom: 0;
-  right: 0;
-  border-width: 0 1px 1px 0;
-}
-
-@media (max-width: 640px) {
-  .crest-corners::before,
-  .crest-corners::after {
-    width: 14px;
-    height: 14px;
-  }
-
-  .crest-corners {
-    padding: 1.75rem;
-  }
-}
-
-/* ----------------------------------------
-   Shield Accent Border
-   Thick top, thin sides, open bottom.
-   Reads as a shield silhouette.
----------------------------------------- */
-.shield-accent {
-  border-top: 3px solid var(--accent);
-  border-left: 1px solid rgba(201, 133, 58, 0.2);
-  border-right: 1px solid rgba(201, 133, 58, 0.2);
-  border-bottom: none;
-  padding: 1.75rem 1.5rem;
-  background-color: var(--bg-card);
+  html.has-js .reveal { opacity: 1; transform: none; }
 }
