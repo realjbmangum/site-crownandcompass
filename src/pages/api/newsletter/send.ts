@@ -1,6 +1,9 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { makeUnsubscribeToken, buildUnsubscribeUrl, constantTimeEqual } from '../../../lib/unsubscribe';
+import { getSiteUrl } from '../../../lib/site';
+import { escapeHtml } from '../../../lib/html';
 
 interface NewsletterPayload {
   subject: string;
@@ -10,10 +13,24 @@ interface NewsletterPayload {
   chapterSpotlight?: string;
 }
 
-function buildEmailHtml(payload: NewsletterPayload, unsubscribeUrl: string): string {
-  const { subject, preheader = '', readingNotes, announcements, chapterSpotlight } = payload;
+function buildEmailHtml(
+  payload: NewsletterPayload,
+  unsubscribeUrl: string,
+  siteUrl: string,
+  mailingAddress = ''
+): string {
+  const siteHost = new URL(siteUrl).host;
 
-  const announcementsSection = announcements?.trim()
+  // Escape all admin-authored fields before interpolation: they are plain text, so a
+  // stray "<" (or a hostile value, were the admin secret ever compromised) must never
+  // become live markup in the email.
+  const subject = escapeHtml(payload.subject.trim());
+  const preheader = escapeHtml((payload.preheader ?? '').trim());
+  const readingNotes = escapeHtml(payload.readingNotes.trim());
+  const announcements = escapeHtml((payload.announcements ?? '').trim());
+  const chapterSpotlight = escapeHtml((payload.chapterSpotlight ?? '').trim());
+
+  const announcementsSection = announcements
     ? `
       <tr>
         <td style="padding: 0 40px 32px;">
@@ -21,7 +38,7 @@ function buildEmailHtml(payload: NewsletterPayload, unsubscribeUrl: string): str
             <tr>
               <td style="border-top: 2px solid #c9853a; padding-top: 24px;">
                 <p style="font-family: 'DM Sans', Arial, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #c9853a; margin: 0 0 12px;">Announcements</p>
-                <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.75; color: #d4cfc6; white-space: pre-line;">${announcements.trim()}</div>
+                <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.75; color: #d4cfc6; white-space: pre-line;">${announcements}</div>
               </td>
             </tr>
           </table>
@@ -29,7 +46,7 @@ function buildEmailHtml(payload: NewsletterPayload, unsubscribeUrl: string): str
       </tr>`
     : '';
 
-  const spotlightSection = chapterSpotlight?.trim()
+  const spotlightSection = chapterSpotlight
     ? `
       <tr>
         <td style="padding: 0 40px 32px;">
@@ -37,7 +54,7 @@ function buildEmailHtml(payload: NewsletterPayload, unsubscribeUrl: string): str
             <tr>
               <td style="border-top: 2px solid #c9853a; padding-top: 24px;">
                 <p style="font-family: 'DM Sans', Arial, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #c9853a; margin: 0 0 12px;">Chapter Spotlight</p>
-                <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.75; color: #d4cfc6; white-space: pre-line;">${chapterSpotlight.trim()}</div>
+                <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.75; color: #d4cfc6; white-space: pre-line;">${chapterSpotlight}</div>
               </td>
             </tr>
           </table>
@@ -82,7 +99,7 @@ function buildEmailHtml(payload: NewsletterPayload, unsubscribeUrl: string): str
                 <tr>
                   <td style="border-top: 2px solid #c9853a; padding-top: 24px;">
                     <p style="font-family: 'DM Sans', Arial, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #c9853a; margin: 0 0 12px;">From the Session</p>
-                    <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.85; color: #d4cfc6; white-space: pre-line;">${readingNotes.trim()}</div>
+                    <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.85; color: #d4cfc6; white-space: pre-line;">${readingNotes}</div>
                   </td>
                 </tr>
               </table>
@@ -108,8 +125,9 @@ function buildEmailHtml(payload: NewsletterPayload, unsubscribeUrl: string): str
               <p style="font-family: 'DM Sans', Arial, sans-serif; font-size: 12px; color: #8a8070; margin: 0; opacity: 0.6;">
                 <a href="${unsubscribeUrl}" style="color: #8a8070; text-decoration: underline;">Unsubscribe</a>
                 &nbsp;·&nbsp;
-                <a href="https://crownandcompass.com" style="color: #8a8070; text-decoration: underline;">crownandcompass.com</a>
+                <a href="${siteUrl}" style="color: #8a8070; text-decoration: underline;">${siteHost}</a>
               </p>
+              ${mailingAddress ? `<p style="font-family: 'DM Sans', Arial, sans-serif; font-size: 11px; color: #8a8070; margin: 12px 0 0; opacity: 0.6;">${escapeHtml(mailingAddress)}</p>` : ''}
             </td>
           </tr>
 
@@ -123,11 +141,11 @@ function buildEmailHtml(payload: NewsletterPayload, unsubscribeUrl: string): str
 
 export async function POST({ request, locals }: APIContext) {
   try {
-    // Admin auth check
+    // Admin auth check (constant-time so a wrong secret leaks no timing signal).
     const adminSecret = (locals.runtime?.env?.ADMIN_SECRET as string) || '';
     const authHeader = request.headers.get('x-admin-secret') || '';
 
-    if (!adminSecret || authHeader !== adminSecret) {
+    if (!adminSecret || !constantTimeEqual(authHeader, adminSecret)) {
       return new Response(JSON.stringify({ error: 'Unauthorized.' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' },
@@ -143,7 +161,7 @@ export async function POST({ request, locals }: APIContext) {
       });
     }
 
-    // @ts-ignore
+    // @ts-ignore — bindings injected by the Cloudflare runtime
     const db = locals.runtime?.env?.DB;
     if (!db) {
       return new Response(JSON.stringify({ error: 'Database unavailable.' }), {
@@ -174,51 +192,78 @@ export async function POST({ request, locals }: APIContext) {
       });
     }
 
-    const siteUrl = 'https://crownandcompass.com';
+    const siteUrl = getSiteUrl(locals.runtime?.env);
+    const mailingAddress = (locals.runtime?.env?.MAILING_ADDRESS as string) || '';
 
-    // Build personalizations (SendGrid supports up to 1000 per request)
-    const personalizations = subscribers.map(sub => ({
-      to: [{ email: sub.email, name: sub.name }],
-    }));
+    // Send one message per subscriber so each carries its own working unsubscribe
+    // link: a visible footer link (CAN-SPAM) plus an RFC 8058 one-click header for
+    // deliverability. Each iteration is one SendGrid subrequest; Cloudflare caps
+    // subrequests per invocation (~50 bundled, ~1000 unbound), so move to a queued
+    // or batched send before the list outgrows that ceiling.
+    let sent = 0;
+    const failed: string[] = [];
 
-    const htmlContent = buildEmailHtml(
-      payload,
-      `${siteUrl}/api/unsubscribe?email=placeholder`
-    );
+    for (const sub of subscribers) {
+      const token = await makeUnsubscribeToken(sub.email, adminSecret);
+      const unsubscribeUrl = buildUnsubscribeUrl(siteUrl, sub.email, token);
+      const htmlContent = buildEmailHtml(payload, unsubscribeUrl, siteUrl, mailingAddress);
 
-    const sendRes = await fetch('https://api.sendgrid.com/v3/mail/send', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${sendgridKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        personalizations,
-        from: { email: fromEmail, name: 'Crown and Compass' },
-        subject: payload.subject.trim(),
-        content: [{ type: 'text/html', value: htmlContent }],
-      }),
-    });
+      const sendRes = await fetch('https://api.sendgrid.com/v3/mail/send', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${sendgridKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          personalizations: [
+            {
+              to: [{ email: sub.email, name: sub.name }],
+              headers: {
+                'List-Unsubscribe': `<${unsubscribeUrl}>`,
+                'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+              },
+            },
+          ],
+          from: { email: fromEmail, name: 'Crown and Compass' },
+          subject: payload.subject.trim(),
+          content: [{ type: 'text/html', value: htmlContent }],
+        }),
+      });
 
-    if (!sendRes.ok) {
-      const errText = await sendRes.text();
-      console.error('SendGrid error:', errText);
-      return new Response(JSON.stringify({ error: 'Failed to send via SendGrid.' }), {
+      if (sendRes.ok) {
+        sent++;
+      } else {
+        failed.push(sub.email);
+        console.error('SendGrid error for', sub.email, await sendRes.text());
+      }
+    }
+
+    if (sent === 0) {
+      return new Response(JSON.stringify({ error: 'Failed to send to any subscriber.' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    // Log the send
-    await db
-      .prepare(`INSERT INTO newsletter_sends (subject, recipient_count) VALUES (?, ?)`)
-      .bind(payload.subject.trim(), subscribers.length)
-      .run();
+    // Log the send. A failure here must NOT change the reported outcome: the emails
+    // already went out, and reporting an error would tempt a duplicate blast to the
+    // whole list.
+    try {
+      await db
+        .prepare(`INSERT INTO newsletter_sends (subject, recipient_count) VALUES (?, ?)`)
+        .bind(payload.subject.trim(), sent)
+        .run();
+    } catch (logErr) {
+      console.error('newsletter_sends log insert failed (send already completed):', logErr);
+    }
 
-    return new Response(JSON.stringify({ success: true, sent: subscribers.length }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({ success: true, sent, failed: failed.length, failedEmails: failed }),
+      {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   } catch (err) {
     console.error('Newsletter send error:', err);
     return new Response(JSON.stringify({ error: 'Something went wrong.' }), {
