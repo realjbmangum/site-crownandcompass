@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  /* keep app nav usable on small screens (proto.css hides plain nav links under 940px) */
+  @media (max-width:940px){ .site-header .nav a:not(.btn):not(.signin){ display:inline-block; } .site-header .nav{ gap:18px; } }
+  @media (max-width:600px){ .site-header .bar{ height:auto; flex-direction:column; align-items:flex-start; gap:10px; padding:12px 0; } .site-header .nav{ flex-wrap:wrap; gap:12px 18px; } }
+
+  .app-main{ background:var(--bone-2); padding:48px 0 64px; }
+  .app-main .wrap{ max-width:1000px; }
+  .app-head{ margin-bottom:26px; }
+  .app-head h1{ font-size:clamp(2rem,4.4vw,2.9rem); margin-top:8px; }
+  .app-head .sub{ font-family:var(--body); color:var(--muted); font-size:19px; line-height:1.6; margin:14px 0 0; max-width:64ch; }
+
+  .panel{ background:var(--bone); border:1px solid var(--line); padding:28px; margin-bottom:20px; }
+  .panel-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin:0 0 10px; flex-wrap:wrap; }
+  .panel-head .kicker{ margin:0; }
+  .panel-head h2{ font-size:22px; }
+  .panel-head .meta{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-2); }
+  .panel .lead-note{ color:var(--muted); font-size:15px; line-height:1.6; margin:0 0 20px; max-width:70ch; }
+
+  /* guide note */
+  .guide-note{ display:flex; gap:14px; align-items:center; background:rgba(192,85,42,.08);
+    border:1px solid rgba(192,85,42,.32); padding:15px 18px; margin-bottom:26px; }
+  .guide-note img{ height:24px; width:auto; flex:0 0 auto; }
+  .guide-note p{ margin:0; color:var(--ink); font-family:var(--body); font-size:16px; }
+  .guide-note .faint{ color:var(--muted); }
+
+  /* section divider label */
+  .sec-divider{ display:flex; align-items:center; gap:16px; margin:38px 0 20px; }
+  .sec-divider .lbl{ font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--ember); }
+  .sec-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+  /* health table */
+  .table-scroll{ overflow-x:auto; }
+  table.health{ width:100%; border-collapse:collapse; min-width:520px; }
+  table.health th{ text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted-2);
+    font-weight:500; padding:0 14px 12px 0; border-bottom:1px solid var(--line); }
+  table.health td{ padding:14px 14px 14px 0; border-bottom:1px solid var(--line-2); font-size:15px; vertical-align:middle; }
+  table.health tr:last-child td{ border-bottom:none; }
+  .cell-name{ display:flex; align-items:center; gap:12px; }
+  .avatar{ width:34px; height:34px; background:var(--bone-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-weight:600; font-size:14px; color:var(--ember-dark); flex:0 0 auto; }
+  .cell-name .nm{ font-family:var(--display); font-weight:600; color:var(--ink); }
+  .cell-name .rl{ font-size:12px; color:var(--muted); }
+  td.when{ color:var(--muted); white-space:nowrap; }
+  td.when.stale{ color:var(--ember); font-weight:600; }
+  .flag{ display:inline-block; font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ember); border:1px solid rgba(192,85,42,.45); background:rgba(192,85,42,.08); padding:3px 10px; }
+  .ok{ font-family:var(--mono); color:var(--muted-2); font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+  .reach-line{ color:var(--muted); font-size:15px; line-height:1.6; margin:18px 0 0; }
+
+  /* the guides engine */
+  .engine-actions{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:16px 0 24px; }
+  .engine-actions .hint{ font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted-2); }
+  .editor{ border:1px solid var(--line); }
+  .editor .ebar{ display:flex; gap:4px; align-items:center; background:var(--bone-2); border-bottom:1px solid var(--line); padding:8px 10px; flex-wrap:wrap; }
+  .editor .ebar button{ background:transparent; border:1px solid transparent; color:var(--muted); font-family:var(--mono); font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase; padding:6px 10px; cursor:pointer; transition:background .2s, color .2s, border-color .2s; }
+  .editor .ebar button:hover{ background:var(--bone); color:var(--ink); border-color:var(--line); }
+  .editor .ebar .sep{ width:1px; height:16px; background:var(--line); margin:0 4px; }
+  .editor .ebar .src{ margin-left:auto; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ember); }
+  .editor textarea{ width:100%; border:none; background:#fbf7ec; color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.7;
+    padding:18px 20px; min-height:210px; resize:vertical; display:block; }
+  .editor textarea:focus{ outline:none; }
+  .pub-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:16px; flex-wrap:wrap; }
+  .pub-row .wk{ display:flex; align-items:center; gap:10px; }
+  .pub-row label{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-2); margin:0; }
+  select.brand{ background:#fbf7ec; border:1px solid var(--line); color:var(--ink); padding:11px 14px; font-family:var(--body); font-size:15px; border-radius:0; }
+
+  /* newsletter cuts */
+  .cuts{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+  @media (max-width:560px){ .cuts{ grid-template-columns:1fr; } }
+  .cut{ display:block; background:var(--bone-2); border:1px solid var(--line); padding:18px 20px; cursor:pointer; transition:border-color .2s; }
+  .cut:hover{ border-color:var(--ember); }
+  .cut input{ position:absolute; opacity:0; }
+  .cut .ct{ font-family:var(--display); font-weight:600; color:var(--ink); font-size:17px; }
+  .cut .cn{ font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ember); margin-top:4px; }
+  .cut .cd{ font-size:14px; color:var(--muted); margin-top:8px; line-height:1.5; }
+  .cut input:checked ~ .cbadge{ background:var(--ember); border-color:var(--ember); color:var(--bone); }
+  .cut .cbadge{ display:inline-block; margin-top:12px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted-2); border:1px solid var(--line); padding:3px 9px; }
+  .news-meta{ color:var(--muted-2); font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin:16px 0 0; }
+
+  /* nominations */
+  .nom{ display:flex; align-items:center; gap:14px; padding:18px 0; border-top:1px solid var(--line-2); }
+  .nom:first-child{ border-top:none; }
+  .nom .info{ flex:1; min-width:0; }
+  .nom .nn{ font-family:var(--display); font-weight:600; color:var(--ink); font-size:16px; }
+  .nom .nd{ font-size:14px; color:var(--muted); margin-top:3px; line-height:1.5; }
+  .nom .acts{ display:flex; gap:8px; flex:0 0 auto; }
+  .btn-decline{ background:transparent; border-color:var(--line); color:var(--muted); }
+  .btn-decline:hover{ border-color:var(--ink); color:var(--ink); }
+
+  /* founder metrics */
+  .founder-tag{ font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ember); border:1px solid rgba(192,85,42,.4); padding:3px 10px; }
+  .stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:4px; }
+  @media (max-width:680px){ .stat-grid{ grid-template-columns:repeat(2,1fr); } }
+  .stat{ background:var(--bone); padding:24px 22px; }
+  .stat .n{ font-family:var(--display); font-weight:700; font-size:2.5rem; color:var(--ink); line-height:1; }
+  .stat .k{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted-2); margin-top:12px; }
+  .stat .d{ font-size:13px; color:var(--muted); margin-top:6px; }
+  .stat .d.up{ color:var(--ember-dark); }
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="wrap bar">
+  <a class="brand" href="app-dashboard.html"><img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" /><span class="name">Crown &amp; Compass</span></a>
+  <nav class="nav"><a href="app-dashboard.html">Dashboard</a><a href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a href="app-vote.html">Vote</a><a href="app-account.html">Account</a></nav>
+</div></header>
+
+<main class="app-main">
+  <div class="wrap">
+    <div class="app-head">
+      <p class="kicker kicker-rule">Admin</p>
+      <h1>Guide tools</h1>
+      <p class="sub">The few things a guide needs to keep the chapter honest and moving. Nothing automated that should be a phone call.</p>
+    </div>
+
+    <!-- WHY YOU SEE THIS -->
+    <div class="guide-note">
+      <img src="assets/cc-black.png" alt="" />
+      <p>You see this because you are a Guide. <span class="faint">These tools are hidden from members.</span></p>
+    </div>
+
+    <!-- CHAPTER HEALTH -->
+    <div class="panel">
+      <div class="panel-head"><h2>Chapter health</h2><span class="meta">Saturday Chapter · 10 men</span></div>
+      <p class="lead-note">Last activity for each man. Anyone quiet two weeks or more is flagged. A flag means make a call, not send a nudge.</p>
+      <div class="table-scroll">
+        <table class="health">
+          <thead>
+            <tr><th>Member</th><th>Last active</th><th>Reading</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">B</div><div><div class="nm">Brian</div><div class="rl">Founder</div></div></div></td>
+              <td class="when">Today</td>
+              <td class="when">Week 3</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">N</div><div><div class="nm">Neil</div><div class="rl">Guide</div></div></div></td>
+              <td class="when">Today</td>
+              <td class="when">Week 3</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">J</div><div><div class="nm">James</div><div class="rl">Member</div></div></div></td>
+              <td class="when">Yesterday</td>
+              <td class="when">Week 3</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">M</div><div><div class="nm">Mike</div><div class="rl">Member</div></div></div></td>
+              <td class="when">2 days ago</td>
+              <td class="when">Week 3</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">D</div><div><div class="nm">Dave</div><div class="rl">Member</div></div></div></td>
+              <td class="when">2 days ago</td>
+              <td class="when">Week 3</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">C</div><div><div class="nm">Curtis</div><div class="rl">Member</div></div></div></td>
+              <td class="when">3 days ago</td>
+              <td class="when">Week 2</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">S</div><div><div class="nm">Sam</div><div class="rl">Member</div></div></div></td>
+              <td class="when">4 days ago</td>
+              <td class="when">Week 3</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">A</div><div><div class="nm">Andre</div><div class="rl">Member</div></div></div></td>
+              <td class="when">5 days ago</td>
+              <td class="when">Week 2</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">T</div><div><div class="nm">Tom</div><div class="rl">Member</div></div></div></td>
+              <td class="when">8 days ago</td>
+              <td class="when">Week 2</td>
+              <td><span class="ok">Steady</span></td>
+            </tr>
+            <tr>
+              <td><div class="cell-name"><div class="avatar">W</div><div><div class="nm">Wes</div><div class="rl">Member</div></div></div></td>
+              <td class="when stale">16 days ago</td>
+              <td class="when">Week 1</td>
+              <td><span class="flag">Reach out</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="reach-line">Wes has been quiet for over two weeks. Call him this week. A man who goes quiet is usually the one who needs the chapter most.</p>
+    </div>
+
+    <!-- THE GUIDES ENGINE -->
+    <div class="panel">
+      <div class="panel-head"><h2>The Guides engine</h2><span class="tag">Powered by Claude</span></div>
+      <p class="lead-note">Jot the rough notes from your week: what landed, what the men are wrestling with, the passage you keep returning to. Claude drafts this week's guide in the Crown and Compass voice. You read it, fix it, and publish. The draft is a starting point, never the final word.</p>
+      <div class="field">
+        <label for="notes">Your rough notes</label>
+        <textarea id="notes" placeholder="Chapter 4 is on prayer. Most of the men admit their prayer life is thin. Keep coming back to Mark 1:35. Want three honest questions and a scripture.">Chapter 4 is on prayer. Most of the men admit their prayer life is thin and rushed. I keep coming back to Mark 1:35, Jesus getting up before dawn. Want three honest questions and one scripture to sit with.</textarea>
+      </div>
+      <div class="engine-actions">
+        <button class="btn btn-ember" type="button">Draft this week's guide with Claude</button>
+        <span class="hint">Drafts in about 20 seconds</span>
+      </div>
+
+      <div class="editor">
+        <div class="ebar">
+          <button type="button">Bold</button>
+          <button type="button">Italic</button>
+          <span class="sep"></span>
+          <button type="button">Heading</button>
+          <button type="button">Quote</button>
+          <button type="button">Question</button>
+          <span class="sep"></span>
+          <button type="button">Scripture</button>
+          <span class="src">Draft · Claude</span>
+        </div>
+        <textarea>## Week 4: Prayer
+
+Hughes is blunt this week: most men do not pray because they are too busy, and they are too busy because they do not pray. The question under all of it is whether we actually believe God is listening.
+
+Read the chapter on the discipline of prayer, then sit with these before Saturday.
+
+Questions for the table
+- When did you last pray without asking for anything?
+- What is the honest reason your prayer life is where it is?
+- What is one fixed time this week you will guard for it, and who will ask you about it?
+
+> "Very early in the morning, while it was still dark, Jesus got up and went off to a solitary place, where he prayed." (Mark 1:35)</textarea>
+      </div>
+      <div class="pub-row">
+        <div class="wk">
+          <label for="wk">Publishing to</label>
+          <select id="wk" class="brand">
+            <option>Week 4 · Nov 9-15</option>
+            <option>Week 5 · Nov 16-22</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn btn-ghost btn-sm" type="button">Save draft</button>
+          <button class="btn btn-ember btn-sm" type="button">Publish to the chapter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE NEWSLETTER ENGINE -->
+    <div class="panel">
+      <div class="panel-head"><h2>The Newsletter engine</h2><span class="meta">Last sent 6 days ago</span></div>
+      <p class="lead-note">One honest note, sent to the men. Pick the cut, then write it. Two lists: members inside the app, and subscribers who left an email but have not joined a chapter yet.</p>
+      <div class="cuts">
+        <label class="cut">
+          <input type="radio" name="cut" checked />
+          <div class="ct">Members</div>
+          <div class="cn">48 men</div>
+          <div class="cd">Everyone in a chapter. The weekly reading note and what is coming next.</div>
+          <span class="cbadge">Selected</span>
+        </label>
+        <label class="cut">
+          <input type="radio" name="cut" />
+          <div class="ct">Subscribers</div>
+          <div class="cn">1,240 emails</div>
+          <div class="cd">Left an email, not yet in a chapter. The public newsletter and the next open cycle.</div>
+          <span class="cbadge">Select</span>
+        </label>
+      </div>
+      <div class="engine-actions" style="margin:0;">
+        <button class="btn btn-ember" type="button">Compose to Members</button>
+        <span class="hint">You approve every send</span>
+      </div>
+      <p class="news-meta">Last members send · 44 of 48 opened · 0 unsubscribed</p>
+    </div>
+
+    <!-- NOMINATIONS -->
+    <div class="panel">
+      <div class="panel-head"><h2>Nominations</h2><span class="meta">2 waiting</span></div>
+      <p class="lead-note">Men nominated by the chapter to guide the next rotation. Affirm the ones ready to lead.</p>
+      <div class="nom">
+        <div class="avatar">J</div>
+        <div class="info">
+          <div class="nn">James</div>
+          <div class="nd">Nominated by Mike to guide the next rotation. "He asks the questions the rest of us avoid."</div>
+        </div>
+        <div class="acts">
+          <button class="btn btn-decline btn-sm" type="button">Decline</button>
+          <button class="btn btn-ember btn-sm" type="button">Affirm</button>
+        </div>
+      </div>
+      <div class="nom">
+        <div class="avatar">M</div>
+        <div class="info">
+          <div class="nn">Mike</div>
+          <div class="nd">Nominated by Neil to guide. "Steady, shows up early, ready to carry it."</div>
+        </div>
+        <div class="acts">
+          <button class="btn btn-decline btn-sm" type="button">Decline</button>
+          <button class="btn btn-ember btn-sm" type="button">Affirm</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOUNDER ONLY -->
+    <div class="sec-divider"><span class="lbl">Founder</span></div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Founder metrics</h2><span class="founder-tag">Founder only</span></div>
+      <p class="lead-note">The whole picture, for Brian. How the brotherhood is growing and whether the men are actually doing the reading. Numbers to steer by, not to brag about.</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="n">1,240</div>
+          <div class="k">Subscribers</div>
+          <div class="d up">+38 this week</div>
+        </div>
+        <div class="stat">
+          <div class="n">17</div>
+          <div class="k">Open inquiries</div>
+          <div class="d">Men asking to join</div>
+        </div>
+        <div class="stat">
+          <div class="n">6</div>
+          <div class="k">Active chapters</div>
+          <div class="d up">+1 this month</div>
+        </div>
+        <div class="stat">
+          <div class="n">78%</div>
+          <div class="k">Weekly reading rate</div>
+          <div class="d">Members who did the reading</div>
+        </div>
+      </div>
+
+      <style>
+        .fd-controls{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin:30px 0 6px;}
+        @media(max-width:640px){.fd-controls{grid-template-columns:1fr;}}
+        .fd-ctl label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:12px;}
+        .fd-ctl label b{color:var(--ember);}
+        .fd-ctl input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--line);outline:none;}
+        .fd-ctl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--ember);cursor:pointer;}
+        .fd-ctl input[type=range]::-moz-range-thumb{width:16px;height:16px;background:var(--ember);border:0;cursor:pointer;}
+        .fd-charts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px;}
+        @media(max-width:640px){.fd-charts{grid-template-columns:1fr;}}
+        .fd-chart{border:1px solid var(--line);padding:16px 16px 10px;background:var(--bone);}
+        .fd-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:12px;}
+        .fd-chart .cv{position:relative;height:168px;}
+      </style>
+
+      <div class="fd-controls">
+        <div class="fd-ctl"><label>Timeframe <b id="tfVal">12 weeks</b></label><input id="tf" type="range" min="4" max="26" value="12" /></div>
+        <div class="fd-ctl"><label>Year-end subscriber goal <b id="goalVal">2,000</b></label><input id="goal" type="range" min="1500" max="5000" step="100" value="2000" /></div>
+      </div>
+
+      <div class="fd-charts">
+        <div class="fd-chart"><div class="fd-lab">Subscriber growth</div><div class="cv"><canvas id="cSubs"></canvas></div></div>
+        <div class="fd-chart"><div class="fd-lab">Weekly reading rate</div><div class="cv"><canvas id="cRead"></canvas></div></div>
+        <div class="fd-chart"><div class="fd-lab">Chapters formed</div><div class="cv"><canvas id="cChap"></canvas></div></div>
+        <div class="fd-chart"><div class="fd-lab">Chapter health</div><div class="cv"><canvas id="cHealth"></canvas></div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+(function(){
+  if(!window.Chart){return;}
+  var ink='#16130D', bone='#F1EBDC', ember='#C0552A', charcoal='#2C2B29', amber2='#d8a066', muted='#6b6455', grid='rgba(22,19,13,.10)';
+  Chart.defaults.font.family="'IBM Plex Mono', monospace"; Chart.defaults.font.size=10; Chart.defaults.color=muted;
+  var W=26, subs=[], v=770; for(var i=0;i<W;i++){v+=8+Math.round(Math.sin(i/3)*4)+(i%3)*3;subs.push(v);}
+  var read=[]; for(var j=0;j<W;j++){read.push(Math.min(88,60+Math.round(Math.sin(j/4)*7)+Math.min(18,j)));}
+  function labs(n){var a=[];for(var i=n;i>0;i--){a.push('W-'+i);}a[a.length-1]='Now';return a;}
+  function tail(a,n){return a.slice(a.length-n);}
+  var ax={grid:{color:grid},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:6},border:{display:false}};
+  var subsChart=new Chart(document.getElementById('cSubs'),{type:'line',data:{labels:labs(12),datasets:[
+    {label:'Subscribers',data:tail(subs,12),borderColor:ember,backgroundColor:'rgba(192,85,42,.12)',fill:true,tension:.35,pointRadius:0,borderWidth:2},
+    {label:'Goal pace',data:[],borderColor:ink,borderDash:[5,4],borderWidth:1,pointRadius:0,fill:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:ax,y:ax}}});
+  var readChart=new Chart(document.getElementById('cRead'),{type:'line',data:{labels:labs(12),datasets:[
+    {data:tail(read,12),borderColor:ink,backgroundColor:'rgba(22,19,13,.06)',fill:true,tension:.35,pointRadius:0,borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:ax,y:{grid:{color:grid},min:0,max:100,border:{display:false},ticks:{maxTicksLimit:5,callback:function(val){return val+'%';}}}}}});
+  new Chart(document.getElementById('cChap'),{type:'bar',data:{labels:['Feb','Mar','Apr','May','Jun','Jul'],datasets:[
+    {data:[1,1,2,3,5,6],backgroundColor:ember,barPercentage:.6}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:ax,y:{grid:{color:grid},beginAtZero:true,border:{display:false},ticks:{stepSize:2,maxTicksLimit:4}}}}});
+  new Chart(document.getElementById('cHealth'),{type:'doughnut',data:{labels:['Steady','At risk','Quiet'],datasets:[
+    {data:[8,1,1],backgroundColor:[ember,amber2,charcoal],borderColor:bone,borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right',labels:{boxWidth:10}}}}});
+  var tf=document.getElementById('tf'),tfVal=document.getElementById('tfVal'),goal=document.getElementById('goal'),goalVal=document.getElementById('goalVal');
+  function up(){var n=+tf.value;tfVal.textContent=n+' weeks';
+    subsChart.data.labels=labs(n);subsChart.data.datasets[0].data=tail(subs,n);
+    var cur=subs[subs.length-1],g=+goal.value;goalVal.textContent=g.toLocaleString();
+    var pace=[];for(var i=0;i<n;i++){pace.push(Math.round(cur+(g-cur)*(i/(n-1))*0.25));}
+    subsChart.data.datasets[1].data=pace;subsChart.update();
+    readChart.data.labels=labs(n);readChart.data.datasets[0].data=tail(read,n);readChart.update();}
+  tf.addEventListener('input',up);goal.addEventListener('input',up);up();
+})();
+</script>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="app-dashboard.html" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="app-dashboard.html">Dashboard</a><a href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a href="app-vote.html">Vote</a><a href="app-account.html">Account</a><a href="app-signin.html">Sign out</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

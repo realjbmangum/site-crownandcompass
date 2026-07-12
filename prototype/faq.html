@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FAQ · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .page-head h1{font-size:clamp(2.25rem,5.5vw,3.75rem);margin-top:14px;}
+  .faq{border-top:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    gap:20px;padding:24px 4px;font-family:var(--display);font-weight:600;font-size:clamp(19px,2.4vw,22px);color:var(--ink);}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary .mark{flex:none;width:22px;height:22px;position:relative;color:var(--ember);transition:transform .25s;}
+  .faq summary .mark::before,.faq summary .mark::after{content:"";position:absolute;background:currentColor;}
+  .faq summary .mark::before{top:10px;left:2px;width:18px;height:2px;}
+  .faq summary .mark::after{top:2px;left:10px;width:2px;height:18px;transition:opacity .25s;}
+  .faq details[open] summary .mark{transform:rotate(90deg);}
+  .faq details[open] summary .mark::after{opacity:0;}
+  .faq .ans{padding:0 4px 26px;}
+  .faq .ans p{font-family:var(--body);color:var(--muted);font-size:16px;line-height:1.7;margin:0 0 14px;max-width:68ch;}
+  .faq .ans p:last-child{margin-bottom:0;}
+  .faq .ans a{color:var(--ember);text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="home.html">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+        <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn active" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html" class="active">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="app-signin.html">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- PAGE HEAD -->
+  <section class="section bone page-head">
+    <div class="wrap narrow">
+      <p class="kicker kicker-rule">FAQ</p>
+      <h1>The questions men actually ask.</h1>
+      <p class="lead" style="margin-top:18px;">Plain answers, no fine print. If you have a question that is not here, reach out and ask a man directly.</p>
+    </div>
+  </section>
+
+  <!-- FAQ LIST -->
+  <section class="section bone" style="padding-top:24px;">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <div class="faq">
+
+        <details open>
+          <summary>Is it really free?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Yes. No fees, no membership, no upsell waiting at the end. It is free because the Gospel is free, and because the best communities, from the early church to AA to F3, have never charged for belonging.</p>
+            <p>There is an option to give if you want to support the work, but it is a link, never a gate. No man is ever turned away over money.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Do I have to be a Christian?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Crown and Compass is Christian. The Bible is part of what we read alongside whatever book we are working through, and prayer is a normal part of a Gather.</p>
+            <p>A man who is curious about faith, or wrestling with it, is welcome to come and see. A man looking for a faith-neutral self-development group will find a better fit elsewhere, and that is alright.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What if I have never done a men's group before?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Good. Most of the men here had not either. You do not need experience, the right words, or your life in order. You show up, you listen, and you talk when you are ready.</p>
+            <p>Nobody performs and nobody is on the spot. The whole point is a room where a man can say the true thing without managing how it lands.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How much time does it take?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>One book every six weeks. You read a bit each week, a chapter or a section, and share as you go in the chapter thread. Then the whole chapter comes together for a Gather at the end of the six weeks to close the book.</p>
+            <p>Your chapter sets a pace it can actually keep. The reading is steady, not heavy, and it is a help, not a homework assignment.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What are we reading right now?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Right now we are reading <em>Disciplines of a Godly Man</em> by R. Kent Hughes. We read one book every six weeks, a section each week, and talk about it together.</p>
+            <p>The books rotate through faith, character, calling, and courage over time. You can see the full list on the <a href="reading-list.html">Reading List</a>.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Can I just watch the first time?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Yes. Come to a Gather, sit in, and listen. You do not have to say a single word your first time. Plenty of men spend the first one just taking it in.</p>
+            <p>Come once and see if it fits. If it is not for you, there is no chasing. If you want to come back, you are a Brother.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>There is no chapter near me. How do I start one?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>You start one. It takes a few men, a book, and a regular rhythm. You do not have to be a teacher or an expert. You have to be willing to hold the room and prepare.</p>
+            <p>Tell us on the <a href="start-a-chapter.html">Start a Chapter</a> page and we will walk you through your first cycle so you are not doing it cold.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Is what I share private?<span class="mark" aria-hidden="true"></span></summary>
+          <div class="ans">
+            <p>Yes. What a man says in the room stays in the room. That is the agreement every chapter keeps, every time.</p>
+            <p>We do not sell or share your personal information. Your email is used to connect you to a chapter and, if you ask for it, the weekly newsletter. Nothing more.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <p class="muted" style="text-align:center;margin-top:44px;">Still have a question? <a href="join.html" style="color:var(--ember);text-decoration:underline;">Reach out</a> and a man will answer you directly.</p>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="section ink center">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <h2>The rest is easier to feel than to read.</h2>
+      <p class="sec-sub" style="max-width:46ch;margin:18px auto 28px;">Come sit in on a Gather. One evening will tell you more than this whole page.</p>
+      <a href="join.html" class="btn btn-ember">Get Connected</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="home.html" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

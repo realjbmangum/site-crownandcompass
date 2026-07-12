@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Reading · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  @media (max-width: 940px) {
+    .site-header .nav a { display: inline-block; }
+    .site-header .nav { gap: 16px; font-size: 12px; }
+  }
+  @media (max-width: 600px) {
+    .site-header .bar { height: auto; flex-direction: column; gap: 10px; padding: 12px 0; }
+    .site-header .nav { flex-wrap: wrap; justify-content: center; }
+  }
+
+  .app-main { padding: 44px 0 64px; position: relative; z-index: 1; }
+
+  .book-head { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: end;
+    padding-bottom: 28px; margin-bottom: 36px; border-bottom: 1px solid var(--line); }
+  @media (max-width: 620px) { .book-head { grid-template-columns: 1fr; align-items: start; } }
+  .book-head h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 8px 0 4px; }
+  .book-head .by { color: var(--muted); font-family: var(--body); font-size: 16px; margin: 0 0 18px; }
+  .book-head .prog { height: 8px; width: min(340px, 100%); background: var(--bone-2); border: 1px solid var(--line); overflow: hidden; }
+  .book-head .prog > span { display: block; height: 100%; background: var(--ember); }
+  .book-head .prog-cap { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-2); margin: 12px 0 0; }
+
+  .app-grid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 860px) { .app-grid { grid-template-columns: 1fr; gap: 34px; } }
+
+  .guide h2 { font-size: 1.7rem; margin: 0 0 6px; }
+  .guide .wk-tag { margin-bottom: 20px; }
+  .scripture { border-bottom: 1px solid rgba(192,85,42,.4); }
+
+  .prayer { border: 1px solid rgba(192,85,42,.35); background: rgba(192,85,42,.06);
+    padding: 22px 24px; margin: 8px 0 0; }
+  .prayer .kicker { margin-bottom: 10px; }
+  .prayer p { font-family: var(--body); font-style: italic; font-size: 18px; line-height: 1.65; color: var(--ink); margin: 0; }
+
+  .aside { position: sticky; top: 96px; }
+  .weeks { border: 1px solid var(--line); overflow: hidden; }
+  .week { display: flex; align-items: center; gap: 14px; padding: 15px 18px; border-bottom: 1px solid var(--line-2); }
+  .week:last-child { border-bottom: none; }
+  .week .chk { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); flex: none;
+    display: grid; place-items: center; color: var(--muted-2); font-family: var(--mono); font-size: 12px; }
+  .week .wn { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); }
+  .week .wt { font-family: var(--body); font-size: 15px; color: var(--muted); }
+  .week .txt { display: flex; flex-direction: column; gap: 2px; }
+  .week.done .chk { background: var(--ember); border-color: var(--ember); color: var(--bone); }
+  .week.done .wt { color: var(--ink); }
+  .week.now { background: var(--bone-2); }
+  .week.now .chk { border-color: var(--ember); color: var(--ember); }
+  .week.now .wt { color: var(--ink); font-weight: 600; }
+  .btn-block { display: block; width: 100%; text-align: center; }
+  .buy-note { color: var(--muted-2); font-family: var(--body); font-size: 13px; text-align: center; margin: 12px 0 0; }
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="wrap bar">
+  <a class="brand" href="app-dashboard.html"><img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" /><span class="name">Crown &amp; Compass</span></a>
+  <nav class="nav"><a href="app-dashboard.html">Dashboard</a><a class="active" href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a href="app-vote.html">Vote</a><a href="app-account.html">Account</a></nav>
+</div></header>
+
+<main class="app-main"><div class="wrap">
+  <div class="book-head">
+    <div>
+      <p class="kicker">Now reading</p>
+      <h1>Disciplines of a Godly Man</h1>
+      <p class="by">R. Kent Hughes</p>
+      <div class="prog"><span style="width:50%"></span></div>
+      <p class="prog-cap">Week 3 of 6</p>
+    </div>
+  </div>
+
+  <div class="app-grid">
+    <!-- THE WEEKLY GUIDE (reader) -->
+    <section class="guide">
+      <span class="tag wk-tag">Week 3</span>
+      <h2>Friendship</h2>
+
+      <div class="prose">
+        <h3>Observation</h3>
+        <p>Read <a class="scripture" href="#">1 Samuel 18:1-4</a> and <a class="scripture" href="#">Ecclesiastes 4:9-12</a>.
+          Jonathan, the king's own son, ties his life to David and hands over his robe, his sword, and his bow.
+          Solomon writes that two are better than one, because if one falls the other lifts him up, and a cord of
+          three strands is not quickly broken. Both passages assume a man was never meant to stand alone.</p>
+
+        <h3>Interpretation</h3>
+        <p>Hughes points to a kind of friendship most men no longer have. Not a network, and not the men you work
+          beside. A friend who has seen you at your worst and stayed. Scripture treats this as standard equipment
+          for a man's life, not a luxury. <a class="scripture" href="#">Proverbs 27:6</a> says the wounds of a
+          friend are faithful, which means a real friend tells you the truth even when it costs him.
+          <a class="scripture" href="#">Proverbs 27:17</a> says iron sharpens iron. Neither one happens at a
+          distance, and neither one happens with a man you are only trying to impress.</p>
+
+        <h3>Application</h3>
+        <p>Name one man you have drifted from and call him this week. Not a text. A call. Ask how he actually is,
+          and stay on the line long enough to hear the real answer.</p>
+
+        <h3>Prayer</h3>
+        <div class="prayer">
+          <p class="kicker">Pray this over the week</p>
+          <p>Father, you did not make me to carry my life alone. Give me the courage to be known and the honesty
+            to know another man well. Send me a friend I can sharpen and be sharpened by, and keep me from trading
+            real friendship for the comfort of being admired. Amen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEEKS + BUY -->
+    <aside class="aside">
+      <p class="kicker">The six weeks</p>
+      <div class="weeks">
+        <div class="week done"><span class="chk">✓</span><span class="txt"><span class="wn">Week 1</span><span class="wt">Purity</span></span></div>
+        <div class="week done"><span class="chk">✓</span><span class="txt"><span class="wn">Week 2</span><span class="wt">Marriage &amp; Fatherhood</span></span></div>
+        <div class="week now"><span class="chk">3</span><span class="txt"><span class="wn">This week</span><span class="wt">Friendship</span></span></div>
+        <div class="week"><span class="chk">4</span><span class="txt"><span class="wn">Week 4</span><span class="wt">The Mind</span></span></div>
+        <div class="week"><span class="chk">5</span><span class="txt"><span class="wn">Week 5</span><span class="wt">Devotion &amp; Prayer</span></span></div>
+        <div class="week"><span class="chk">6</span><span class="txt"><span class="wn">Week 6</span><span class="wt">Perseverance</span></span></div>
+      </div>
+
+      <div style="margin-top:22px;">
+        <a class="btn btn-ember btn-block" href="#">Get the book</a>
+        <p class="buy-note">An affiliate link. It costs you nothing extra and helps keep the chapters free.</p>
+      </div>
+    </aside>
+  </div>
+</div></main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="app-dashboard.html" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="app-dashboard.html">Dashboard</a><a href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a href="app-vote.html">Vote</a><a href="app-account.html">Account</a><a href="app-signin.html">Sign out</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

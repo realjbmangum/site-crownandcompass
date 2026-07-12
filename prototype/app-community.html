@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Community · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  /* keep app nav usable on small screens (proto.css hides plain nav links under 940px) */
+  @media (max-width:940px){ .site-header .nav a:not(.btn):not(.signin){ display:inline-block; } .site-header .nav{ gap:18px; } }
+  @media (max-width:600px){ .site-header .bar{ height:auto; flex-direction:column; align-items:flex-start; gap:10px; padding:12px 0; } .site-header .nav{ flex-wrap:wrap; gap:12px 18px; } }
+
+  .app-main{ background:var(--bone-2); padding:48px 0 64px; }
+  .app-main .wrap{ max-width:1000px; }
+  .app-head{ margin-bottom:28px; }
+  .app-head h1{ font-size:clamp(2rem,4.4vw,2.9rem); margin-top:8px; }
+  .app-head .sub{ font-family:var(--body); color:var(--muted); font-size:19px; line-height:1.6; margin:14px 0 0; max-width:62ch; }
+
+  /* later-wave notice */
+  .notice{ background:var(--charcoal); color:var(--bone); border:1px solid rgba(241,235,220,.14); padding:28px 30px; margin-bottom:26px; }
+  .notice .kicker{ color:var(--ember); margin:0 0 10px; }
+  .notice h2{ color:var(--bone); font-size:24px; margin:0 0 12px; }
+  .notice p{ color:var(--on-dark-2); font-family:var(--body); font-size:17px; line-height:1.65; margin:0; max-width:66ch; }
+
+  /* the plan: is / is not */
+  .plan{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:34px; }
+  @media (max-width:680px){ .plan{ grid-template-columns:1fr; } }
+  .panel{ background:var(--bone); border:1px solid var(--line); padding:26px 28px; }
+  .panel .kicker{ margin:0 0 14px; }
+  .panel h3{ font-size:19px; margin:0 0 14px; }
+  .plist{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; }
+  .plist li{ position:relative; padding-left:22px; font-family:var(--body); font-size:16px; line-height:1.55; color:var(--muted); }
+  .plist li::before{ content:""; position:absolute; left:0; top:11px; width:11px; height:1px; background:var(--ember); }
+  .plist.no li::before{ background:var(--muted-2); }
+  .plist li strong{ color:var(--ink); font-weight:600; }
+
+  /* design preview */
+  .preview-head{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:18px; flex-wrap:wrap; }
+  .preview-head .kicker{ margin:0; }
+  .preview-tag{ font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted-2); border:1px dashed var(--line); padding:5px 11px; }
+  .preview{ border-top:2px dashed var(--line); padding-top:24px; }
+  .preview-grid{ display:grid; grid-template-columns:1.25fr .75fr; gap:20px; align-items:start; }
+  @media (max-width:760px){ .preview-grid{ grid-template-columns:1fr; } }
+  .preview-col h4{ font-size:16px; margin:0 0 14px; }
+
+  /* quiet feed */
+  .feed{ display:flex; flex-direction:column; }
+  .note{ padding:18px 0; border-top:1px solid var(--line-2); }
+  .note:first-child{ border-top:none; padding-top:0; }
+  .note .nh{ display:flex; align-items:center; gap:12px; }
+  .avatar{ width:36px; height:36px; background:var(--bone-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-weight:600; font-size:14px; color:var(--ember-dark); flex:0 0 auto; }
+  .note .nn{ font-family:var(--display); font-weight:600; color:var(--ink); font-size:15px; }
+  .note .nw{ margin-left:auto; font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted-2); }
+  .note .nt{ color:var(--muted); font-size:15px; line-height:1.6; margin:10px 0 0; }
+
+  /* preview prayers */
+  .ppray{ display:grid; gap:12px; }
+  .ppray .p{ background:var(--bone-2); border:1px solid var(--line); padding:14px 16px; }
+  .ppray .p .top{ display:flex; align-items:center; gap:8px; }
+  .ppray .p .who{ font-family:var(--display); font-weight:600; color:var(--ink); font-size:14px; }
+  .ppray .p .when{ margin-left:auto; font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted-2); }
+  .ppray .p .txt{ color:var(--muted); font-size:14px; line-height:1.55; margin:8px 0 0; }
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="wrap bar">
+  <a class="brand" href="app-dashboard.html"><img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" /><span class="name">Crown &amp; Compass</span></a>
+  <nav class="nav"><a href="app-dashboard.html">Dashboard</a><a href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a href="app-vote.html">Vote</a><a href="app-account.html">Account</a></nav>
+</div></header>
+
+<main class="app-main">
+  <div class="wrap">
+    <div class="app-head">
+      <p class="kicker kicker-rule">Community</p>
+      <h1>Community</h1>
+      <p class="sub">A place for your chapter to stay close between meetings. Honest, quiet, and built for the men you already walk with.</p>
+    </div>
+
+    <!-- LATER-WAVE NOTICE -->
+    <div class="notice">
+      <p class="kicker">Coming in a later wave</p>
+      <h2>Not built yet. Here is the plan.</h2>
+      <p>We are shipping the reading and the chapters first, because that is the point. Community comes next, and only when we can do it right. This page is the plan, not a promise of dates. When it lands it will serve your chapter, not the whole internet.</p>
+    </div>
+
+    <!-- THE PLAN -->
+    <div class="plan">
+      <div class="panel">
+        <p class="kicker">What it will be</p>
+        <h3>Quiet, and yours</h3>
+        <ul class="plist">
+          <li><strong>Your chapter only.</strong> The men you meet with, not strangers.</li>
+          <li><strong>Short, honest notes.</strong> A line about your week, not a highlight reel.</li>
+          <li><strong>Prayer you can carry.</strong> Requests from your men, in one place.</li>
+          <li><strong>Read once, done.</strong> No reason to keep checking it all day.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <p class="kicker">What it will not be</p>
+        <h3>Not a social network</h3>
+        <ul class="plist no">
+          <li>No likes, no reactions, no scores to chase.</li>
+          <li>No follower counts. A man is not a number here.</li>
+          <li>No endless feed built to keep you scrolling.</li>
+          <li>No performing. Show up honest or stay quiet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DESIGN PREVIEW -->
+    <div class="preview-head">
+      <p class="kicker kicker-rule">Design preview</p>
+      <span class="preview-tag">Not live yet</span>
+    </div>
+    <div class="panel preview">
+      <div class="preview-grid">
+        <!-- QUIET FEED -->
+        <div class="preview-col">
+          <h4>Your chapter, this week</h4>
+          <div class="feed">
+            <div class="note">
+              <div class="nh"><div class="avatar">N</div><span class="nn">Neil</span><span class="nw">this morning</span></div>
+              <p class="nt">Read the friendship chapter twice. It named something I have been dodging for years. Bring your honest answer Saturday.</p>
+            </div>
+            <div class="note">
+              <div class="nh"><div class="avatar">M</div><span class="nn">Mike</span><span class="nw">yesterday</span></div>
+              <p class="nt">Hard week at work, but I kept the reading. First time in a while I did not quit halfway. Grateful for the men holding the line.</p>
+            </div>
+            <div class="note">
+              <div class="nh"><div class="avatar">J</div><span class="nn">James</span><span class="nw">2 days ago</span></div>
+              <p class="nt">Behind on the book, honest about it. Catching up this weekend before we gather.</p>
+            </div>
+            <div class="note">
+              <div class="nh"><div class="avatar">C</div><span class="nn">Curtis</span><span class="nw">3 days ago</span></div>
+              <p class="nt">Took the walk-and-talk idea from last meeting. Called my dad instead of texting. Long overdue.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRAYER REQUESTS -->
+        <div class="preview-col">
+          <h4>Prayer requests</h4>
+          <div class="ppray">
+            <div class="p">
+              <div class="top"><span class="who">James</span><span class="when">2 days ago</span></div>
+              <p class="txt">My father's surgery is Thursday. Praying it goes clean.</p>
+            </div>
+            <div class="p">
+              <div class="top"><span class="who">Mike</span><span class="when">3 days ago</span></div>
+              <p class="txt">New job Monday. Pray for steady nerves.</p>
+            </div>
+            <div class="p">
+              <div class="top"><span class="who">Neil</span><span class="when">last week</span></div>
+              <p class="txt">Ninety days sober today. Thankful this one.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="app-dashboard.html" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="app-dashboard.html">Dashboard</a><a href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a href="app-vote.html">Vote</a><a href="app-account.html">Account</a><a href="app-signin.html">Sign out</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

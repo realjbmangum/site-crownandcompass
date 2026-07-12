@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .join-grid{display:grid;grid-template-columns:1fr;gap:42px;align-items:start;}
+  @media(min-width:900px){.join-grid{grid-template-columns:1fr 25rem;gap:56px;}}
+
+  .steps{list-style:none;padding:0;margin:22px 0 0;counter-reset:step;}
+  .steps li{position:relative;padding:0 0 26px 56px;}
+  .steps li:last-child{padding-bottom:0;}
+  .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;
+    width:36px;height:36px;border:1px solid var(--ember);color:var(--ember);
+    font-family:var(--display);font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;background:transparent;}
+  .steps li:not(:last-child)::after{content:"";position:absolute;left:17.5px;top:44px;bottom:6px;width:1px;background:var(--line);}
+  .steps li h4{margin:6px 0 6px;font-family:var(--display);font-size:18px;font-weight:600;color:var(--ink);}
+  .steps li p{margin:0;color:var(--muted);font-family:var(--body);font-size:15px;line-height:1.65;}
+
+  .freebox{margin-top:34px;border:1px solid var(--line);background:var(--bone);padding:26px 28px;}
+  .freebox .n{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);margin:0 0 8px;}
+  .freebox p.muted{font-size:14px;margin:0;}
+
+  .opt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted-2);text-transform:none;}
+  .alt-line{margin-top:22px;padding-top:18px;border-top:1px solid var(--line-2);}
+  .alt-line a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="home.html">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+        <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="app-signin.html">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- PAGE HEAD -->
+  <section class="section bone">
+    <div class="wrap">
+      <p class="kicker kicker-rule">Join the Brotherhood</p>
+      <h1 style="font-size:clamp(2.25rem,5vw,3.6rem);">Take up the next book.</h1>
+      <p class="prose" style="max-width:52ch;margin-top:18px;">One book every six weeks, read together, online and worldwide. Leave your name and Brian will send you the next cycle's book and how to join. No application, no fee, no commitment for the first visit.</p>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <section class="section bone2" style="padding-top:0;margin-top:-48px;">
+    <div class="wrap join-grid">
+
+      <!-- Left: what happens next -->
+      <div>
+        <p class="kicker kicker-rule">What happens next</p>
+        <ol class="steps">
+          <li>
+            <h4>You fill this out</h4>
+            <p>Name, email, how you heard, and a sentence or two if you want. It takes about a minute. Nothing else is required.</p>
+          </li>
+          <li>
+            <h4>Brian replies within a day or two</h4>
+            <p>He reads every message himself and writes back. Not an autoresponder, not a sales sequence. A real reply from a real person.</p>
+          </li>
+          <li>
+            <h4>You're in the next cycle</h4>
+            <p>When the next six-week cycle opens, he sends you the book and walks you in. You read it with the brotherhood, and we gather to close it out before the next one begins.</p>
+          </li>
+        </ol>
+
+        <div class="freebox">
+          <p class="n">It's free.</p>
+          <p class="muted">No fee, no application, no membership. Crown and Compass is free because the Gospel is free, and because the best brotherhoods have never charged for belonging. You are not paying to be here. You belong because you show up.</p>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div>
+        <div class="card">
+          <h2 style="font-size:26px;margin-bottom:6px;">Join the Brotherhood</h2>
+          <p class="muted" style="font-size:14px;margin-bottom:22px;">Fill this out and Brian will be in touch before the next cycle opens. No pressure. Just a conversation.</p>
+
+          <form onsubmit="return false;">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="how">How did you hear about us?</label>
+              <input type="text" id="how" name="how" placeholder="A friend, word of mouth, just found it" />
+            </div>
+            <div class="field">
+              <label for="message">Anything you want us to know? <span class="opt">(optional)</span></label>
+              <textarea id="message" name="message" placeholder="Where you are at, what you are looking for, questions you have"></textarea>
+            </div>
+            <button class="btn btn-ember" type="submit" style="width:100%;">Join the Brotherhood</button>
+            <p class="form-note" style="text-align:center;">Brian reads every message personally. You will hear from him, not an autoresponder.</p>
+          </form>
+
+          <div class="alt-line">
+            <p class="kicker" style="margin-bottom:8px;">Or reach out directly</p>
+            <p class="muted" style="font-size:14px;margin:0;">If forms are not your thing, find Brian at <a href="https://x.com/realjbmangum" target="_blank" rel="noopener noreferrer">@realjbmangum</a> on X. A direct message works fine.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="home.html" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

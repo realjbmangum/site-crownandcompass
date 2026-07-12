@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Start a Chapter · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .steps{list-style:none;padding:0;margin:0;counter-reset:step;max-width:60ch;}
+  .steps li{position:relative;padding:0 0 30px 62px;}
+  .steps li:last-child{padding-bottom:0;}
+  .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;
+    width:38px;height:38px;border:1.5px solid var(--ember);color:var(--ember);
+    font-family:var(--display);font-weight:600;font-size:17px;
+    display:flex;align-items:center;justify-content:center;background:var(--bone);}
+  .steps li:not(:last-child)::after{content:"";position:absolute;left:18.5px;top:44px;bottom:6px;width:1px;background:var(--line);}
+  .steps li h4{margin:5px 0 6px;font-size:20px;}
+  .steps li p{margin:0;font-family:var(--body);color:var(--muted);font-size:16px;line-height:1.7;}
+
+  .start-grid{display:grid;grid-template-columns:1fr;gap:44px;align-items:start;}
+  @media(min-width:900px){.start-grid{grid-template-columns:1fr 26rem;gap:56px;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="home.html">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+        <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn active" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html" class="active">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="app-signin.html">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- PAGE HEAD -->
+  <section class="section ink" style="padding:84px 0 72px;">
+    <div class="wrap">
+      <p class="kicker kicker-rule">Start a Chapter</p>
+      <h1>Any man can start one.</h1>
+      <p class="sec-sub" style="max-width:54ch;">A chapter is not a franchise or a program. It is a few men, one book, and an hour a week. If there is no chapter where you are, you are the one who starts it. We give you everything you need.</p>
+    </div>
+  </section>
+
+  <!-- WHAT IT TAKES -->
+  <section class="section bone">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <div class="sec-head"><p class="kicker kicker-rule">What it takes</p><h2>Four plain steps.</h2></div>
+      <ol class="steps">
+        <li>
+          <h4>Gather a few men</h4>
+          <p>Three or four is enough. Friends, neighbors, guys from church or work. A small group talks more honestly than a big one, so you do not need a crowd to start.</p>
+        </li>
+        <li>
+          <h4>We give you the book</h4>
+          <p>Every chapter reads the same book at the same time. We tell you what it is and where to get it. The book is the common ground that makes honest conversation possible.</p>
+        </li>
+        <li>
+          <h4>We give you the guide</h4>
+          <p>Discussion questions for each week, bookmarks, and a short starter kit. You do not build the material. You gather the men and show up.</p>
+        </li>
+        <li>
+          <h4>We give you the six-week rhythm</h4>
+          <p>One book every six weeks: pick it up together, read and check in through the middle, and gather to close it out before the next begins. The cadence is the discipline. We hand it to you ready to run.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- REASSURANCE + FORM -->
+  <section class="section bone2">
+    <div class="wrap start-grid">
+
+      <!-- Left: reassurance -->
+      <div>
+        <p class="kicker kicker-rule">You are qualified</p>
+        <p class="lead" style="margin-bottom:18px;">You do not have to be an expert. Any man can guide.</p>
+        <p class="prose" style="font-size:17px;">The man who guides a chapter is not the teacher and not the theologian. He is the one who prepared, who holds the room, and who keeps the conversation honest. That is a role any man can grow into. The first meeting feeling a little uncomfortable is normal. The guide role can rotate, so the weight does not sit on one man. Brian will walk with you through the first meeting and talk it through with you after. You start with a brother beside you.</p>
+      </div>
+
+      <!-- Right: form -->
+      <div>
+        <div class="card">
+          <h3 style="font-size:24px;margin-bottom:6px;">Start a chapter</h3>
+          <p class="muted" style="font-family:var(--body);font-size:14px;margin-bottom:22px;">Tell us a little and Brian will reach out to help you get the first meeting on the calendar.</p>
+
+          <form onsubmit="return false;">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="city">City / State</label>
+              <input type="text" id="city" name="city" placeholder="Where you would meet" />
+            </div>
+            <div class="field">
+              <label for="men">Tell us about the men you would gather</label>
+              <textarea id="men" name="men" placeholder="Who they are, how you know them, and why now"></textarea>
+            </div>
+            <button class="btn btn-ember" type="submit" style="width:100%;">Start a chapter</button>
+            <p class="form-note" style="text-align:center;">Brian reads every message personally. You will hear back from him, not an autoresponder.</p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="home.html" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

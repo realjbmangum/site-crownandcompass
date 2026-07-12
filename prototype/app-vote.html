@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vote · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .vote-hero{background:var(--ink);color:var(--bone);}
+  .vote-hero h1{color:var(--bone);}
+  .vote-hero .sec-sub{color:var(--on-dark);}
+  .closes{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember);border:1px solid rgba(192,85,42,.5);padding:8px 14px;margin-top:22px;}
+  .ballot{display:flex;flex-direction:column;gap:16px;margin-top:8px;}
+  .cand{display:grid;grid-template-columns:96px 1fr auto;gap:22px;align-items:center;background:var(--bone);border:1px solid var(--line);padding:22px 24px;transition:border-color .2s,background .2s;}
+  .cand.picked{border-color:var(--ember);background:#f7efe0;}
+  .cover{width:96px;aspect-ratio:2/3;background:var(--ink);color:var(--on-dark-mute);display:flex;align-items:flex-end;padding:10px;}
+  .cover .th{font-family:var(--mono);font-size:9px;letter-spacing:.14em;}
+  .cand h3{margin:0;font-size:22px;}
+  .cand .auth{font-family:var(--body);color:var(--muted);font-size:15px;margin:2px 0 8px;}
+  .cand .pitch{font-family:var(--body);color:var(--muted);font-size:15px;line-height:1.5;margin:0 0 12px;max-width:60ch;}
+  .bar{height:6px;background:var(--bone-2);border:1px solid var(--line);position:relative;overflow:hidden;max-width:340px;}
+  .bar > i{position:absolute;inset:0 auto 0 0;background:var(--ember);}
+  .barrow{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted-2);text-transform:uppercase;}
+  .votebtn{font-family:var(--display);font-weight:600;font-size:15px;padding:12px 22px;border:1.5px solid var(--ember);background:transparent;color:var(--ember);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s;}
+  .votebtn:hover{background:var(--ember);color:var(--bone);}
+  .cand.picked .votebtn{background:var(--ember);color:var(--bone);}
+  @media(max-width:680px){.cand{grid-template-columns:72px 1fr;}.cand .cover{width:72px;}.votebtn{grid-column:1 / -1;}}
+  .yourvote{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-top:20px;}
+  .yourvote b{color:var(--ember);}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="wrap bar">
+  <a class="brand" href="app-dashboard.html"><img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" /><span class="name">Crown &amp; Compass</span></a>
+  <nav class="nav"><a href="app-dashboard.html">Dashboard</a><a href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a class="active" href="app-vote.html">Vote</a><a href="app-account.html">Account</a></nav>
+</div></header>
+
+<main>
+  <section class="vote-hero section tight">
+    <div class="wrap">
+      <p class="kicker">The Next Book</p>
+      <h1>Vote on what we read next.</h1>
+      <p class="sec-sub" style="max-width:60ch;">The book with the most votes starts the next six-week cycle. One vote per man, change it anytime before voting closes. The shelf stays yours.</p>
+      <span class="closes">&#9679; Voting closes in 3 days</span>
+    </div>
+  </section>
+
+  <section class="section bone">
+    <div class="wrap">
+      <div class="sec-head"><p class="kicker kicker-rule">On the Ballot</p><h2>Seven books. Pick one.</h2></div>
+
+      <div class="ballot" id="ballot">
+
+        <div class="cand" data-id="a" data-votes="41">
+          <div class="cover has-cover" style="background-image:url('img/covers/george-muller.jpg');"></div>
+          <div>
+            <h3>George M&uuml;ller: Delighted in God</h3>
+            <div class="auth">Roger Steer</div>
+            <p class="pitch">The life of a man who ran orphanages on prayer alone and never asked a soul but God for a dollar. A quiet argument that faith is a practice, not a feeling.</p>
+            <div class="barrow"><span class="bar"><i style="width:21%"></i></span> <span class="cnt">41 votes</span></div>
+          </div>
+          <div><a href="https://www.amazon.com/dp/1527114104?tag=jbmangum27-20" target="_blank" rel="noopener" class="faint" style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;text-align:right;">View book &rsaquo;</a><button class="votebtn">Vote</button></div>
+        </div>
+
+        <div class="cand" data-id="b" data-votes="37">
+          <div class="cover has-cover" style="background-image:url('img/covers/counterfeit-gods.jpg');"></div>
+          <div>
+            <h3>Counterfeit Gods</h3>
+            <div class="auth">Timothy Keller</div>
+            <p class="pitch">Keller on the things a man builds his life around when God is not enough: money, sex, power, approval. He names the idol under the surface and what it costs.</p>
+            <div class="barrow"><span class="bar"><i style="width:19%"></i></span> <span class="cnt">37 votes</span></div>
+          </div>
+          <div><a href="https://www.amazon.com/dp/1594485496?tag=jbmangum27-20" target="_blank" rel="noopener" class="faint" style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;text-align:right;">View book &rsaquo;</a><button class="votebtn">Vote</button></div>
+        </div>
+
+        <div class="cand" data-id="c" data-votes="33">
+          <div class="cover has-cover" style="background-image:url('img/covers/mortification-of-sin.jpg');"></div>
+          <div>
+            <h3>The Mortification of Sin</h3>
+            <div class="auth">John Owen</div>
+            <p class="pitch">Three hundred years on, still the hardest and most useful book on killing the sin that keeps trying to kill you. Slow going, and worth every page.</p>
+            <div class="barrow"><span class="bar"><i style="width:17%"></i></span> <span class="cnt">33 votes</span></div>
+          </div>
+          <div><a href="https://www.amazon.com/dp/1951034007?tag=jbmangum27-20" target="_blank" rel="noopener" class="faint" style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;text-align:right;">View book &rsaquo;</a><button class="votebtn">Vote</button></div>
+        </div>
+
+        <div class="cand" data-id="d" data-votes="28">
+          <div class="cover has-cover" style="background-image:url('img/covers/make-it-home-before-dark.jpg');"></div>
+          <div>
+            <h3>Make It Home Before Dark</h3>
+            <div class="auth">Crawford W. Loritts</div>
+            <p class="pitch">Loritts on finishing well. What it takes to still be standing, and still be faithful, when the light starts to go.</p>
+            <div class="barrow"><span class="bar"><i style="width:15%"></i></span> <span class="cnt">28 votes</span></div>
+          </div>
+          <div><a href="https://www.amazon.com/dp/0802454372?tag=jbmangum27-20" target="_blank" rel="noopener" class="faint" style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;text-align:right;">View book &rsaquo;</a><button class="votebtn">Vote</button></div>
+        </div>
+
+        <div class="cand" data-id="e" data-votes="23">
+          <div class="cover has-cover" style="background-image:url('img/covers/joy-of-fearing-god.jpg');"></div>
+          <div>
+            <h3>The Joy of Fearing God</h3>
+            <div class="auth">Jerry Bridges</div>
+            <p class="pitch">Bridges recovers a phrase we flinch at. The fear of the Lord is not dread. It is the start of wisdom and the root of a settled joy.</p>
+            <div class="barrow"><span class="bar"><i style="width:12%"></i></span> <span class="cnt">23 votes</span></div>
+          </div>
+          <div><a href="https://www.amazon.com/dp/1400070643?tag=jbmangum27-20" target="_blank" rel="noopener" class="faint" style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;text-align:right;">View book &rsaquo;</a><button class="votebtn">Vote</button></div>
+        </div>
+
+        <div class="cand" data-id="f" data-votes="18">
+          <div class="cover has-cover" style="background-image:url('img/covers/inside-out.jpg');"></div>
+          <div>
+            <h3>Inside Out</h3>
+            <div class="auth">Larry Crabb</div>
+            <p class="pitch">Crabb on why managing your behavior is not the same as changing. Real change starts underneath, in the parts we would rather not look at.</p>
+            <div class="barrow"><span class="bar"><i style="width:9%"></i></span> <span class="cnt">18 votes</span></div>
+          </div>
+          <div><a href="https://www.amazon.com/dp/1612913121?tag=jbmangum27-20" target="_blank" rel="noopener" class="faint" style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;text-align:right;">View book &rsaquo;</a><button class="votebtn">Vote</button></div>
+        </div>
+
+        <div class="cand" data-id="g" data-votes="13">
+          <div class="cover has-cover" style="background-image:url('img/covers/how-does-sanctification-work.jpg');"></div>
+          <div>
+            <h3>How Does Sanctification Work?</h3>
+            <div class="auth">David Powlison</div>
+            <p class="pitch">Powlison on how men actually grow. Not one formula, but the ordinary, unglamorous ways God works a man over time.</p>
+            <div class="barrow"><span class="bar"><i style="width:7%"></i></span> <span class="cnt">13 votes</span></div>
+          </div>
+          <div><a href="https://www.amazon.com/dp/1433556103?tag=jbmangum27-20" target="_blank" rel="noopener" class="faint" style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;text-align:right;">View book &rsaquo;</a><button class="votebtn">Vote</button></div>
+        </div>
+      </div>
+      <p class="yourvote" id="yv">You have not voted yet.</p>
+      <p class="muted" style="margin-top:22px;font-size:15px;">Think a book belongs on the ballot? <a href="app-chapter.html">Nominate it to your guide.</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap ft">
+  <a class="brand" href="app-dashboard.html"><img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" /><span class="name">Crown &amp; Compass</span></a>
+  <div class="ft-links"><a href="app-dashboard.html">Dashboard</a><a href="app-reading.html">My Reading</a><a href="app-chapter.html">My Chapter</a><a href="app-vote.html">Vote</a><a href="app-account.html">Account</a><a href="app-signin.html">Sign out</a></div>
+</div></footer>
+
+<script>
+(function(){
+  var ballot=document.getElementById('ballot'), yv=document.getElementById('yv'), picked=null;
+  function pct(){var t=0;ballot.querySelectorAll('.cand').forEach(function(c){t+=+c.dataset.votes;});
+    ballot.querySelectorAll('.cand').forEach(function(c){var p=Math.round(+c.dataset.votes/t*100);
+      c.querySelector('.bar i').style.width=p+'%'; c.querySelector('.cnt').textContent=c.dataset.votes+' votes';});}
+  ballot.querySelectorAll('.cand').forEach(function(c){
+    c.querySelector('.votebtn').addEventListener('click',function(){
+      if(picked===c) return;
+      if(picked){picked.classList.remove('picked');picked.dataset.votes=+picked.dataset.votes-1;picked.querySelector('.votebtn').textContent='Vote';}
+      picked=c; c.classList.add('picked'); c.dataset.votes=+c.dataset.votes+1; c.querySelector('.votebtn').textContent='Your vote ✓';
+      yv.innerHTML='Your vote: <b>'+c.querySelector('h3').textContent+'</b>. Change it anytime before voting closes.';
+      pct();
+    });
+  });
+})();
+</script>
+</body>
+</html>
