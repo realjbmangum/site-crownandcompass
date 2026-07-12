@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How It Works · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .page-head h1{font-size:clamp(2.25rem,5.5vw,3.75rem);margin-top:14px;}
+  .step .num{font-family:var(--mono);font-size:13px;letter-spacing:.22em;color:var(--ember);margin-bottom:12px;}
+  .step h2{margin:0;}
+  .move{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);}
+  .move:last-child{border-bottom:none;}
+  .move .mk{flex:none;width:130px;font-family:var(--display);font-weight:600;font-size:18px;color:var(--ink);}
+  .move .md{font-family:var(--body);color:var(--muted);font-size:16px;line-height:1.7;margin:0;}
+  @media(max-width:560px){.move{flex-direction:column;gap:6px;}.move .mk{width:auto;}}
+
+  /* six-week rhythm, same arc as home's Rhythm section */
+  .rhythm-grid{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line-dark);border-bottom:none;}
+  .rhythm-grid .wk{padding:26px 20px;border-bottom:1px solid var(--line-dark);border-right:1px solid var(--line-dark);}
+  .rhythm-grid .wk .n{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ember);}
+  .rhythm-grid .wk h4{font-family:var(--display);font-weight:600;font-size:19px;margin:10px 0 0;color:var(--bone);}
+  .rhythm-grid .wk p{font-family:var(--body);font-size:14px;line-height:1.5;color:var(--on-dark-mute);margin:8px 0 0;}
+  .rhythm-grid .wk.last{background:var(--ember);}
+  .rhythm-grid .wk.last .n{color:var(--charcoal);} .rhythm-grid .wk.last p{color:#f4e4da;}
+  @media(max-width:720px){.rhythm-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .firsttime{background:var(--bone);border:1px solid var(--line-strong);padding:36px 36px;}
+  .firsttime ul{margin:18px 0 0;padding:0;list-style:none;}
+  .firsttime li{position:relative;padding-left:22px;margin-bottom:13px;font-family:var(--body);color:var(--muted);font-size:16px;line-height:1.6;}
+  .firsttime li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;background:var(--ember);}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+        <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html" class="active">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="app-signin.html">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- PAGE HEAD -->
+  <section class="section bone page-head">
+    <div class="wrap narrow">
+      <p class="kicker kicker-rule">How it works</p>
+      <h1>It is simpler than you think.</h1>
+      <p class="lead" style="margin-top:18px;">A small group of men. One book every six weeks. An honest conversation along the way, and a Gather at the end to close it out. That is the whole thing. Here is how each part works, and what to expect your first time.</p>
+    </div>
+  </section>
+
+  <!-- CHAPTERS -->
+  <section class="section bone2">
+    <div class="wrap split">
+      <div class="step">
+        <div class="num">01</div>
+        <h2>Chapters</h2>
+        <p class="prose" style="margin-top:14px;">A Chapter is the core of Crown and Compass. Four to eight men who read the same book and walk it out together. Every chapter runs the same cadence: one book every six weeks, read a bit each week, and a closing Gather at the end.</p>
+        <p class="prose">Small is the point. Eight men or fewer means every man gets heard, and the conversation stays honest instead of turning into a lecture. When a chapter grows past that, it splits and another chapter begins.</p>
+      </div>
+      <div class="imgph filled" data-label="four men around a table at night, seen from behind, warm lamplight" style="min-height:320px;background-image:url('img/brotherhood.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
+    </div>
+  </section>
+
+  <!-- GUIDES -->
+  <section class="section bone">
+    <div class="wrap split">
+      <div class="imgph filled" data-label="a hand turning a page under a single lamp" style="min-height:320px;background-image:url('img/reading.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
+      <div class="step">
+        <div class="num">02</div>
+        <h2>Guides</h2>
+        <p class="prose" style="margin-top:14px;">Every cycle has a Guide. The Guide is not the teacher or the expert. He is the man who prepared, who holds the room at the Gather, and who keeps the conversation honest along the way. He reads ahead and brings a handful of questions drawn from the book and from real life.</p>
+        <p class="prose">Any man can Guide, and the role rotates from one book to the next. Over time every man in a chapter should have the experience of leading one. The first time is uncomfortable. That is expected, and it is fine. Guiding forms a man in a way that sitting in the group does not.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SIX-WEEK RHYTHM -->
+  <section class="section charcoal">
+    <div class="wrap">
+      <div class="sec-head"><p class="kicker kicker-rule">The rhythm</p><h2>One book. Six weeks. Repeat.</h2><p class="sec-sub">The cadence is the discipline. Every cycle runs the same arc: pick the book up together, read and share as you go, then gather to close it before the next begins.</p></div>
+      <div class="rhythm-grid">
+        <div class="wk"><div class="n">WK 01</div><h4>Kickoff</h4><p>Book announced. Bearing set.</p></div>
+        <div class="wk"><div class="n">WK 02</div><h4>Read</h4><p>Dig in. Notes in the thread.</p></div>
+        <div class="wk"><div class="n">WK 03</div><h4>Check In</h4><p>Mid-book. Life on the table.</p></div>
+        <div class="wk"><div class="n">WK 04</div><h4>Read</h4><p>Push through the middle.</p></div>
+        <div class="wk"><div class="n">WK 05</div><h4>Finish</h4><p>Last pages. Land the plane.</p></div>
+        <div class="wk last"><div class="n">WK 06</div><h4>Gather</h4><p>Meet, close it out, reset.</p></div>
+      </div>
+      <p class="sec-sub" style="max-width:64ch;margin:28px 0 0;">The sharing is not saved for the end. From week two on, men trade notes and check in on each other in the chapter thread. The Gather at week six is where the whole chapter comes together to close the book.</p>
+    </div>
+  </section>
+
+  <!-- THE GATHER -->
+  <section class="section bone2">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <div class="step">
+        <div class="num">03</div>
+        <h2>The Gather</h2>
+        <p class="prose" style="margin-top:14px;margin-bottom:26px;">At the end of the six weeks, the chapter gathers to close the book. It has two halves. First the book: the Guide opens with his questions and the men work through what they read, agreeing, arguing, holding it up as a mirror. Then the check-in, which is where the real work happens. It has three moves.</p>
+        <div class="move">
+          <div class="mk">The check-in</div>
+          <p class="md">Skip "how are you." That question gets a performance. The question is: where are you, really? The Guide answers first and models honesty. One sentence or one minute. The room listens. No advice, no fixing. Just hearing.</p>
+        </div>
+        <div class="move">
+          <div class="mk">Prayer requests</div>
+          <p class="md">What do you need? Prayer, accountability, a follow-up before the next cycle. A man who will text you and ask if you did the thing you said you would. The ask is specific, because vague requests get vague support.</p>
+        </div>
+        <div class="move">
+          <div class="mk">The close</div>
+          <p class="md">The Guide offers one thing to carry into the next cycle: a verse, a sentence from the book, a question, or a moment of silence. It should be short, and it should land. It is the thing a man drives home with.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE READING -->
+  <section class="section bone">
+    <div class="wrap split">
+      <div class="imgph filled" data-label="a stack of worn books beside a lamp" style="min-height:320px;background-image:url('img/the-shelf.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
+      <div class="step">
+        <div class="num">04</div>
+        <h2>The reading</h2>
+        <p class="prose" style="margin-top:14px;">One book every six weeks. Every chapter reads the same book at the same pace, a chapter or a section each week. The book is the common ground that makes honest conversation possible. Without it, men default to small talk. With it, they have a shared text to push against.</p>
+        <p class="prose">A man reads before the Gather. The Guide prepares questions from the reading. The conversation stays close to the book, because that is where the traction is. Right now we are reading <em>Disciplines of a Godly Man</em> by R. Kent Hughes.</p>
+        <a href="reading-list.html" class="btn btn-ghost btn-sm" style="margin-top:6px;">See the reading list</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIRST TIME -->
+  <section class="section bone2">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <div class="firsttime">
+        <p class="kicker">Your first time</p>
+        <h2 style="font-size:clamp(1.6rem,3.5vw,2rem);">Just show up and listen.</h2>
+        <p class="prose" style="margin-top:14px;">There is zero pressure your first Gather. You come, you sit down, and you see what it feels like. Here is what to expect.</p>
+        <ul>
+          <li>You do not have to talk. You can sit and listen the whole time, and nobody will push you.</li>
+          <li>You do not have to have read the whole book. Come as you are and pick it up from there.</li>
+          <li>Nobody performs. The men here are honest about what is hard, which makes it easier for you to be.</li>
+          <li>What is said in the room stays in the room. That is the agreement, every time.</li>
+          <li>Come once and see if it fits. If it is not for you, there is no chasing and no guilt. If you want to come back, you are a Brother.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="section ink center">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <h2>Ready to sit in on a Gather?</h2>
+      <p class="sec-sub" style="max-width:46ch;margin:18px auto 28px;">Tell us where you are and we will connect you to a chapter, or help you start one.</p>
+      <div class="ctas" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="find-a-chapter.html" class="btn btn-ghost">Find a Chapter</a>
+        <a href="join.html" class="btn btn-ember">Join a Chapter</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
