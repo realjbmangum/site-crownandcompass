@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book Worksheet · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .intro{max-width:70ch;}
+  .how{background:var(--bone-2);border:1px solid var(--line);padding:20px 24px;margin:20px 0 0;}
+  .how p{font-family:var(--body);font-size:16px;line-height:1.6;color:var(--muted);margin:0;}
+  .how code{background:var(--bone);padding:1px 6px;border:1px solid var(--line);font-size:13px;}
+  .rows{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0 0;}
+  .row{display:grid;grid-template-columns:1fr 150px 200px;gap:18px;align-items:center;background:var(--bone);padding:16px 20px;}
+  .row .bk .t{font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);line-height:1.2;}
+  .row .bk .a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-top:4px;}
+  .row .bk .badge{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);border:1px solid rgba(192,85,42,.4);padding:2px 7px;margin-top:8px;}
+  .row a.az{font-family:var(--display);font-weight:600;font-size:13px;padding:9px 12px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);text-align:center;white-space:nowrap;}
+  .row a.az:hover{background:var(--ink);color:var(--bone);}
+  .row input{font-family:var(--mono);font-size:14px;letter-spacing:.04em;padding:11px 12px;background:#fbf7ec;border:1px solid var(--line);color:var(--ink);outline:none;width:100%;}
+  .row input:focus{border-color:var(--ember);outline:2px solid var(--ember);outline-offset:-1px;}
+  .row input.ok{border-color:var(--ember);background:#f7efe0;}
+  @media(max-width:720px){.row{grid-template-columns:1fr;gap:10px;}}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center;}
+  .btn-copy{font-family:var(--display);font-weight:600;font-size:14px;padding:12px 24px;border:1.5px solid var(--ink);background:var(--ink);color:var(--bone);cursor:pointer;}
+  .btn-copy.done{background:var(--ember);border-color:var(--ember);}
+  .count{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--muted-2);}
+  .gcard{border:1px solid var(--line);background:var(--bone);padding:20px 22px;margin-top:14px;}
+  .gcard .gt{font-family:var(--display);font-weight:600;font-size:18px;color:var(--ink);}
+  .gcard .ga{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin:3px 0 12px;}
+  .gcard button{font-family:var(--display);font-weight:600;font-size:13px;padding:9px 18px;border:1.5px solid var(--ember);background:transparent;color:var(--ember);cursor:pointer;}
+  .gcard button:hover{background:var(--ember);color:var(--bone);}
+  .gcard button.done{background:var(--ink);border-color:var(--ink);color:var(--bone);}
+  .out{width:100%;min-height:120px;font-family:var(--mono);font-size:12px;line-height:1.5;padding:14px 16px;background:#211d15;color:var(--bone);border:1px solid var(--line-dark);margin-top:16px;white-space:pre;overflow:auto;}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="wrap bar">
+  <a class="brand" href="home.html"><img src="assets/cc-white.png" alt="" style="height:44px;width:auto;" /><span class="name">Crown &amp; Compass</span></a>
+  <nav class="nav"><a class="signin" href="index.html">Back to the map</a></nav>
+</div></header>
+
+<main>
+  <section class="section bone tight">
+    <div class="wrap">
+      <p class="kicker kicker-rule">Book Worksheet</p>
+      <h1>ASINs and summaries, in one pass.</h1>
+      <p class="intro muted" style="font-size:18px;">Sixteen books need a real Amazon ID so the affiliate links point at the right book and the right edition. Three also need a short summary. Fill this out, hit copy, and paste it back to me.</p>
+
+      <div class="how">
+        <p><b>To grab an ASIN:</b> click <b>Find on Amazon</b> for a book, open the correct result, and copy the 10-character code from the URL after <code>/dp/</code> or <code>/gp/product/</code>. Use the <b>hardcover or paperback</b> page, that one shows every format (men can still pick Audible or Kindle there). Print IDs start with a digit; Kindle and audio start with <code>B0</code>. Paste it in the box.</p>
+      </div>
+
+      <h2 style="margin-top:38px;font-size:1.6rem;">1. Grab the IDs</h2>
+      <div class="rows" id="rows"></div>
+      <div class="actions">
+        <button class="btn-copy" id="copyIds">Copy the filled list</button>
+        <span class="count" id="count">0 of 16 filled</span>
+      </div>
+      <div class="out" id="idOut" style="display:none;"></div>
+    </div>
+  </section>
+
+  <section class="section bone2">
+    <div class="wrap">
+      <p class="kicker kicker-rule">Run in Grok</p>
+      <h2>2. Three summaries</h2>
+      <p class="muted" style="max-width:64ch;font-size:16px;">These three I do not know well enough to write without inventing. Copy each prompt into Grok, then paste the answer back to me. The Crown and Compass voice and the exact five sections are already baked in.</p>
+      <div id="gcards"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap ft">
+  <span class="name">Crown &amp; Compass</span>
+</div></footer>
+
+<script>
+  var BOOKS = [
+    {t:"Disciplines of a Godly Man", a:"R. Kent Hughes", note:"current read"},
+    {t:"The Barbarian Way", a:"Erwin Raphael McManus"},
+    {t:"Stepping Up", a:"Dennis Rainey"},
+    {t:"They Were Christians", a:"Cristobal Krusen", grok:true},
+    {t:"M46 Crash Course", a:"Kenny Dallas & Tim Sexton", grok:true},
+    {t:"Counterfeit Gods", a:"Timothy Keller", note:"shelf + ballot"},
+    {t:"A Million Little Miracles", a:"Mark Batterson", grok:true},
+    {t:"Under Par", a:"Phil Callaway"},
+    {t:"Maximized Manhood", a:"Edwin Louis Cole"},
+    {t:"The Man in the Mirror", a:"Patrick Morley"},
+    {t:"George Müller: Delighted in God", a:"Roger Steer", note:"ballot"},
+    {t:"The Mortification of Sin", a:"John Owen", note:"ballot"},
+    {t:"Make It Home Before Dark", a:"Crawford W. Loritts", note:"ballot"},
+    {t:"The Joy of Fearing God", a:"Jerry Bridges", note:"ballot"},
+    {t:"Inside Out", a:"Larry Crabb", note:"ballot"},
+    {t:"How Does Sanctification Work?", a:"David Powlison", note:"ballot"}
+  ];
+  function azLink(b){ return "https://www.amazon.com/s?k="+encodeURIComponent(b.t+" "+b.a+" book"); }
+
+  var rows = document.getElementById('rows');
+  BOOKS.forEach(function(b,i){
+    var badge = b.grok ? '<span class="badge">needs summary</span>' : (b.note ? '<span class="badge" style="color:var(--muted-2);border-color:var(--line);">'+b.note+'</span>' : '');
+    var el = document.createElement('div'); el.className='row';
+    el.innerHTML = '<div class="bk"><div class="t">'+b.t+'</div><div class="a">'+b.a+'</div>'+badge+'</div>'
+      + '<a class="az" href="'+azLink(b)+'" target="_blank" rel="noopener">Find on Amazon &rarr;</a>'
+      + '<input type="text" placeholder="paste ASIN" data-i="'+i+'" />';
+    rows.appendChild(el);
+  });
+
+  var inputs = [].slice.call(document.querySelectorAll('.row input'));
+  var countEl = document.getElementById('count');
+  function refresh(){
+    var n=0; inputs.forEach(function(inp){ var v=inp.value.trim(); if(v){n++; inp.classList.add('ok');} else inp.classList.remove('ok'); });
+    countEl.textContent = n+' of '+BOOKS.length+' filled';
+  }
+  inputs.forEach(function(inp){ inp.addEventListener('input', refresh); });
+
+  document.getElementById('copyIds').addEventListener('click', function(){
+    var lines = inputs.map(function(inp){ var v=inp.value.trim(); return v ? (BOOKS[+inp.dataset.i].t+" — "+v) : null; }).filter(Boolean);
+    var text = lines.length ? lines.join("\n") : "(nothing filled in yet)";
+    var out = document.getElementById('idOut'); out.style.display='block'; out.textContent = text;
+    navigator.clipboard.writeText(text);
+    this.textContent = 'Copied '+lines.length+' IDs'; this.classList.add('done');
+    var b=this; setTimeout(function(){ b.textContent='Copy the filled list'; b.classList.remove('done'); }, 1600);
+  });
+
+  var PROMPT = 'You are helping write a reading guide for Crown and Compass, a Christian men\'s book club.\n\n'
+    + 'For the book "[TITLE]" by [AUTHOR], write a short study guide in the exact structure and voice below.\n\n'
+    + 'VOICE: Warm and contemplative, like a wise friend talking on a long walk (think Barnabas, the encourager), never a drill sergeant or a hype man. Grounded, concrete, and honest. Written for ordinary Christian men.\n\n'
+    + 'HARD RULES:\n- No emojis.\n- No em dashes. Use commas or periods.\n- No litotes or double negatives. Never write "it is not X, it is Y" or "you are not alone." State the positive directly.\n- No Christian cliches ("blessed beyond measure"), no manosphere language ("crush it," "dominate"), no hype.\n- If you are unsure of a fact about this specific book, say so plainly instead of inventing it.\n\n'
+    + 'Output exactly these five labeled sections and nothing else:\n\n'
+    + 'WHAT IT IS ABOUT: two or three sentences on what the book actually is and does.\n\n'
+    + 'THE BIG IDEA: one or two sentences naming the single central point.\n\n'
+    + 'TALK IT THROUGH: seven discussion questions for a group of men. Make them personal and honest, the kind that get a man talking about his real life and not just the book.\n\n'
+    + 'READ THE WORD: five Bible passages that connect to the book\'s themes. Reference only, one per line, for example "Psalm 23:1-4".\n\n'
+    + 'ONE PRACTICE: one concrete thing a man can do this week, in two or three sentences.';
+
+  var gc = document.getElementById('gcards');
+  BOOKS.filter(function(b){return b.grok;}).forEach(function(b){
+    var full = PROMPT.replace('[TITLE]', b.t).replace('[AUTHOR]', b.a);
+    var el = document.createElement('div'); el.className='gcard';
+    el.innerHTML = '<div class="gt">'+b.t+'</div><div class="ga">'+b.a+'</div><button>Copy Grok prompt</button>';
+    el.querySelector('button').addEventListener('click', function(){
+      navigator.clipboard.writeText(full); this.textContent='Copied'; this.classList.add('done');
+      var bb=this; setTimeout(function(){ bb.textContent='Copy Grok prompt'; bb.classList.remove('done'); }, 1400);
+    });
+    gc.appendChild(el);
+  });
+</script>
+</body>
+</html>

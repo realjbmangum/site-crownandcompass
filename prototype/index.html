@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prototype Map · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .map-hero{padding:56px 0 24px;}
+  .map-hero h1{font-size:clamp(2.2rem,5vw,3.4rem);}
+  .group{margin-top:44px;}
+  .group > .kicker{margin-bottom:16px;}
+  .screens{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .screens a{background:var(--bone);padding:22px 22px;transition:background .18s;}
+  .screens a:hover{background:var(--bone-2);}
+  .screens .t{font-family:var(--display);font-weight:600;font-size:19px;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:12px;line-height:1.15;}
+  .screens .t .arrow{color:var(--ember);font-family:var(--mono);font-size:14px;flex:none;}
+  .screens .d{font-family:var(--body);color:var(--muted);font-size:14.5px;line-height:1.55;margin:8px 0 0;}
+  @media(max-width:860px){.screens{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.screens{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="wrap bar">
+  <a class="brand" href="index.html">
+    <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+    <span class="name">Crown &amp; Compass</span>
+  </a>
+  <nav class="nav"><a class="signin" href="home.html">Open the site →</a></nav>
+</div></header>
+
+<main class="wrap">
+  <section class="map-hero">
+    <p class="kicker kicker-rule">Prototype map</p>
+    <h1>The whole platform, mapped and mocked.</h1>
+    <p class="prose" style="margin-top:16px;max-width:66ch;">Every screen we plan to build, in the real brand, with plain labels and sample content. Click through and tell me what to change: labels, structure, layout. We build the real thing only after you sign off. Image blocks show where atmospheric photos will go.</p>
+  </section>
+
+  <section class="group">
+    <p class="kicker">Public site · thecrownandcompass.org</p>
+    <div class="screens">
+      <a href="home.html"><div class="t">Home <span class="arrow">→</span></div><p class="d">The front door: what this is, how it works, the current read, newsletter signup.</p></a>
+      <a href="about.html"><div class="t">About <span class="arrow">→</span></div><p class="d">The story, who it is for, and the founder.</p></a>
+      <a href="how-it-works.html"><div class="t">How It Works <span class="arrow">→</span></div><p class="d">Chapters, guides, the six-week rhythm, and the closing Gather, in plain terms.</p></a>
+      <a href="reading-list.html"><div class="t">Reading List <span class="arrow">→</span></div><p class="d">Every book we read, with the current pick up top.</p></a>
+      <a href="reading-guide.html"><div class="t">Reading Guide <span class="arrow">→</span></div><p class="d">A book's page and its study guide for the six weeks.</p></a>
+      <a href="blog.html"><div class="t">Blog <span class="arrow">→</span></div><p class="d">Articles and short reads on faith, character, and calling.</p></a>
+      <a href="blog-post.html"><div class="t">Blog Post <span class="arrow">→</span></div><p class="d">A single article, with share and newsletter signup.</p></a>
+      <a href="resources.html"><div class="t">Resources <span class="arrow">→</span></div><p class="d">The library: reading guides, tools, directories, downloads.</p></a>
+      <a href="directory.html"><div class="t">Recovery Directory <span class="arrow">→</span></div><p class="d">60+ sobriety resources, filterable. A real functional tool.</p></a>
+      <a href="find-a-chapter.html"><div class="t">Find a Chapter <span class="arrow">→</span></div><p class="d">Map and list of chapters, including ones forming near you.</p></a>
+      <a href="start-a-chapter.html"><div class="t">Start a Chapter <span class="arrow">→</span></div><p class="d">What it takes, and a form to start one.</p></a>
+      
+      <a href="faq.html"><div class="t">FAQ <span class="arrow">→</span></div><p class="d">Plain answers to the questions men actually ask.</p></a>
+      
+      <a href="join.html"><div class="t">Join <span class="arrow">→</span></div><p class="d">The main intake: get connected to a chapter.</p></a>
+      <a href="newsletter-confirm.html"><div class="t">Newsletter Confirm <span class="arrow">→</span></div><p class="d">The "you're subscribed" page.</p></a>
+      <a href="contact.html"><div class="t">Contact <span class="arrow">→</span></div><p class="d">A simple contact form: name, email, message. Linked from the footer.</p></a>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="kicker">Members app · app.thecrownandcompass.org</p>
+    <div class="screens">
+      <a href="app-signin.html"><div class="t">Sign In <span class="arrow">→</span></div><p class="d">Magic-link sign in, no password. "Check your email."</p></a>
+      <a href="app-dashboard.html"><div class="t">Dashboard <span class="arrow">→</span></div><p class="d">Your chapter, the current book and where you are in the six weeks, the reading guide, who is active.</p></a>
+      <a href="app-reading.html"><div class="t">My Reading <span class="arrow">→</span></div><p class="d">The current book, the study guide, past cycles, and your progress.</p></a>
+      <a href="app-chapter.html"><div class="t">My Chapter <span class="arrow">→</span></div><p class="d">Members, the next Gather, prayer requests.</p></a>
+      <a href="app-community.html"><div class="t">Community <span class="arrow">→</span></div><p class="d">Chapter feed and prayer requests (a later wave).</p></a>
+      <a href="app-vote.html"><div class="t">Vote <span class="arrow">→</span></div><p class="d">Vote on the next book; the winner starts the next six-week cycle. Affiliate-linked.</p></a>
+      <a href="app-account.html"><div class="t">Account <span class="arrow">→</span></div><p class="d">Name, email, notifications, sessions, sign out.</p></a>
+      <a href="app-admin.html"><div class="t">Admin <span class="arrow">→</span></div><p class="d">For guides: chapter health, the Guides + Newsletter engines, nominations, and founder metrics with live charts.</p></a>
+      <a href="image-prompts.html"><div class="t">Image Prompts <span class="arrow">→</span></div><p class="d">One-time worksheet: every image prompt in one uniform style, to generate the site's photography.</p></a>
+      <a href="video-prompts.html"><div class="t">Hero Video Prompts <span class="arrow">→</span></div><p class="d">One-time worksheet: five slow-loop prompts for the home hero, to generate the background video.</p></a>
+      <a href="book-worksheet.html"><div class="t">Book Worksheet <span class="arrow">→</span></div><p class="d">One-time worksheet: grab Amazon IDs for all 16 books and the 3 Grok summary prompts.</p></a>
+    </div>
+  </section>
+
+  <section class="group" style="margin:56px 0;">
+    <p class="faint mono" style="font-size:12px;letter-spacing:.08em;">Reference: <a href="sitemap.md" style="text-decoration:underline;">sitemap.md</a>, the written information architecture.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -2,6 +2,9 @@
 
 Crown and Compass public website. Astro hybrid site deployed to Cloudflare Pages.
 
+> [!important] Current direction (updated July 2026)
+> The brand and design have been rebuilt on the official **Brand & Identity Field Manual** (Ink / Bone / Ember, Zilla Slab / Spectral / IBM Plex Mono, a heraldic seal). The **source of truth right now is the local prototype in `prototype/`** — a full clickable mockup of the public site and the member app, pending Brian's sign-off before the Astro rebuild. When we build, follow the prototype plus `brand/voice.md` and `brand/redesign-spec.md`. The sections below marked _(superseded)_ describe the OLD deployed build and are kept only as a record.
+
 ## Stack
 
 - **Framework:** Astro 4.x (`output: 'hybrid'` — 4 static pages + 1 API route)
@@ -10,33 +13,35 @@ Crown and Compass public website. Astro hybrid site deployed to Cloudflare Pages
 - **Hosting:** Cloudflare Pages (auto-deploy from GitHub)
 - **Database:** Cloudflare D1 (`DB` binding) — subscribers table
 - **Email:** SendGrid — new subscriber notification to NOTIFICATION_EMAIL
-- **Fonts:** EB Garamond + DM Sans via Google Fonts
+- **Fonts:** Zilla Slab (display) + Spectral (body) + IBM Plex Mono (labels) via Google Fonts
 
-## Design System
+## Design System (official Field Manual brand)
 
-**Colors (CSS variables in global.css):**
-- `--bg-base: #0f1117` — near-black body background
-- `--bg-card: #1a1a20` — card/section backgrounds
-- `--bg-surface: #22222a` — elevated surfaces
-- `--text-primary: #f0ebe2` — warm off-white
-- `--text-muted: #8a8070` — secondary text
-- `--accent: #c9853a` — amber (CTAs, labels, borders)
-- `--accent-light: #e8a055` — hover state
-- `--border: #2e2c26` — subtle borders
+The live prototype design system is in `prototype/proto.css` (CSS variables), to be ported to the Astro build.
+
+**Palette:**
+- `--ink: #16130D` — primary text + the mark
+- `--bone: #F1EBDC` — primary paper ground
+- `--bone-2: #E7DEC9` — second paper tone (alternating sections)
+- `--charcoal: #2C2B29` — depth: dark blocks, footer, quotes
+- `--ember: #C0552A` — accent: labels, rules, primary buttons (kept rare, reserved for actions)
+- `--ember-dark: #A5451E` — accent hover / on-bone label
 
 **Typography:**
-- Display/Headings: `EB Garamond` (literary, C.S. Lewis-ish)
-- Body/UI: `DM Sans` (clean, readable)
+- Display/Headings: `Zilla Slab` (slab serif)
+- Body/reading: `Spectral` (literary serif)
+- Labels/eyebrows: `IBM Plex Mono` (uppercase, letter-spaced)
 
-**Key utilities:**
-- `.grain-bg` — adds subtle grain texture overlay (CSS-only SVG)
-- `.btn-amber` — primary amber CTA button
-- `.btn-ghost` — ghost outline button
-- `.section-pad` — standard section padding
-- `.section-container` — centered max-width wrapper
-- `.prose-cc` — long-form reading typography
-- `.scripture-block` — amber-bordered scripture callout
-- `.questions-card` — elevated question list card
+Square corners (no border-radius), hairline rules, mono kicker labels, atmospheric photography. Tagline: "Point True."
+
+**Key classes (`prototype/proto.css`):**
+- `.kicker` / `.kicker-rule` — mono uppercase eyebrow with ember rule
+- `.btn-ember` / `.btn-ghost` — square primary + ghost buttons
+- `.card` / `.grid` — hairline cards and 1px-gap grids
+- `.section` + ground classes `.bone` / `.bone2` / `.charcoal` / `.ink`
+- `.prose` — long-form reading typography; `.site-header` / `.site-footer` — ink header, slim charcoal footer
+
+_(superseded)_ The original deployed build used `#0f1117` + EB Garamond / DM Sans with `.grain-bg` / `.btn-amber` / `.scripture-block` utilities in `src/styles/global.css`. That system is being replaced.
 
 ## Pages
 
@@ -92,9 +97,13 @@ Run `npm run build` first, then use wrangler to serve with D1 binding.
 
 ## Logo
 
-Logo is at `public/logo.png` (copied from `AI/CC/brand/CrownAndCompass.png`).
-If logo needs a transparent background and it has a white bg, update the header to use
-a different rendering approach or add `filter: brightness(0) invert(1)` for pure white.
+The mark is the heraldic **Crown & Compass seal**, a transparent PNG in these colorways:
+- `public/cc-white.png` — primary, for dark grounds (header, footer, hero)
+- `public/cc-black.png` — for light / cream backgrounds
+- `public/cc-orange.png` — ember accent (favicon, social avatar, one-off spots)
+- `public/cc.png` — the original gold seal
+
+For the build, export sized versions (a small header mark, a hero-size one) in an optimized format; the source PNGs are ~0.5-2 MB. The orange seal reads best as a favicon at tab size. Old `public/logo.png` is superseded.
 
 ## Deploy to Cloudflare Pages
 
@@ -132,3 +141,11 @@ a different rendering approach or add `filter: brightness(0) invert(1)` for pure
 - TODO: Add SendGrid key + NOTIFICATION_EMAIL to Cloudflare Pages env
 - TODO: Push to GitHub
 - TODO: Generate hero-bg.mp4 using prompts in `prompts/hero-video-prompt.md`
+
+### July 12, 2026 — Brand + prototype rebuild
+- Rebuilt the whole brand on the official Field Manual (Ink / Bone / Ember, Zilla Slab / Spectral / IBM Plex Mono, heraldic seal). Full clickable prototype of the public site + member app in `prototype/` (see `prototype/sitemap.md` and `prototype/index.html`).
+- Home hero uses a looping video (`public/hero-bg.mp4`) with the seal large on the right. Logo colorways added (`public/cc-*.png`); adopted white-on-dark / black-on-light as the logo system.
+- Removed the Stories and Support pages; rolled a "More" dropdown nav across all public pages; slimmed the footer and dropped the "Point True" tagline line.
+- Ran design (impeccable) + copy (voice) quality passes: reports in `prototype/_review-design.md` and `prototype/_review-copy.md`. Fixed AI-slop side-stripe borders and light-touch voice/litotes edits.
+- Current book placeholder aligned to *Disciplines of a Godly Man* across all pages.
+- Pending: Brian's sign-off, then the Astro rebuild from the prototype. Move image/video assets to R2 at go-live; the member app gets its own repo (`app-crownandcompass`).
