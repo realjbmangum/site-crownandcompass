@@ -149,3 +149,27 @@ For the build, export sized versions (a small header mark, a hero-size one) in a
 - Ran design (impeccable) + copy (voice) quality passes: reports in `prototype/_review-design.md` and `prototype/_review-copy.md`. Fixed AI-slop side-stripe borders and light-touch voice/litotes edits.
 - Current book placeholder aligned to *Disciplines of a Godly Man* across all pages.
 - Pending: Brian's sign-off, then the Astro rebuild from the prototype. Move image/video assets to R2 at go-live; the member app gets its own repo (`app-crownandcompass`).
+
+### July 12, 2026 — Go-live migration (PR #4)
+- **Root cause of "old site still showing":** the redesign lived in `prototype/`,
+  which Astro never builds — it only builds `src/pages/` and copies `public/`
+  verbatim to `dist/`. Merging PR #3 updated the repo but not the deployed output.
+- **Fix (chosen over an Astro-component rebuild for reliability):** serve the new
+  site as static HTML from `public/`. Ported all 40 prototype pages into
+  `public/` (home = `public/index.html`; internal `home.html` links → `/`),
+  moved `proto.css` + `img/` + `assets/` alongside them, and deleted the
+  `prototype/` folder.
+- **Removed the old build source:** `src/pages/{index,about,books,compass,join}.astro`,
+  `BaseLayout`, `Header/Footer/PillarCard/AvatarCard/SEOHead`, `global.css`,
+  `books.json`, plus duplicate public-root media. **Kept the backend:**
+  `src/pages/api/*` (`join`, `newsletter/send`, `unsubscribe`), `src/lib/*`,
+  `src/pages/admin/newsletter.astro`.
+- **Wired the Join + Contact forms** to the existing `/api/join` (D1 `subscribers`
+  + SendGrid); CC-voice success/error states. Added `public/favicon.ico`.
+- Build verified: 40 pages in `dist`, 0 old-brand markers, all routes 200.
+- **Architecture note:** the site is now static-HTML-in-`public/` on top of the
+  Astro/Cloudflare shell (whose only job is the API routes + admin). A future
+  proper Astro-component rebuild is optional, not required. Assets still move to
+  R2 at scale; the member app still gets its own repo.
+- Next: merge PR #4 → Cloudflare rebuilds `main` → new site live. Then member-app
+  architecture + user stories.

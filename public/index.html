@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home · Crown and Compass</title>
+<meta property="og:title" content="Crown and Compass · A brotherhood of men who refuse to drift" />
+<meta property="og:description" content="One book every six weeks, real life shared along the way, bearing fixed on Christ the King. Online, worldwide, free." />
+<meta property="og:image" content="img/open-graph.jpg" />
+<meta property="og:type" content="website" />
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .hero{background:#100d09 url('img/img1.jpg') center 32%/cover no-repeat;color:var(--bone);position:relative;overflow:hidden;}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;z-index:0;}
+  @media (prefers-reduced-motion:reduce){.hero-video{display:none;}}
+  .hero-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg, rgba(15,13,9,.93) 0%, rgba(15,13,9,.72) 50%, rgba(15,13,9,.44) 100%), linear-gradient(0deg, rgba(15,13,9,.82) 0%, rgba(15,13,9,.12) 46%, rgba(15,13,9,0) 62%);}
+  .hero .glow{position:absolute;inset:0;z-index:2;background:radial-gradient(120% 90% at 84% 14%, rgba(192,85,42,.16), rgba(192,85,42,0) 55%);pointer-events:none;}
+  .hero-grid{position:relative;z-index:3;display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center;padding:100px 0 112px;min-height:74vh;}
+  .hero-grid .hcol{max-width:60ch;}
+  .hero-emblem{position:relative;display:flex;justify-content:center;align-items:center;}
+  .hero-emblem::before{content:"";position:absolute;width:132%;height:132%;left:-16%;top:-16%;background:radial-gradient(closest-side, rgba(15,13,9,.62), rgba(15,13,9,0) 70%);pointer-events:none;}
+  .hero-emblem img{position:relative;width:100%;max-width:548px;height:auto;filter:drop-shadow(0 16px 55px rgba(0,0,0,.6));}
+  .hero h1{font-size:clamp(2.8rem,6vw,4.3rem);color:var(--bone);text-wrap:balance;}
+  .hero .sub{font-family:var(--body);font-size:21px;line-height:1.6;color:var(--on-dark);max-width:52ch;margin:28px 0 40px;}
+  .hero .ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .hero .btn-ghost{background-color:rgba(16,13,9,.42);}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:24px;padding:76px 0 84px;min-height:60vh;}.hero-emblem{order:-1;}.hero-emblem img{max-width:200px;}.hero-emblem::before{display:none;}}
+
+  .verse blockquote{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(1.9rem,4vw,2.75rem);line-height:1.2;letter-spacing:-.005em;}
+  .verse .cite{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:30px;font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2);}
+  .verse .cite span{width:32px;height:1px;background:var(--ember);}
+
+  .how-cell{padding:40px 34px;}
+  .how-cell .num{font-family:var(--mono);font-size:13px;letter-spacing:.24em;color:var(--ember);margin-bottom:18px;}
+  .how-cell h3{margin:0 0 12px;}
+  .how-cell p{font-family:var(--body);font-size:17px;line-height:1.6;color:var(--muted);margin:0;}
+
+  .rhythm-grid{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line-dark);border-bottom:none;}
+  .rhythm-grid .wk{padding:26px 20px;border-bottom:1px solid var(--line-dark);border-right:1px solid var(--line-dark);}
+  .rhythm-grid .wk .n{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ember);}
+  .rhythm-grid .wk h4{font-family:var(--display);font-weight:600;font-size:19px;margin:10px 0 0;color:var(--bone);}
+  .rhythm-grid .wk p{font-family:var(--body);font-size:14px;line-height:1.5;color:var(--on-dark-mute);margin:8px 0 0;}
+  .rhythm-grid .wk.last{background:var(--ember);}
+  .rhythm-grid .wk.last .n{color:var(--charcoal);} .rhythm-grid .wk.last p{color:#f4e4da;}
+  @media(max-width:720px){.rhythm-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .read-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;}
+  .themes{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .theme{padding:30px;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;}
+  .theme .t{font-family:var(--mono);font-size:11px;letter-spacing:.2em;}
+  .theme h4{font-family:var(--display);font-weight:600;font-size:24px;margin-top:8px;line-height:1.1;color:var(--bone);}
+  @media(max-width:820px){.read-grid{grid-template-columns:1fr;gap:36px;}}
+
+  .news-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:26px auto 0;}
+  .news-form input{flex:1;min-width:240px;font-family:var(--body);font-size:17px;padding:15px 18px;background:#211d15;border:1px solid rgba(241,235,220,.24);color:var(--bone);outline:none;}
+  .join-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto;}
+  .join-form input{flex:1;min-width:240px;font-family:var(--body);font-size:17px;padding:15px 18px;background:#211d15;border:1px solid rgba(241,235,220,.24);color:var(--bone);outline:none;}
+</style>
+</head>
+<body>
+
+<!-- HERO + NAV -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+        <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="app-signin.html">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="img/img1.jpg">
+      <source src="img/hero-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="glow"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hcol">
+          <p class="kicker">A Men's Discipleship Brotherhood</p>
+          <h1>A brotherhood of men who refuse to drift.</h1>
+          <p class="sub">We read one book every six weeks, share real life along the way, and keep our bearing fixed on Christ the King. Online, worldwide, and for men who mean it.</p>
+          <div class="ctas">
+            <a href="join.html" class="btn btn-ember">Join the Brotherhood</a>
+            <a href="how-it-works.html" class="btn btn-ghost">See how it works</a>
+          </div>
+        </div>
+        <div class="hero-emblem"><img src="assets/cc-white.png" alt="Crown and Compass" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION / VERSE -->
+  <section class="section bone verse center">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <p class="kicker" style="justify-content:center;display:flex;">The Mission</p>
+      <blockquote>&ldquo;Do not conform to the pattern of this world, but be transformed by the renewing of your mind.&rdquo;</blockquote>
+      <div class="cite"><span></span> Romans 12:2 <span></span></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section ink center">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <p class="kicker" style="justify-content:center;display:flex;">The Newsletter</p>
+      <h2>One honest email each week.</h2>
+      <p class="sec-sub" style="max-width:46ch;margin:14px auto 0;">What we're reading, one thought worth sitting with, and when the next cycle opens. No spam.</p>
+      <form class="news-form" onsubmit="return false;">
+        <input type="email" placeholder="you@example.com" aria-label="Email" />
+        <button class="btn btn-ember" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section bone2">
+    <div class="wrap">
+      <div class="sec-head"><p class="kicker kicker-rule">How It Works</p><h2>Three things. Done well, together.</h2></div>
+      <div class="grid grid-3">
+        <a class="how-cell" href="how-it-works.html" style="background:var(--bone-2);"><div class="num">I.</div><h3>Read</h3><p>One book every six weeks. Read it slowly, mark it up, wrestle with it. Iron takes time to sharpen.</p></a>
+        <a class="how-cell" href="how-it-works.html" style="background:var(--bone-2);"><div class="num">II.</div><h3>Share Life</h3><p>The book is the doorway; the men are the point. We show up honest, the wins, the failures, the fight.</p></a>
+        <a class="how-cell" href="how-it-works.html" style="background:var(--bone-2);"><div class="num">III.</div><h3>Meet</h3><p>When the last page turns, we gather to close it out, and set the bearing for the next leg.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE RHYTHM -->
+  <section class="section charcoal">
+    <div class="wrap">
+      <div class="sec-head"><p class="kicker kicker-rule">The Rhythm</p><h2>One book. Six weeks. Repeat.</h2><p class="sec-sub">The cadence is the discipline. Every cycle runs the same arc: pick it up together, walk it out, and gather to close it before the next begins.</p></div>
+      <div class="rhythm-grid">
+        <div class="wk"><div class="n">WK 01</div><h4>Kickoff</h4><p>Book announced. Bearing set.</p></div>
+        <div class="wk"><div class="n">WK 02</div><h4>Read</h4><p>Dig in. Notes in the thread.</p></div>
+        <div class="wk"><div class="n">WK 03</div><h4>Check In</h4><p>Mid-book. Life on the table.</p></div>
+        <div class="wk"><div class="n">WK 04</div><h4>Read</h4><p>Push through the middle.</p></div>
+        <div class="wk"><div class="n">WK 05</div><h4>Finish</h4><p>Last pages. Land the plane.</p></div>
+        <div class="wk last"><div class="n">WK 06</div><h4>Gather</h4><p>Meet, close it out, reset.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE READ -->
+  <section class="section bone">
+    <div class="wrap read-grid">
+      <div>
+        <p class="kicker kicker-rule">What We Read</p>
+        <h2>Books that don't let you stay the same.</h2>
+        <p class="prose" style="margin-top:22px;">We choose books with weight, on faith, character, calling, and the long obedience of following Christ. No fluff, no hype cycle. If it won't sharpen a man, it doesn't make the list.</p>
+        <p class="prose" style="margin:0 0 24px;">Every six weeks the brotherhood votes on what's next, so the shelf stays yours.</p>
+        <a href="reading-list.html" class="btn btn-ghost btn-sm">See the reading list</a>
+      </div>
+      <div class="themes">
+        <div class="theme" style="background:linear-gradient(to top, rgba(22,19,13,.92) 4%, rgba(22,19,13,.32) 60%, rgba(22,19,13,.42)), url('img/faith-theology.jpg') center/cover;color:var(--bone);"><h4>Faith &amp;<br>Theology</h4></div>
+        <div class="theme" style="background:linear-gradient(to top, rgba(22,19,13,.92) 4%, rgba(22,19,13,.32) 60%, rgba(22,19,13,.42)), url('img/character-discipline.jpg') center/cover;color:var(--bone);"><h4>Character &amp;<br>Discipline</h4></div>
+        <div class="theme" style="background:linear-gradient(to top, rgba(22,19,13,.92) 4%, rgba(22,19,13,.32) 60%, rgba(22,19,13,.42)), url('img/calling-work.jpg') center/cover;color:var(--bone);"><h4>Calling &amp;<br>Work</h4></div>
+        <div class="theme" style="background:linear-gradient(to top, rgba(22,19,13,.92) 4%, rgba(22,19,13,.32) 60%, rgba(22,19,13,.42)), url('img/biography-courage.jpg') center/cover;color:var(--bone);"><h4>Biography &amp;<br>Courage</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="section bone2 center">
+    <div class="wrap" style="max-width:900px;margin:0 auto;">
+      <div class="display" style="font-size:80px;line-height:.6;color:var(--ember);">&ldquo;</div>
+      <p class="body" style="font-style:italic;font-size:clamp(22px,3vw,29px);line-height:1.45;color:#2a251c;margin:10px 0 28px;">I've been in men's groups before. This is the first one that actually changed how I think, and how I show up for my family.</p>
+      <div class="kicker" style="color:var(--muted-2);">A Crown &amp; Compass Member</div>
+    </div>
+  </section>
+
+  <!-- JOIN CTA -->
+  <section class="section center" style="padding-top:64px;background:linear-gradient(0deg, rgba(15,13,9,.92) 0%, rgba(15,13,9,.74) 55%, rgba(15,13,9,.82) 100%), url('img/img2.jpg') center/cover no-repeat;">
+    <div class="wrap" style="max-width:820px;margin:0 auto;">
+      <img src="assets/cc-white.png" alt="" style="height:104px;width:auto;margin-bottom:28px;filter:drop-shadow(0 8px 30px rgba(0,0,0,.55));" />
+      <h2 style="font-size:clamp(2.2rem,5vw,3.25rem);color:var(--bone);">Take up the book. Fix your bearing.</h2>
+      <p class="sec-sub" style="max-width:52ch;margin:18px auto 40px;color:var(--on-dark);">An online brotherhood, open to men worldwide. Leave your email and we'll send you the next cycle's book and how to join.</p>
+      <form class="join-form" onsubmit="return false;">
+        <input type="email" placeholder="you@example.com" aria-label="Email" />
+        <button class="btn btn-ember" type="submit">Join the Brotherhood</button>
+      </form>
+      <div class="kicker" style="margin-top:22px;color:rgba(241,235,220,.45);">No spam · Leave any time · Rom. 12:2</div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

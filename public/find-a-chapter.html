@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Find a Chapter · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:820px){.ch-grid{grid-template-columns:1fr;}}
+  .ch-grid .card{display:flex;flex-direction:column;}
+  .ch-grid .card .btn{margin-top:auto;align-self:flex-start;}
+  .ch-grid .card .meta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted-2);margin:14px 0 12px;}
+  .ch-grid .card .body{font-family:var(--body);font-size:15px;line-height:1.65;color:var(--muted);margin:0 0 24px;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+        <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn active" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html">Resources</a>
+          <a href="find-a-chapter.html" class="active">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="app-signin.html">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- PAGE HEAD -->
+  <section class="section ink" style="padding:84px 0 72px;">
+    <div class="wrap">
+      <p class="kicker kicker-rule">Find a Chapter</p>
+      <h1 style="font-size:clamp(2.6rem,5.5vw,3.9rem);">Find a chapter.<br>Or start one.</h1>
+      <p class="sec-sub" style="max-width:54ch;">Crown and Compass is young. Right now one chapter is meeting, with more forming as men step up to lead them. If there is not one near you yet, that is an opening, not a dead end.</p>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="section bone" style="padding:72px 0;">
+    <div class="wrap">
+      <p class="kicker kicker-rule">The Map</p>
+      <div class="imgph dark" data-label="Mapbox map of chapters" style="min-height:380px;margin-top:8px;"></div>
+      <p class="form-note" style="text-align:center;margin-top:16px;">On the live site this is an interactive Mapbox map. Here it is a placeholder.</p>
+    </div>
+  </section>
+
+  <!-- CHAPTERS -->
+  <section class="section bone2">
+    <div class="wrap">
+      <div class="sec-head"><p class="kicker kicker-rule">The Chapters</p><h2>One meeting. A few forming.</h2><p class="sec-sub">We will not pretend the map is full. It is not. Here is what is real today, and where you can step in.</p></div>
+
+      <div class="ch-grid">
+
+        <!-- Active chapter -->
+        <div class="card">
+          <span class="tag">Meeting now</span>
+          <h3 style="margin:16px 0 4px;">Saturday Chapter</h3>
+          <p class="meta">Saturdays · 7:00am · Online for now</p>
+          <p class="body">The first chapter. A handful of men reading the current book and closing every meeting with the Round: a plain, honest check-in. New men are welcome to sit in and listen before they say a word.</p>
+          <a href="join.html" class="btn btn-ember btn-sm">Request to join</a>
+        </div>
+
+        <!-- Forming: weeknight -->
+        <div class="card">
+          <span class="pill">Forming</span>
+          <h3 style="margin:16px 0 4px;">A weeknight chapter</h3>
+          <p class="meta">Day and time set by whoever starts it</p>
+          <p class="body">Some men cannot do Saturday mornings. If that is you, gather three or four others and pick a weeknight. We give you the guide and help you get going.</p>
+          <a href="start-a-chapter.html" class="btn btn-ghost btn-sm">Start this one</a>
+        </div>
+
+        <!-- Forming: your town -->
+        <div class="card">
+          <span class="pill">Forming</span>
+          <h3 style="margin:16px 0 4px;">Your town</h3>
+          <p class="meta">Wherever you live</p>
+          <p class="body">There is probably no chapter near you yet. Most places do not have one. That is not a gap to apologize for. It is an invitation to be the man who starts it where you live.</p>
+          <a href="start-a-chapter.html" class="btn btn-ghost btn-sm">Start this one</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- START A CHAPTER CTA -->
+  <section class="section ink center">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <p class="kicker" style="justify-content:center;display:flex;">No chapter near you?</p>
+      <h2>Start one.</h2>
+      <p class="sec-sub" style="max-width:46ch;margin:16px auto 32px;">You do not need to be an expert or a pastor. You need three or four men, the current book, and an hour a week. We hand you the rest.</p>
+      <a href="start-a-chapter.html" class="btn btn-ember">Start a Chapter</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
