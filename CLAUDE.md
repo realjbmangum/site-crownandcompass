@@ -173,3 +173,28 @@ For the build, export sized versions (a small header mark, a hero-size one) in a
   R2 at scale; the member app still gets its own repo.
 - Next: merge PR #4 → Cloudflare rebuilds `main` → new site live. Then member-app
   architecture + user stories.
+
+### July 12, 2026 — Remove the old newsletter subsystem (security + old brand)
+- **Two problems in the merged go-live:** (1) `/admin/newsletter` shipped as a
+  **publicly reachable, unauthenticated page** — only the *send* was secret-gated,
+  the composer itself loaded for anyone with the URL. Never acceptable. (2) The
+  newsletter **email + unsubscribe page were still on the OLD brand** (`#0f1117`,
+  EB Garamond / DM Sans, "The Walk. Long. Slow. Together.").
+- **Audited every page in `public/` and `src/` for old branding.** Result: the
+  **public site is clean** — all old-brand code was confined to the newsletter
+  subsystem in `src/`. (The only `public/` hits were false positives: a chart
+  color var `amber2` in the `app-admin` mockup, and a `.btn-amber` alias in
+  `proto.css` deliberately mapped to the *new* ember.)
+- **Removed the whole subsystem:** `src/pages/admin/newsletter.astro`,
+  `src/pages/api/newsletter/send.ts`, `src/pages/api/unsubscribe.ts`,
+  `src/lib/site.ts`, `src/lib/unsubscribe.ts` (self-contained; nothing else
+  imported them). **Kept** `src/pages/api/join.ts` + `src/lib/html.ts` (shared).
+  Only API route left is `/api/join`. Trimmed `.env.example` to just the two
+  SendGrid vars.
+- **The newsletter is NOT gone as a capability — it moves.** Per Brian: newsletters
+  get **drafted with Claude inside the member-app admin** (behind real auth), and
+  he already has the newsletter **design ready**. SendGrid stays as the send
+  vehicle only. We build that engine fresh during the app work; `ADMIN_SECRET` /
+  `SITE_URL` / `MAILING_ADDRESS` return then, not before.
+- Build verified: succeeds, `/admin/newsletter` gone from the SSR bundle, **0
+  old-brand markers** in `dist`. PR opened off `main`.
