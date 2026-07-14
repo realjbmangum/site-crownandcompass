@@ -67,7 +67,8 @@
         <p>Who in your life asks you the hard questions? And when was the last time you asked one?</p>
         <p class="signoff">Brian</p>
       </div>
-      <div class="share"><span>Share</span><a href="#">Copy link</a><a href="#">Email</a><a href="#">Text a brother</a></div>
+      <div class="share"><span>Share</span><a class="share-copy" role="button" tabindex="0" style="cursor:pointer;">Copy link</a><a class="share-email" href="mailto:">Share with a friend</a></div>
+      <script>(function(){function w(){document.querySelectorAll('.share-copy').forEach(function(el){var o=el.textContent;el.addEventListener('click',function(){navigator.clipboard.writeText(window.location.href).then(function(){el.textContent='Copied';setTimeout(function(){el.textContent=o;},1600);});});el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});});document.querySelectorAll('.share-email').forEach(function(el){el.href='mailto:?subject='+encodeURIComponent(document.title)+'&body='+encodeURIComponent('Thought you might want to read this. '+window.location.href);});}if(document.readyState!=='loading'){w();}else{document.addEventListener('DOMContentLoaded',w);}})();</script>
     </div>
   </section>
 

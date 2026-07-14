@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Tracker · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .backlink{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:24px;}
+  .backlink:hover{color:var(--ember);}
+  .print-actions{margin-top:30px;}
+  .print-note{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-top:14px;}
+
+  .wkline{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;}
+  .wkline .lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);}
+  .wkline .rule{flex:1;height:1px;background:var(--line);}
+
+  .tbl-scroll{overflow-x:auto;}
+  .tracker{width:100%;border-collapse:collapse;background:var(--bone);}
+  .tracker th,.tracker td{border:1px solid var(--line);}
+  .tracker thead th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);padding:12px 8px;text-align:center;vertical-align:middle;}
+  .tracker thead th.corner{text-align:left;padding-left:20px;}
+  .tracker td.area{padding:16px 20px;vertical-align:top;min-width:220px;}
+  .tracker td.area .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ember);}
+  .tracker td.area h3{font-size:1.12rem;margin:4px 0 3px;}
+  .tracker td.area p{font-family:var(--body);font-size:14px;line-height:1.45;color:var(--muted);margin:0;max-width:30ch;}
+  .tracker td.day{text-align:center;vertical-align:middle;padding:12px;}
+  .box{display:inline-block;width:24px;height:24px;border:1.5px solid var(--line-strong);background:#fbf7ec;}
+
+  .reflect{margin-top:22px;border:1px solid var(--line);background:var(--bone-2);padding:20px 24px;}
+  .reflect .lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:0 0 14px;}
+  .reflect .wline{height:1px;background:var(--line-strong);margin:22px 0;}
+
+  @media(max-width:560px){.tracker td.area{min-width:160px;}}
+
+  @media print{
+    @page{size:portrait;margin:13mm;}
+    .site-header,.site-footer,.print-actions,.backlink,.print-note{display:none !important;}
+    body{background:#fff;color:#000;font-size:11pt;}
+    .section{padding:0 !important;background:#fff !important;}
+    .section.bone2{padding-top:14px !important;}
+    .wrap{max-width:none;padding:0;}
+    .wrap.narrow{max-width:none;}
+    h1{font-size:26pt;}
+    .lead{font-size:12pt;color:#000;}
+    .tbl-scroll{overflow:visible;}
+    .tracker{background:#fff;}
+    .tracker th,.tracker td{border-color:#222 !important;}
+    .tracker thead th,.tracker td.area .p,.tracker td.area p{color:#000 !important;}
+    .box{border-color:#000 !important;background:#fff !important;}
+    .reflect{background:#fff !important;border-color:#222 !important;}
+    .reflect .wline{background:#000 !important;}
+    .wkline .rule{background:#000 !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn active" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html" class="active">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="https://app.thecrownandcompass.org">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HEAD -->
+  <section class="section bone" style="padding-bottom:40px;">
+    <div class="wrap narrow">
+      <a class="backlink" href="resources.html">&larr; Resources</a>
+      <p class="kicker kicker-rule">Printable · Daily Tracker</p>
+      <h1 style="font-size:clamp(2.2rem,5vw,3.2rem);">The Daily Tracker.</h1>
+      <p class="lead" style="max-width:60ch;margin-top:18px;">Four things, every day. The reading, the workout, the prayer, and one honest word to someone who matters. Each one is small. Together they hold a life on its bearing. Print this page, pin it where the morning will find you, and fill a box each day you show up. A week is short. See what a week can carry.</p>
+      <div class="print-actions">
+        <button onclick="window.print()" class="btn btn-ember">Print or save as PDF</button>
+        <p class="print-note">One page. Reuse it every week.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACKER -->
+  <section class="section bone2 tight" style="padding-top:20px;">
+    <div class="wrap">
+      <div class="wkline">
+        <span class="lab">Week of</span>
+        <span class="rule"></span>
+      </div>
+      <div class="tbl-scroll">
+        <table class="tracker">
+          <thead>
+            <tr>
+              <th class="corner">The four areas</th>
+              <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="area">
+                <span class="n">01</span>
+                <h3>The Reading</h3>
+                <p>A few pages of the book we are on. Underline one line worth keeping.</p>
+              </td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+            </tr>
+            <tr>
+              <td class="area">
+                <span class="n">02</span>
+                <h3>The Workout</h3>
+                <p>Move the body. A hard hour counts. A long walk counts too.</p>
+              </td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+            </tr>
+            <tr>
+              <td class="area">
+                <span class="n">03</span>
+                <h3>The Prayer</h3>
+                <p>Time with God. Five honest minutes is a start. Ten is better.</p>
+              </td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+            </tr>
+            <tr>
+              <td class="area">
+                <span class="n">04</span>
+                <h3>The Honest Word</h3>
+                <p>One true thing said out loud to someone who matters. A thank you, an apology, a hard question.</p>
+              </td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+              <td class="day"><span class="box"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reflect">
+        <p class="lab">The week in a sentence</p>
+        <div class="wline"></div>
+        <div class="wline"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

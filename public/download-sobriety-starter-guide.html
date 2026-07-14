@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sobriety Starter Guide · Crown and Compass</title>
+<meta name="description" content="The first four weeks of an alcohol-free life, one week at a time. What to expect, a bit of education, a daily tracker you can fill in, and where to get support. A printable Crown and Compass field guide." />
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  /* ---- guide chrome ---- */
+  .backlink{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:24px;}
+  .backlink:hover{color:var(--ember);}
+  .print-cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+  .print-cta .hint{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);}
+  .byline{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin:0 0 20px;}
+
+  /* ---- a safety / note callout ---- */
+  .callout{display:flex;gap:16px;align-items:flex-start;background:rgba(192,85,42,.06);border:1px solid rgba(192,85,42,.28);
+    padding:22px 24px;margin-top:30px;}
+  .callout .ck{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:0 0 10px;}
+  .callout p{font-family:var(--body);font-size:16px;line-height:1.65;color:var(--muted);margin:0;}
+  .callout p strong{color:var(--ink);}
+
+  /* ---- week block ---- */
+  .week{max-width:820px;}
+  .week .wk-index{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--ember);margin:0 0 12px;}
+  .week h2{margin:0 0 26px;}
+  .block{margin-top:34px;}
+  .block .bk{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:0 0 12px;}
+  .block p{font-family:var(--body);font-size:18px;line-height:1.72;color:var(--muted);margin:0 0 1rem;}
+  .block p:last-child{margin-bottom:0;}
+  .block p strong{color:var(--ink);}
+
+  /* ---- one honest practice (dark) ---- */
+  .practice{background:var(--ink);color:var(--bone);padding:28px 32px;margin-top:32px;}
+  .practice .bk{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:0 0 12px;}
+  .practice p{font-family:var(--body);font-size:19px;line-height:1.62;color:var(--bone);margin:0;}
+
+  /* ---- daily tracker ---- */
+  .tracker-wrap{margin-top:16px;overflow-x:auto;}
+  .tracker{width:100%;min-width:560px;border-collapse:collapse;}
+  .tracker th{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);
+    background:var(--bone-2);border:1px solid var(--line);padding:11px 8px;text-align:left;vertical-align:bottom;}
+  .tracker td{border:1px solid var(--line);padding:0;height:40px;}
+  .tracker td.day{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink);background:var(--bone-2);padding:0 12px;white-space:nowrap;}
+  .tracker .t-check{width:56px;text-align:center;}
+  .tracker .t-write{width:64px;}
+  .tracker .box{display:inline-block;width:16px;height:16px;border:1px solid var(--line-strong);vertical-align:middle;}
+  .tracker-note{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin:12px 0 0;}
+
+  /* ---- support list ---- */
+  .support{max-width:820px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .support .row{background:var(--bone);padding:24px 26px;}
+  .support .row .rk{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);margin:0 0 6px;}
+  .support .row h3{font-size:1.2rem;margin:0 0 8px;}
+  .support .row p{font-family:var(--body);font-size:16px;line-height:1.62;color:var(--muted);margin:0;}
+  .support .row a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(192,85,42,.45);}
+  .support .row.crisis{background:var(--charcoal);}
+  .support .row.crisis .rk{color:var(--ember);}
+  .support .row.crisis h3,.support .row.crisis p{color:var(--bone);}
+  .support .row.crisis a{color:var(--bone);text-decoration-color:rgba(241,235,220,.5);}
+
+  /* ---- print ---- */
+  @media print{
+    @page{margin:16mm 14mm;}
+    .no-print,.site-header,.site-footer,.backlink,.print-cta,.proto-banner{display:none !important;}
+    html,body{background:#fff !important;color:#000 !important;font-size:11.5pt;}
+    main{z-index:auto;}
+    .section{padding:0 0 10mm 0 !important;background:#fff !important;color:#000 !important;}
+    h1,h2,h3,.wk-index,.kicker,.block .bk,.practice .bk,.callout .ck,.support .row .rk,.byline{color:#000 !important;}
+    .block p,.practice p,.callout p,.support .row p,.sec-sub,.lead{color:#111 !important;}
+    /* each week and the support page start fresh */
+    .page-break{page-break-before:always;break-before:page;}
+    .week,.tracker-wrap,.practice,.callout,.support,.block{break-inside:avoid;}
+    /* keep dark blocks readable + cheap on ink */
+    .practice{background:#fff !important;color:#000 !important;border:1px solid #000;border-left:4px solid #000;}
+    .practice p{color:#000 !important;}
+    .support{border-color:#000;background:#000;}
+    .support .row,.support .row.crisis{background:#fff !important;}
+    .support .row.crisis h3,.support .row.crisis p{color:#000 !important;}
+    .support .row.crisis a{color:#000 !important;}
+    .callout{border-color:#000;background:#fff !important;}
+    .tracker th{background:#eee !important;color:#000 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .tracker td,.tracker th{border-color:#000 !important;}
+    .tracker td.day{background:#f3f3f3 !important;color:#000 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .tracker td{height:34px;}
+    .tracker .box{border-color:#000;}
+    a{color:#000 !important;}
+    .ink,.charcoal,.bone,.bone2{background:#fff !important;color:#000 !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn active" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html" class="active">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="https://app.thecrownandcompass.org">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- COVER -->
+  <section class="section bone" style="padding-bottom:56px;">
+    <div class="wrap">
+      <a class="backlink" href="resources.html">&larr; Resources</a>
+      <p class="kicker kicker-rule">Sobriety Starter Guide</p>
+      <h1 style="font-size:clamp(2.4rem,5.4vw,3.6rem);">The first four weeks.</h1>
+      <p class="byline">A Crown and Compass field guide</p>
+      <p class="sec-sub" style="max-width:60ch;">The first four weeks of an alcohol-free life, one week at a time. Each week tells you what is coming, teaches you one thing worth knowing, gives you a page to fill in with a pen, and leaves you with one honest thing to do. At the end is a short list of where to get real help.</p>
+      <div class="print-cta no-print">
+        <button class="btn btn-ember" type="button" onclick="window.print()">Print or save as PDF</button>
+        <span class="hint">Print it, put it where you will see it.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE YOU START -->
+  <section class="section bone2 tight">
+    <div class="wrap narrow">
+      <div class="block" style="margin-top:0;">
+        <p class="bk">Before you start</p>
+        <h2 style="margin:0 0 22px;">Read this first.</h2>
+        <p style="font-family:var(--body);font-size:19px;line-height:1.78;color:var(--muted);">This guide is short on purpose. In the first days of putting the drink down, your head is foggy and your patience is thin. You do not need a lecture. You need a map you can follow when your hands are shaking, it is five in the afternoon, and your mind starts building a case for just one.</p>
+        <p style="font-family:var(--body);font-size:19px;line-height:1.78;color:var(--muted);">So here is four weeks, one at a time. Keep this page somewhere you will see it every day. The coffee maker. The bathroom mirror. The dash of your truck.</p>
+        <p style="font-family:var(--body);font-size:19px;line-height:1.78;color:var(--muted);">You do not have to fix your whole life this month. You have to get through today without numbing, and then do the same tomorrow. Twenty-eight days. That is the whole ask right now.</p>
+      </div>
+
+      <div class="callout">
+        <div>
+          <p class="ck">A word about your body</p>
+          <p>If you have been drinking heavily every day, stopping all at once can be dangerous, and for some men it lands them in the hospital. Bad shaking, a racing heart, sweating, confusion, or a seizure are signs your body needs medical help to come off alcohol safely. <strong>Talk to a doctor before you start</strong>, or call the SAMHSA helpline at 1-800-662-4357. There is real courage in doing this the safe way. Getting sober with a doctor's help is still getting sober.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEK 1 -->
+  <section class="section bone tight page-break">
+    <div class="wrap narrow week">
+      <p class="wk-index">Week One &middot; Days 1 to 7</p>
+      <h2>The Fog</h2>
+
+      <div class="block">
+        <p class="bk">What to expect</p>
+        <p>The first week is mostly physical. Your sleep will be rough. You may get headaches, sweats, a short fuse, and a stomach that cannot decide what it wants. The craving will come hardest at the hour you always used to drink. For a lot of men that is the drive home, or the moment the house finally goes quiet. Your body is clearing out something it got used to leaning on. This part passes. Most men feel the worst of it ease by the end of the week.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">A bit of education</p>
+        <p>Here is the thing most men miss. The drink was not really the problem. It was the solution. A bad one, but it worked. It shut up the pressure, the shame, and the noise you did not want to feel. Alcohol was the mute button.</p>
+        <p>When you put it down, the volume comes back. That is your life asking for your attention again. The whole point of these first weeks is to stop sedating and start facing what the drink was covering. You cannot heal what you keep numbing.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">Daily tracker</p>
+        <div class="tracker-wrap">
+          <table class="tracker">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th class="t-check">Sober</th>
+                <th class="t-write">Slept</th>
+                <th class="t-write">Water</th>
+                <th class="t-check">Moved</th>
+                <th class="t-write">Craving</th>
+                <th>One honest word to someone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="day">Day 1</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 2</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 3</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 4</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 5</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 6</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 7</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tracker-note">Sober: check the box. Slept: hours. Water: glasses. Craving: write L, M, or H.</p>
+      </div>
+
+      <div class="practice">
+        <p class="bk">One honest practice</p>
+        <p>Tell one person. Not the internet. One man, out loud: I am not drinking for a while. Saying it makes it real, and it puts a second set of eyes on you. You do not owe him the whole story. You just let one person in.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEK 2 -->
+  <section class="section bone2 tight page-break">
+    <div class="wrap narrow week">
+      <p class="wk-index">Week Two &middot; Days 8 to 14</p>
+      <h2>Too Much Time</h2>
+
+      <div class="block">
+        <p class="bk">What to expect</p>
+        <p>The shakes and the headaches fade, and a stranger shows up: boredom. The evenings feel long now. You will feel like you have too much time on your hands, and a quiet voice will start telling you that you were more fun before, more relaxed, easier to be around. Hear this clearly. That is the withdrawal talking, and it is the last argument of a habit that is losing its grip.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">A bit of education</p>
+        <p>You did not lose all those years to alcohol. You spent them hiding under it, telling yourself you were too busy to change. Now the fog is lifting and the truth lands hard: you always had the time. You were just spending it on staying numb.</p>
+        <p>Taking the drink out leaves a hole. Leave that hole empty and it aches, and the old habit knows the way back in. So you fill it with something that builds you instead of buries you. A walk. A book you actually read. That project in the garage that has been mocking you for a year. The days start moving again when you start using them.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">Daily tracker</p>
+        <div class="tracker-wrap">
+          <table class="tracker">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th class="t-check">Sober</th>
+                <th class="t-write">Slept</th>
+                <th class="t-write">Water</th>
+                <th class="t-check">Moved</th>
+                <th class="t-write">Craving</th>
+                <th>One thing I made or did instead</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="day">Day 8</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 9</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 10</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 11</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 12</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 13</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 14</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tracker-note">Sober: check the box. Slept: hours. Water: glasses. Craving: write L, M, or H.</p>
+      </div>
+
+      <div class="practice">
+        <p class="bk">One honest practice</p>
+        <p>Make a five o'clock plan. Pick the hour the craving hits hardest and decide, right now, what you will do instead. Lace up your shoes. Call a friend. Get in the shower. Leave the house. Have the plan ready before the craving comes, because it is hard to think straight once it is already here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEK 3 -->
+  <section class="section bone tight page-break">
+    <div class="wrap narrow week">
+      <p class="wk-index">Week Three &middot; Days 15 to 21</p>
+      <h2>The Thaw</h2>
+
+      <div class="block">
+        <p class="bk">What to expect</p>
+        <p>Around now the feelings come back online, and it can catch a man off guard. Grief you buried, anger you swallowed, shame you drank at, all of it can surface, sometimes out of nowhere. You might be more emotional than you have been in years. That is the thaw. Frozen ground is cold and messy before it turns green. Your energy and your thinking start to clear this week too. Both of those are true at the same time.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">A bit of education</p>
+        <p>When the drink is gone, you need something solid to stand on. Four beams hold up the rebuild.</p>
+        <p><strong>Body.</strong> Move, drink water, sleep, eat like you plan to be here in twenty years. <strong>Being.</strong> Your inner life. Prayer, silence, the words you read and the ones you tell yourself. <strong>Balance.</strong> The people at home, and the conversations you have been too checked out to have. <strong>Business.</strong> The work you are building, and why.</p>
+        <p>You do not have to master all four this week. You just keep an eye on each one, because a man who only lifts weights while his marriage goes quiet is still off balance.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">Daily tracker</p>
+        <div class="tracker-wrap">
+          <table class="tracker">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th class="t-check">Sober</th>
+                <th class="t-check">Body</th>
+                <th class="t-check">Being</th>
+                <th class="t-check">Balance</th>
+                <th class="t-check">Business</th>
+                <th>One honest word</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="day">Day 15</td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td></td></tr>
+              <tr><td class="day">Day 16</td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td></td></tr>
+              <tr><td class="day">Day 17</td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td></td></tr>
+              <tr><td class="day">Day 18</td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td></td></tr>
+              <tr><td class="day">Day 19</td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td></td></tr>
+              <tr><td class="day">Day 20</td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td></td></tr>
+              <tr><td class="day">Day 21</td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td class="t-check"><span class="box"></span></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tracker-note">Check a pillar when you fed it that day. The point is to keep an eye on all four, not to score perfect.</p>
+      </div>
+
+      <div class="practice">
+        <p class="bk">One honest practice</p>
+        <p>Sit in silence for five minutes. No phone, no screen, no music. Let one thing you have been avoiding come to the surface, and instead of reaching for something to push it back down, write it down. You do not have to solve it today. You just stop running from it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEK 4 -->
+  <section class="section bone2 tight page-break">
+    <div class="wrap narrow week">
+      <p class="wk-index">Week Four &middot; Days 22 to 28</p>
+      <h2>The Turn</h2>
+
+      <div class="block">
+        <p class="bk">What to expect</p>
+        <p>By the fourth week the craving is quieter. It is still there, but it is no longer running the show. You will have whole stretches where you forget to think about it. Guard those. The new pattern is real now and still young, and one hard day can pull you back toward the old road. This is also the week hope shows up. You have done a hard thing for four weeks straight. Look back at those filled-in pages. That is proof, in your own handwriting, that you can.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">A bit of education</p>
+        <p>Willpower is a tank, and it runs dry. Every man who tries to white-knuckle sobriety on grit alone eventually hits empty. What lasts is different. It is building a life you would rather not numb, and it is other men.</p>
+        <p>You were built to walk this with a few good men, the kind who will ask you the honest question and sit with you when it is heavy. That is what the brotherhood is for. The drink kept you behind glass, away from your wife, your kids, your friends. Sobriety is you stepping back out from behind it.</p>
+      </div>
+
+      <div class="block">
+        <p class="bk">Daily tracker</p>
+        <div class="tracker-wrap">
+          <table class="tracker">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th class="t-check">Sober</th>
+                <th class="t-write">Slept</th>
+                <th class="t-write">Water</th>
+                <th class="t-check">Moved</th>
+                <th class="t-write">Craving</th>
+                <th>Who I checked in with</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="day">Day 22</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 23</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 24</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 25</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 26</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 27</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+              <tr><td class="day">Day 28</td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td class="t-write"></td><td class="t-check"><span class="box"></span></td><td class="t-write"></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tracker-note">Sober: check the box. Slept: hours. Water: glasses. Craving: write L, M, or H.</p>
+      </div>
+
+      <div class="practice">
+        <p class="bk">One honest practice</p>
+        <p>Ask one man to walk with you. Tell him where you are and ask him to check in on you. If you do not have a man like that yet, this is the week to find him. Find a chapter of the brotherhood near you, or start one, or sign in to the app and meet the men already walking this same road. It is time to let other men in.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE TO GET SUPPORT -->
+  <section class="section bone tight page-break">
+    <div class="wrap narrow">
+      <div class="sec-head" style="margin-bottom:28px;">
+        <p class="kicker kicker-rule">Where to get support</p>
+        <h2>Good places to reach for help.</h2>
+        <p class="sec-sub" style="max-width:56ch;">A guide and a pen will carry you only so far. When you need real people and a real program, here is where to go. Every one of these is worth your time, and most of them are free.</p>
+      </div>
+
+      <div class="support">
+        <div class="row">
+          <p class="rk">Free meetings, everywhere</p>
+          <h3>Alcoholics Anonymous (AA)</h3>
+          <p>Free meetings in nearly every town, in person and online. Generations of men have walked out of a drinking life through those rooms. Find a meeting near you at <a href="https://www.aa.org" target="_blank" rel="noopener">aa.org</a>.</p>
+        </div>
+        <div class="row">
+          <p class="rk">Practical and science-based</p>
+          <h3>SMART Recovery</h3>
+          <p>A practical approach built on tools and self-direction rather than a higher power. A good fit if the AA model is not for you. Meetings and worksheets at <a href="https://www.smartrecovery.org" target="_blank" rel="noopener">smartrecovery.org</a>.</p>
+        </div>
+        <div class="row">
+          <p class="rk">Faith and a group</p>
+          <h3>Celebrate Recovery</h3>
+          <p>A Christ-centered recovery program run through local churches. Faith, a group of people who get it, and a clear path to walk. Find a group at <a href="https://www.celebraterecovery.com" target="_blank" rel="noopener">celebraterecovery.com</a>.</p>
+        </div>
+        <div class="row">
+          <p class="rk">One hour that is only yours</p>
+          <h3>A counselor</h3>
+          <p>A good counselor gives you one hour a week that is only about you. If money is tight, ask about sliding-scale fees, or find a counselor through your church. We are building a directory of Christian counselors for men. Watch the <a href="resources.html">Resources</a> page for it.</p>
+        </div>
+        <div class="row">
+          <p class="rk">The brotherhood</p>
+          <h3>Crown and Compass</h3>
+          <p>Men walking this same road, together. The <a href="directory.html">Recovery Directory</a> gathers the best sobriety apps, books, and tools we could find. <a href="find-a-chapter.html">Find a chapter</a> of men near you, or <a href="start-a-chapter.html">start one</a>. And the <a href="https://app.thecrownandcompass.org" target="_blank" rel="noopener">member app</a> has trackers and men who will check in on you.</p>
+        </div>
+        <div class="row crisis">
+          <p class="rk">If today is dark</p>
+          <h3>In a crisis, reach out now</h3>
+          <p>If you are thinking about hurting yourself, or you are in danger, get help right now. Call or text <strong>988</strong> for the Suicide and Crisis Lifeline, any hour of any day. For help finding treatment, call SAMHSA at <strong>1-800-662-4357</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="section ink center">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <h2>Day one is the hardest one to start.</h2>
+      <p class="sec-sub" style="max-width:48ch;margin:18px auto 30px;">You do not have to feel ready. You do not have to feel strong. You get through today without numbing, and let tomorrow be its own day. Twenty-eight of them, and you will be a different man than the one who picked up this page. We will walk it with you.</p>
+      <a href="find-a-chapter.html" class="btn btn-ember">Find a Chapter</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Six-Week Rhythm · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .backlink{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:24px;}
+  .backlink:hover{color:var(--ember);}
+  .print-actions{margin-top:30px;}
+  .print-note{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-top:14px;}
+
+  .timeline{position:relative;margin:8px 0 0;padding-left:4px;}
+  .timeline::before{content:"";position:absolute;left:23px;top:14px;bottom:26px;width:2px;background:var(--ember);}
+  .beat{position:relative;padding-left:74px;padding-bottom:34px;}
+  .beat:last-child{padding-bottom:0;}
+  .beat .node{position:absolute;left:0;top:0;width:48px;height:48px;background:var(--ember);color:var(--bone);border-radius:0;
+    display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:20px;}
+  .beat .wk{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);margin:2px 0 4px;}
+  .beat h3{font-size:1.45rem;margin:0 0 8px;}
+  .beat p{font-family:var(--body);font-size:16.5px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch;}
+
+  .loop{display:flex;align-items:center;gap:14px;margin-top:14px;padding-left:74px;}
+  .loop .dot{position:absolute;left:9px;width:30px;height:30px;border:2px solid var(--ember);border-radius:0;transform:rotate(45deg);}
+  .loop p{font-family:var(--body);font-size:16.5px;line-height:1.55;color:var(--ink);margin:0;font-style:italic;}
+
+  .legend{margin-top:26px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:26px;flex-wrap:wrap;}
+  .legend span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);}
+  .legend b{color:var(--ember);font-weight:600;}
+
+  @media(max-width:560px){
+    .timeline::before{left:19px;}
+    .beat{padding-left:60px;}
+    .beat .node{width:40px;height:40px;font-size:17px;}
+    .loop{padding-left:60px;}
+  }
+
+  @media print{
+    @page{size:portrait;margin:13mm;}
+    .site-header,.site-footer,.print-actions,.backlink,.print-note{display:none !important;}
+    body{background:#fff;color:#000;font-size:11pt;}
+    .section{padding:0 !important;background:#fff !important;}
+    .section.bone2{padding-top:14px !important;}
+    .wrap{max-width:none;padding:0;}
+    .wrap.narrow{max-width:none;}
+    h1{font-size:26pt;}
+    .lead{font-size:12pt;color:#000;}
+    .timeline::before{background:#000 !important;}
+    .beat{break-inside:avoid;}
+    .beat .node{background:#fff !important;color:#000 !important;border:2px solid #000;}
+    .beat .wk,.beat p{color:#000 !important;}
+    .loop .dot{border-color:#000 !important;}
+    .loop p{color:#000 !important;}
+    .legend{border-color:#222 !important;}
+    .legend span,.legend b{color:#000 !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn active" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html" class="active">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="https://app.thecrownandcompass.org">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HEAD -->
+  <section class="section bone" style="padding-bottom:40px;">
+    <div class="wrap narrow">
+      <a class="backlink" href="resources.html">&larr; Resources</a>
+      <p class="kicker kicker-rule">Printable · The Six-Week Rhythm</p>
+      <h1 style="font-size:clamp(2.2rem,5vw,3.2rem);">The Six-Week Rhythm.</h1>
+      <p class="lead" style="max-width:62ch;margin-top:18px;">One book every six weeks. That is the whole cadence. Long enough to read something worth reading, short enough that a man never drifts. Five beats carry each cycle, from the night you open the book to the night the brotherhood gathers to close it. Print this, pin it up, and you will always know where you stand.</p>
+      <div class="print-actions">
+        <button onclick="window.print()" class="btn btn-ember">Print or save as PDF</button>
+        <p class="print-note">One page. The shape of every cycle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section bone2 tight" style="padding-top:20px;">
+    <div class="wrap narrow">
+      <div class="timeline">
+
+        <div class="beat">
+          <div class="node">1</div>
+          <p class="wk">Week 1 · Kickoff</p>
+          <h3>Kickoff</h3>
+          <p>The book is named and everyone gets a copy. The six-week guide goes out. You crack the cover and read the opening pages. The clock starts, and the whole brotherhood starts it together.</p>
+        </div>
+
+        <div class="beat">
+          <div class="node">2</div>
+          <p class="wk">Weeks 1 through 5 · The main work</p>
+          <h3>Read</h3>
+          <p>A section a week, led by the reading guide. A short reading, some Scripture, a few questions, and one thing to try. Read at the pace of your own life. A few pages a day beats a rushed weekend.</p>
+        </div>
+
+        <div class="beat">
+          <div class="node">3</div>
+          <p class="wk">Week 3 · Halfway</p>
+          <h3>Check in</h3>
+          <p>Halfway through, the brothers check in. Where are you in the book, what is landing, where are you stuck. A text thread or a short call is enough. The point is that no one reads alone.</p>
+        </div>
+
+        <div class="beat">
+          <div class="node">4</div>
+          <p class="wk">Weeks 5 and 6 · The last pages</p>
+          <h3>Finish</h3>
+          <p>Read to the end and sit with the one practice the book asks of you. Bring your honest answer, not a book report. Notice what the six weeks changed, even if the change is small.</p>
+        </div>
+
+        <div class="beat">
+          <div class="node">5</div>
+          <p class="wk">Week 6 · Together</p>
+          <h3>Gather</h3>
+          <p>The brotherhood meets. You talk it through, you name what shifted, and you choose the next book. Then the rhythm begins again, one more book, one more six weeks.</p>
+        </div>
+
+        <div class="loop">
+          <span class="dot" aria-hidden="true"></span>
+          <p>Six weeks. One book. Then again.</p>
+        </div>
+
+      </div>
+
+      <div class="legend">
+        <span><b>Kickoff</b> open it</span>
+        <span><b>Read</b> a section a week</span>
+        <span><b>Check in</b> at the halfway mark</span>
+        <span><b>Finish</b> the last pages</span>
+        <span><b>Gather</b> and choose the next</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

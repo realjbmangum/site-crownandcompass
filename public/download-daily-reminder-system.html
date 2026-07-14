@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Reminder System · Crown and Compass</title>
+<link rel="stylesheet" href="proto.css?v=8" />
+<style>
+  .backlink{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:24px;}
+  .backlink:hover{color:var(--ember);}
+  .print-actions{margin-top:30px;}
+  .print-note{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-top:14px;}
+
+  .block{margin-top:20px;}
+  .setup{background:var(--bone-2);border:1px solid var(--line);padding:28px 32px;}
+  .setup .lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:0 0 6px;}
+  .setup ol{margin:16px 0 0;padding-left:22px;}
+  .setup li{font-family:var(--body);font-size:17px;line-height:1.6;color:var(--muted);margin-bottom:13px;}
+  .setup li:last-child{margin-bottom:0;}
+  .setup li strong{color:var(--ink);}
+
+  .anchor{border:1px solid var(--line);background:var(--bone);padding:26px 30px;margin-top:16px;}
+  .anchor .top{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:16px;}
+  .anchor .ak{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);}
+  .anchor h3{font-size:1.4rem;margin:6px 0 0;}
+  .anchor .time{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 12px;white-space:nowrap;}
+  .anchor .purpose{font-family:var(--body);font-size:17px;line-height:1.6;color:var(--muted);margin:0 0 18px;max-width:64ch;}
+  .anchor .how{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin:0 0 12px;}
+
+  .verses{list-style:none;margin:0;padding:0;}
+  .verses li{font-family:var(--body);font-size:16px;line-height:1.55;color:var(--ink);padding:11px 0;border-top:1px solid var(--line-2);}
+  .verses li:first-child{border-top:0;}
+  .verses .ref{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:3px;}
+
+  .prompts{margin:0;padding-left:22px;}
+  .prompts li{font-family:var(--body);font-size:17px;line-height:1.55;color:var(--muted);margin-bottom:11px;}
+  .prompts li:last-child{margin-bottom:0;}
+
+  .closer{background:var(--charcoal);color:var(--bone);padding:14px 18px;margin-top:16px;font-family:var(--body);font-size:16px;line-height:1.55;}
+  .closer .ref{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:5px;}
+
+  @media print{
+    @page{size:portrait;margin:13mm;}
+    .site-header,.site-footer,.print-actions,.backlink,.print-note{display:none !important;}
+    body{background:#fff;color:#000;font-size:10.5pt;}
+    .section{padding:0 !important;background:#fff !important;}
+    .section.bone2{padding-top:12px !important;}
+    .wrap{max-width:none;padding:0;}
+    .wrap.narrow{max-width:none;}
+    h1{font-size:24pt;}
+    .lead{font-size:11.5pt;color:#000;}
+    .setup,.anchor{background:#fff !important;border-color:#222 !important;break-inside:avoid;}
+    .anchor .top,.verses li,.verses li:first-child{border-color:#999 !important;}
+    .anchor .time{border-color:#222 !important;color:#000 !important;}
+    .setup li,.setup li strong,.anchor .purpose,.prompts li,.verses li{color:#000 !important;}
+    .closer{background:#fff !important;color:#000 !important;border:1px solid #222;break-inside:avoid;}
+    .closer .ref,.anchor .ak,.setup .lab,.verses .ref{color:#000 !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <nav class="nav">
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="reading-list.html">Reading</a>
+      <a href="blog.html">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn active" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="resources.html" class="active">Resources</a>
+          <a href="find-a-chapter.html">Find a Chapter</a>
+          <a href="start-a-chapter.html">Start a Chapter</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+      <a class="signin" href="https://app.thecrownandcompass.org">Sign in</a>
+      <a class="btn-nav" href="join.html">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HEAD -->
+  <section class="section bone" style="padding-bottom:40px;">
+    <div class="wrap narrow">
+      <a class="backlink" href="resources.html">&larr; Resources</a>
+      <p class="kicker kicker-rule">Guide · Daily Reminder System</p>
+      <h1 style="font-size:clamp(2.2rem,5vw,3.2rem);">The Daily Reminder System.</h1>
+      <p class="lead" style="max-width:62ch;margin-top:18px;">A phone can pull a man a hundred directions before breakfast. It can also call him back. Three reminders, set one time, and the day has an anchor at each end and one in the middle. A verse when you wake. A short check when the noise is loudest. A quiet look back before you sleep. Here is how to set them, and what to put inside them.</p>
+      <div class="print-actions">
+        <button onclick="window.print()" class="btn btn-ember">Print or save as PDF</button>
+        <p class="print-note">Set it once. Let it run.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <section class="section bone2 tight" style="padding-top:16px;">
+    <div class="wrap narrow">
+
+      <div class="block">
+        <div class="setup">
+          <p class="lab">Set it up · about five minutes</p>
+          <ol>
+            <li>Open the reminder or alarm app already on your phone. On an iPhone that is <strong>Clock</strong> or <strong>Reminders</strong>. On Android it is <strong>Clock</strong> or <strong>Google Tasks</strong>. Any of them will do.</li>
+            <li>Make <strong>three</strong> reminders and set each one to <strong>repeat every day</strong>.</li>
+            <li>Name each reminder for one of the three anchors below. Paste the words into the note or the label so they show up on the screen when it goes off. You are reading them, not just hearing a chime.</li>
+            <li>Set the times to <strong>near waking</strong>, <strong>near midday</strong>, and <strong>near bed</strong>. The times below are a starting point. Move them to fit your life.</li>
+            <li>Let them run for <strong>two weeks</strong> without skipping. After two weeks they stop being reminders and start being rhythm.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ANCHOR ONE -->
+      <div class="anchor">
+        <div class="top">
+          <div>
+            <p class="ak">Anchor One · Morning</p>
+            <h3>A verse to point the day</h3>
+          </div>
+          <span class="time">Near 6:00 AM</span>
+        </div>
+        <p class="purpose">Point the day before the world does. Read one line of Scripture before you read the news or the group chat. Pick one verse and keep it for a season, or set seven and let one land each day of the week.</p>
+        <p class="how">Paste one, or rotate the week</p>
+        <ul class="verses">
+          <li><span class="ref">Lamentations 3:22-23</span>His mercies never come to an end. They are new every morning. Great is your faithfulness.</li>
+          <li><span class="ref">Psalm 143:8</span>Let me hear in the morning of your steadfast love, for in you I trust. Make me know the way I should go.</li>
+          <li><span class="ref">Proverbs 3:5-6</span>Trust in the Lord with all your heart, and do not lean on your own understanding. He will make straight your paths.</li>
+          <li><span class="ref">Joshua 1:9</span>Be strong and courageous. Do not be frightened, for the Lord your God is with you wherever you go.</li>
+          <li><span class="ref">Psalm 90:12</span>Teach us to number our days that we may get a heart of wisdom.</li>
+          <li><span class="ref">Micah 6:8</span>Do justice, love kindness, and walk humbly with your God.</li>
+          <li><span class="ref">Psalm 5:3</span>In the morning you hear my voice. In the morning I lay my requests before you and wait.</li>
+        </ul>
+      </div>
+
+      <!-- ANCHOR TWO -->
+      <div class="anchor">
+        <div class="top">
+          <div>
+            <p class="ak">Anchor Two · Midday</p>
+            <h3>A check when the day is loud</h3>
+          </div>
+          <span class="time">Near 12:00 PM</span>
+        </div>
+        <p class="purpose">By noon the day has its own momentum. This is a hand on the shoulder that asks a plain question and waits for an honest answer. Ten seconds is enough. Rotate through these, or sit with one all week.</p>
+        <p class="how">Ask one, honestly</p>
+        <ol class="prompts">
+          <li>Where am I spending myself right now, and is it worth it?</li>
+          <li>Am I present with the people in front of me, or somewhere else?</li>
+          <li>What is one thing I can set right this afternoon?</li>
+          <li>Have I moved my body or eaten anything real today?</li>
+          <li>What am I carrying that I should hand to God before I carry it further?</li>
+        </ol>
+        <div class="closer">
+          <span class="ref">1 Corinthians 16:13-14</span>
+          Be watchful, stand firm in the faith, act like men, be strong. Let all that you do be done in love.
+        </div>
+      </div>
+
+      <!-- ANCHOR THREE -->
+      <div class="anchor">
+        <div class="top">
+          <div>
+            <p class="ak">Anchor Three · Evening</p>
+            <h3>A look back before sleep</h3>
+          </div>
+          <span class="time">Near 9:00 PM</span>
+        </div>
+        <p class="purpose">Before the day closes, walk back through it. Not to keep score, but to see where God was and where you drifted. Three questions, answered in your head or in a notebook by the bed.</p>
+        <p class="how">Answer these three</p>
+        <ol class="prompts">
+          <li>Where did I see God today?</li>
+          <li>Where did I miss it, and who do I need to make right with?</li>
+          <li>What am I grateful for from today?</li>
+        </ol>
+        <p class="purpose" style="margin:16px 0 0;">Then name one honest word you owe someone, and plan to say it tomorrow.</p>
+        <div class="closer">
+          <span class="ref">Psalm 4:8</span>
+          In peace I will both lie down and sleep, for you alone, O Lord, make me dwell in safety.
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="about.html">About</a><a href="how-it-works.html">How It Works</a><a href="reading-list.html">Reading</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a><a href="find-a-chapter.html">Find a Chapter</a><a href="start-a-chapter.html">Start a Chapter</a><a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
