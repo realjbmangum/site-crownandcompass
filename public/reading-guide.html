@@ -93,11 +93,11 @@
     <div class="wrap">
       <a class="backlink" href="reading-list.html">&larr; Reading</a>
       <div class="gh">
-        <div class="cover has-cover" style="background-image:url('img/covers/disciplines-of-a-godly-man.jpg');"><div class="ct">Disciplines of a Godly Man</div><div class="ca">R. Kent Hughes</div></div>
+        <div class="cover has-cover" style="background-image:url('img/covers/disciplines-of-a-godly-man.jpg');"><div class="ct"><span data-current-book-title>Disciplines of a Godly Man</span></div><div class="ca"><span data-current-book-author>R. Kent Hughes</span></div></div>
         <div>
           <p class="kicker">Reading Guide</p>
-          <h1 style="font-size:clamp(1.9rem,4vw,2.8rem);">Disciplines of a Godly Man</h1>
-          <p class="by">R. Kent Hughes</p>
+          <h1 style="font-size:clamp(1.9rem,4vw,2.8rem);"><span data-current-book-title>Disciplines of a Godly Man</span></h1>
+          <p class="by"><span data-current-book-author>R. Kent Hughes</span></p>
           <div class="meta">
             <span class="pill">A six-week guide</span>
             <span class="tag">Body</span><span class="tag">Being</span><span class="tag">Balance</span>
@@ -424,6 +424,9 @@
       });
     });
   })();
+</script>
+<script>
+(function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){if(!d||!d.title)return;var t=document.querySelectorAll('[data-current-book-title]');for(var i=0;i<t.length;i++)t[i].textContent=d.title;if(d.author){var a=document.querySelectorAll('[data-current-book-author]');for(var j=0;j<a.length;j++)a[j].textContent=d.author;}}).catch(function(){});}catch(e){}})();
 </script>
 </body>
 </html>

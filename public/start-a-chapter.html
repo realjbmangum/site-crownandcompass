@@ -101,7 +101,7 @@
           <h3 style="font-size:24px;margin-bottom:6px;">Start a chapter</h3>
           <p class="muted" style="font-family:var(--body);font-size:14px;margin-bottom:22px;">Tell us a little and Brian will reach out to help you get the first meeting on the calendar.</p>
 
-          <form onsubmit="return false;">
+          <form id="chapterForm">
             <div class="field">
               <label for="name">Name</label>
               <input type="text" id="name" name="name" placeholder="Your name" />
@@ -121,6 +121,7 @@
             <button class="btn btn-ember" type="submit" style="width:100%;">Start a chapter</button>
             <p class="form-note" style="text-align:center;">Brian reads every message personally. You will hear back from him, not an autoresponder.</p>
           </form>
+          <p id="chapterMsg" style="display:none;text-align:center;margin-top:16px;font-family:var(--body);font-size:15px;line-height:1.5;"></p>
         </div>
       </div>
 
@@ -139,5 +140,49 @@
     </div>
   </div>
 </footer>
+<script>
+(function () {
+  var f = document.getElementById('chapterForm');
+  if (!f) return;
+  var msg = document.getElementById('chapterMsg');
+  var btn = f.querySelector('button[type="submit"]');
+  function show(text, isError) {
+    msg.textContent = text;
+    msg.style.display = 'block';
+    msg.style.color = isError ? 'var(--ember-dark)' : 'var(--ink)';
+  }
+  f.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var name = f.querySelector('#name').value.trim();
+    var email = f.querySelector('#email').value.trim();
+    var city = f.querySelector('#city').value.trim();
+    var men = f.querySelector('#men').value.trim();
+    if (!name || !email) { show('Please add your name and email so Brian can reach you.', true); return; }
+    var message = (city ? 'City: ' + city + '.' : '') + (city && men ? ' ' : '') + men;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    try {
+      var r = await fetch('/api/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, how_you_heard: 'Start a chapter', message: message })
+      });
+      var d = await r.json().catch(function () { return {}; });
+      if (r.ok) {
+        f.style.display = 'none';
+        show('Good. Brian will reach out to help you get the first meeting on the calendar.', false);
+      } else {
+        show(d.error || 'Something went wrong. Please try again.', true);
+        btn.disabled = false;
+        btn.textContent = 'Start a chapter';
+      }
+    } catch (err) {
+      show('Network trouble. Please try again in a moment.', true);
+      btn.disabled = false;
+      btn.textContent = 'Start a chapter';
+    }
+  });
+})();
+</script>
 </body>
 </html>

@@ -102,7 +102,7 @@
         <details>
           <summary>What are we reading right now?<span class="mark" aria-hidden="true"></span></summary>
           <div class="ans">
-            <p>Right now we are reading <em>Disciplines of a Godly Man</em> by R. Kent Hughes. We read one book every six weeks, a section each week, and talk about it together.</p>
+            <p>Right now we are reading <em><span data-current-book-title>Disciplines of a Godly Man</span></em> by <span data-current-book-author>R. Kent Hughes</span>. We read one book every six weeks, a section each week, and talk about it together.</p>
             <p>The books rotate through faith, character, calling, and courage over time. You can see the full list on the <a href="reading-list.html">Reading List</a>.</p>
           </div>
         </details>
@@ -158,5 +158,8 @@
     </div>
   </div>
 </footer>
+<script>
+(function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){if(!d||!d.title)return;var t=document.querySelectorAll('[data-current-book-title]');for(var i=0;i<t.length;i++)t[i].textContent=d.title;if(d.author){var a=document.querySelectorAll('[data-current-book-author]');for(var j=0;j<a.length;j++)a[j].textContent=d.author;}}).catch(function(){});}catch(e){}})();
+</script>
 </body>
 </html>

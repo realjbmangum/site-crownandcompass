@@ -142,7 +142,7 @@
         <div class="num">04</div>
         <h2>The reading</h2>
         <p class="prose" style="margin-top:14px;">One book every six weeks. Every chapter reads the same book at the same pace, a chapter or a section each week. The book is the common ground that makes honest conversation possible. Without it, men default to small talk. With it, they have a shared text to push against.</p>
-        <p class="prose">A man reads before the Gather. The Guide prepares questions from the reading. The conversation stays close to the book, because that is where the traction is. Right now we are reading <em>Disciplines of a Godly Man</em> by R. Kent Hughes.</p>
+        <p class="prose">A man reads before the Gather. The Guide prepares questions from the reading. The conversation stays close to the book, because that is where the traction is. Right now we are reading <em><span data-current-book-title>Disciplines of a Godly Man</span></em> by <span data-current-book-author>R. Kent Hughes</span>.</p>
         <a href="reading-list.html" class="btn btn-ghost btn-sm" style="margin-top:6px;">See the reading list</a>
       </div>
     </div>
@@ -190,5 +190,8 @@
     </div>
   </div>
 </footer>
+<script>
+(function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){if(!d||!d.title)return;var t=document.querySelectorAll('[data-current-book-title]');for(var i=0;i<t.length;i++)t[i].textContent=d.title;if(d.author){var a=document.querySelectorAll('[data-current-book-author]');for(var j=0;j<a.length;j++)a[j].textContent=d.author;}}).catch(function(){});}catch(e){}})();
+</script>
 </body>
 </html>
