@@ -77,16 +77,16 @@
         <p class="sec-sub">One book every six weeks. We read it slowly, walk it out along the way, and gather to close it before the next begins. Every book has a six-week reading guide to take you through it.</p>
       </div>
       <div class="now">
-        <div class="cover has-cover" style="background-image:url('img/covers/disciplines-of-a-godly-man.jpg');"><div class="ct"><span data-current-book-title>Disciplines of a Godly Man</span></div><div class="ca"><span data-current-book-author>R. Kent Hughes</span></div></div>
+        <div class="cover" data-current-book-cover><div class="ct"><span data-current-book-title>Disciplines of a Godly Man</span></div><div class="ca"><span data-current-book-author>R. Kent Hughes</span></div></div>
         <div>
           <p class="kicker">Now Reading</p>
           <h2 style="font-size:clamp(1.9rem,4vw,2.6rem);"><span data-current-book-title>Disciplines of a Godly Man</span></h2>
           <p class="by"><span data-current-book-author>R. Kent Hughes</span></p>
-          <div class="tags"><span class="tag">Body</span><span class="tag">Being</span><span class="tag">Balance</span></div>
-          <p class="prose" style="margin:0;">The book we are in right now. Hughes wrote the manual: twelve disciplines, no shortcuts, from prayer and the Word to marriage, work, and leadership. The men who keep coming back say it is the one they return to most. Come with your Bible.</p>
+          <div class="tags"><span class="tag">Current cycle</span></div>
+          <p class="prose" style="margin:0;">This is the book the brotherhood is reading right now. We take six weeks with it: read it slowly, mark it up, talk it out along the way, and gather to close it before the next one opens. Get a copy and read it with us. Bring your Bible.</p>
           <div class="ctas">
-            <a href="https://www.amazon.com/dp/1433561301?tag=jbmangum27-20" target="_blank" rel="noopener" class="btn btn-ember">Get the book</a>
-            <a href="reading-guide.html" class="btn btn-ghost">Reading Guide</a>
+            <a href="https://www.amazon.com/dp/1433561301?tag=jbmangum27-20" target="_blank" rel="noopener" class="btn btn-ember" data-current-book-buy>Get the book</a>
+            <a href="reading-guide.html" class="btn btn-ghost" data-current-book-guide>Reading Guide</a>
           </div>
         </div>
       </div>
@@ -216,10 +216,9 @@
     <div class="wrap">
       <div class="sec-head"><p class="kicker kicker-rule">How The Shelf Grows</p><h2>The brotherhood picks what is next.</h2><p class="sec-sub">Every six weeks a book closes and another opens. Before it does, the brotherhood votes on the next read, so the shelf stays ours. No fluff, no hype cycle. If it will not sharpen a man, it does not make the list.</p></div>
       <div class="between">
-        <p class="alt-note">Alternate state, shown when the brotherhood is between books</p>
         <img src="assets/cc-white.png" alt="" style="height:52px;width:auto;margin-bottom:8px;" />
-        <h3 style="color:var(--bone);font-size:1.9rem;margin-top:10px;">We are between books right now.</h3>
-        <p class="sec-sub" style="max-width:46ch;margin:14px auto 26px;">The next one is being chosen, and it is chosen together. Join the brotherhood and you will read it with us from the first page.</p>
+        <h3 style="color:var(--bone);font-size:1.9rem;margin-top:10px;">You help choose what is next.</h3>
+        <p class="sec-sub" style="max-width:46ch;margin:14px auto 26px;">Every six weeks a book closes and the brotherhood votes on the next one. Join and you read it with us from the first page, and you have a hand in what we pick.</p>
         <a href="join.html" class="btn btn-ember">Join the Brotherhood</a>
       </div>
     </div>
@@ -231,7 +230,10 @@
       <p class="kicker" style="justify-content:center;display:flex;">The Newsletter</p>
       <h2>Know what we are reading next.</h2>
       <p class="sec-sub" style="max-width:44ch;margin:14px auto 28px;">One honest email each week. What we are reading, one thought worth sitting with, and when the next cycle opens.</p>
-      <a href="/" class="btn btn-ember">Subscribe</a>
+      <form class="news-form">
+        <input type="email" placeholder="you@example.com" aria-label="Email" />
+        <button class="btn btn-ember" type="submit">Subscribe</button>
+      </form>
     </div>
   </section>
 </main>
@@ -248,7 +250,22 @@
   </div>
 </footer>
 <script>
-(function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){if(!d||!d.title)return;var t=document.querySelectorAll('[data-current-book-title]');for(var i=0;i<t.length;i++)t[i].textContent=d.title;if(d.author){var a=document.querySelectorAll('[data-current-book-author]');for(var j=0;j<a.length;j++)a[j].textContent=d.author;}}).catch(function(){});}catch(e){}})();
+(function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){
+  if(!d||!d.title)return;
+  var set=function(sel,val){var n=document.querySelectorAll(sel);for(var i=0;i<n.length;i++)n[i].textContent=val;};
+  set('[data-current-book-title]',d.title);
+  if(d.author)set('[data-current-book-author]',d.author);
+  var cover=document.querySelector('[data-current-book-cover]');
+  if(cover){
+    if(d.cover_url){cover.style.backgroundImage="url(\""+String(d.cover_url).replace(/"/g,'')+"\")";cover.classList.add('has-cover');}
+    else{cover.classList.remove('has-cover');cover.style.backgroundImage='';}
+  }
+  var buy=document.querySelector('[data-current-book-buy]');
+  if(buy&&d.buy_url)buy.setAttribute('href',d.buy_url);
+  var guide=document.querySelector('[data-current-book-guide]');
+  if(guide){if(d.guide_url)guide.setAttribute('href',d.guide_url);else guide.style.display='none';}
+}).catch(function(){});}catch(e){}})();
 </script>
+<script src="/site.js" defer></script>
 </body>
 </html>

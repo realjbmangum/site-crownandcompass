@@ -66,18 +66,18 @@
       </div>
       <div class="grid grid-3">
         <a class="card hover res-card" href="reading-guide.html">
-          <p class="kind">Current book</p>
-          <h3><span data-current-book-title>Disciplines of a Godly Man</span></h3>
-          <p><span data-current-book-author>R. Kent Hughes</span>. Six weeks on the disciplines that shape a man: purity, marriage, fatherhood, the mind, prayer, work, and finishing well.</p>
+          <p class="kind">Reading guide</p>
+          <h3>Disciplines of a Godly Man</h3>
+          <p>R. Kent Hughes. Six weeks on the disciplines that shape a man: purity, marriage, fatherhood, the mind, prayer, work, and finishing well.</p>
           <span class="go">Open the reading guide</span>
         </a>
-        <a class="card hover res-card" href="reading-guide.html">
+        <a class="card hover res-card" href="guide-counterfeit-gods.html">
           <p class="kind">Reading guide</p>
           <h3>Counterfeit Gods</h3>
           <p>Timothy Keller. Six weeks on the idols a man builds his life around, career, approval, money, family, and what it takes to tear them down.</p>
           <span class="go">Open the reading guide</span>
         </a>
-        <a class="card hover res-card" href="reading-guide.html">
+        <a class="card hover res-card" href="guide-the-man-in-the-mirror.html">
           <p class="kind">Reading guide</p>
           <h3>The Man in the Mirror</h3>
           <p>Patrick Morley. Six weeks on the questions most men avoid: who am I, where am I going, and why does it still feel like something is missing.</p>
@@ -203,8 +203,6 @@
     </div>
   </div>
 </footer>
-<script>
-(function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){if(!d||!d.title)return;var t=document.querySelectorAll('[data-current-book-title]');for(var i=0;i<t.length;i++)t[i].textContent=d.title;if(d.author){var a=document.querySelectorAll('[data-current-book-author]');for(var j=0;j<a.length;j++)a[j].textContent=d.author;}}).catch(function(){});}catch(e){}})();
-</script>
+<script src="/site.js" defer></script>
 </body>
 </html>

@@ -161,5 +161,6 @@
 <script>
 (function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){if(!d||!d.title)return;var t=document.querySelectorAll('[data-current-book-title]');for(var i=0;i<t.length;i++)t[i].textContent=d.title;if(d.author){var a=document.querySelectorAll('[data-current-book-author]');for(var j=0;j<a.length;j++)a[j].textContent=d.author;}}).catch(function(){});}catch(e){}})();
 </script>
+<script src="/site.js" defer></script>
 </body>
 </html>

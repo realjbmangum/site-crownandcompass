@@ -92,14 +92,14 @@
       <div>
         <p class="kicker kicker-rule">You are qualified</p>
         <p class="lead" style="margin-bottom:18px;">You do not have to be an expert. Any man can guide.</p>
-        <p class="prose" style="font-size:17px;">The man who guides a chapter is not the teacher and not the theologian. He is the one who prepared, who holds the room, and who keeps the conversation honest. That is a role any man can grow into. The first meeting feeling a little uncomfortable is normal. The guide role can rotate, so the weight does not sit on one man. Brian will walk with you through the first meeting and talk it through with you after. You start with a brother beside you.</p>
+        <p class="prose" style="font-size:17px;">The man who guides a chapter is not the teacher and not the theologian. He is the one who prepared, who holds the room, and who keeps the conversation honest. That is a role any man can grow into. The first meeting feeling a little uncomfortable is normal. The guide role can rotate, so the weight does not sit on one man. Someone from the brotherhood will walk with you through the first meeting and talk it through with you after. You start with a brother beside you.</p>
       </div>
 
       <!-- Right: form -->
       <div>
         <div class="card">
           <h3 style="font-size:24px;margin-bottom:6px;">Start a chapter</h3>
-          <p class="muted" style="font-family:var(--body);font-size:14px;margin-bottom:22px;">Tell us a little and Brian will reach out to help you get the first meeting on the calendar.</p>
+          <p class="muted" style="font-family:var(--body);font-size:14px;margin-bottom:22px;">Tell us a little and we will reach out to help you get the first meeting on the calendar.</p>
 
           <form id="chapterForm">
             <div class="field">
@@ -119,7 +119,7 @@
               <textarea id="men" name="men" placeholder="Who they are, how you know them, and why now"></textarea>
             </div>
             <button class="btn btn-ember" type="submit" style="width:100%;">Start a chapter</button>
-            <p class="form-note" style="text-align:center;">Brian reads every message personally. You will hear back from him, not an autoresponder.</p>
+            <p class="form-note" style="text-align:center;">A real person reads every message. You will hear back from one of us, not an autoresponder.</p>
           </form>
           <p id="chapterMsg" style="display:none;text-align:center;margin-top:16px;font-family:var(--body);font-size:15px;line-height:1.5;"></p>
         </div>
@@ -157,7 +157,7 @@
     var email = f.querySelector('#email').value.trim();
     var city = f.querySelector('#city').value.trim();
     var men = f.querySelector('#men').value.trim();
-    if (!name || !email) { show('Please add your name and email so Brian can reach you.', true); return; }
+    if (!name || !email) { show('Please add your name and email so we can reach you.', true); return; }
     var message = (city ? 'City: ' + city + '.' : '') + (city && men ? ' ' : '') + men;
     btn.disabled = true;
     btn.textContent = 'Sending...';
@@ -170,7 +170,7 @@
       var d = await r.json().catch(function () { return {}; });
       if (r.ok) {
         f.style.display = 'none';
-        show('Good. Brian will reach out to help you get the first meeting on the calendar.', false);
+        show('Good. We will reach out to help you get the first meeting on the calendar.', false);
       } else {
         show(d.error || 'Something went wrong. Please try again.', true);
         btn.disabled = false;
@@ -184,5 +184,6 @@
   });
 })();
 </script>
+<script src="/site.js" defer></script>
 </body>
 </html>

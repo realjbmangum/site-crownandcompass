@@ -14,7 +14,7 @@ export async function GET({ locals }: APIContext) {
 
     const row = await db
       .prepare(
-        `SELECT b.title, b.author, b.slug, b.buy_url, b.guide_url
+        `SELECT b.title, b.author, b.slug, b.cover_url, b.buy_url, b.guide_url
          FROM reading_cycles rc
          JOIN books b ON b.id = rc.book_id
          WHERE rc.status = 'current'
@@ -31,6 +31,7 @@ export async function GET({ locals }: APIContext) {
       title: row.title,
       author: row.author ?? null,
       slug: row.slug ?? null,
+      cover_url: row.cover_url ?? null,
       buy_url: row.buy_url ?? null,
       guide_url: row.guide_url ?? null,
     });

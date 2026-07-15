@@ -189,3 +189,31 @@ a.card,.card.hover{cursor:pointer;}
 /* prototype banner */
 .proto-banner{background:var(--ember);color:var(--bone);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:8px 12px;position:relative;z-index:40;}
 .proto-banner a{color:var(--bone);text-decoration:underline;}
+
+/* newsletter / email capture forms — used on dark (ink/charcoal) sections */
+.news-form,.join-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:26px auto 0;}
+.join-form{margin:0 auto;}
+.news-form input,.join-form input{flex:1;min-width:240px;font-family:var(--body);font-size:17px;padding:15px 18px;background:#211d15;border:1px solid rgba(241,235,220,.24);color:var(--bone);outline:none;}
+.news-form input::placeholder,.join-form input::placeholder{color:rgba(241,235,220,.5);}
+.news-form input:focus,.join-form input:focus{border-color:var(--ember);}
+/* success/error line these forms swap in after submit — inherits the section's text color */
+.form-done{font-family:var(--body);font-size:17px;line-height:1.55;color:inherit;max-width:520px;margin:24px auto 0;text-align:center;}
+
+/* mobile nav — hamburger + drop panel (button + panel injected by site.js) */
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0;margin-left:10px;background:none;border:0;cursor:pointer;}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--bone);margin:0 auto;transition:transform .2s,opacity .2s;}
+.site-header.nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.site-header.nav-open .nav-toggle span:nth-child(2){opacity:0;}
+.site-header.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-nav{display:none;}
+/* More dropdown: click-to-open (site.js) as well as hover/focus */
+.nav-more.open>.more-btn{color:var(--bone);}
+.nav-more.open .nav-menu{opacity:1;visibility:visible;transform:translateY(0);}
+@media(max-width:940px){
+  .nav-toggle{display:flex;}
+  .mobile-nav{display:none;flex-direction:column;background:var(--ink);border-bottom:1px solid var(--line-dark);}
+  .site-header.nav-open .mobile-nav{display:flex;}
+  .mobile-nav a{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark);padding:15px clamp(20px,5vw,40px);border-top:1px solid var(--line-dark);white-space:nowrap;}
+  .mobile-nav a:first-child{border-top:0;}
+  .mobile-nav a:hover,.mobile-nav a.active{color:var(--bone);background:rgba(241,235,220,.05);}
+}
