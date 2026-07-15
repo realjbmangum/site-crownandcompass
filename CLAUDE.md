@@ -198,3 +198,36 @@ For the build, export sized versions (a small header mark, a hero-size one) in a
   `SITE_URL` / `MAILING_ADDRESS` return then, not before.
 - Build verified: succeeds, `/admin/newsletter` gone from the SSR bundle, **0
   old-brand markers** in `dist`. PR opened off `main`.
+
+### July 14, 2026 — overnight audit sweep (dead forms, mobile nav, current-book, copy)
+
+Two-agent read-only audit of the public site (bugs + copy), then hand-fixes +
+live verification in a real browser. Commits `141a7fe` + `2c6274e` on `main`.
+
+- **Newsletter was dead site-wide.** Every subscribe form (13 pages) plus the two
+  homepage forms (newsletter + Join CTA) were `onsubmit="return false"` with no
+  handler, silently discarding every email. Added `src/pages/api/subscribe.ts`
+  (email-only upsert into `subscribers`, does not clobber an existing name;
+  optional SendGrid confirmation) and a new shared **`public/site.js`** that
+  wires every `.news-form` / `.join-form`. Verified live: a submit returns
+  "You are on the list." (left one test row `audit-delete-me@example.com` — delete it).
+- **No mobile nav.** Below 940px the header links + whole "More" menu were hidden
+  with no hamburger. `site.js` injects a hamburger + drop panel (built from the
+  existing nav) and a click/touch toggle for "More"; CSS in `proto.css`. **Note:**
+  the CSS additions required bumping the cache-buster **`proto.css?v=8 → ?v=9`**
+  across all 37 pages, or returning visitors keep the old cached stylesheet and
+  the mobile nav does not apply. Any future `proto.css` change must bump this.
+- **Current-book display is now fully dynamic from D1.** `/api/current-book`
+  returns `cover_url`; the reading-list "Now Reading" swaps cover + buy link +
+  hides the guide button when `guide_url` is null, and the blurb is now
+  book-agnostic. `reading-guide.html` had its dynamic hooks stripped so it stays
+  the honest Disciplines guide (its whole six-week body is Disciplines-specific).
+  `resources.html` current-book card made static + its two wrong guide links fixed.
+- **Copy:** removed the placeholder find-a-chapter map caption and the shipped
+  "Alternate state…" prototype annotation (+ its contradictory always-on
+  between-books box); replaced hardcoded "Brian" in join + start-a-chapter with
+  generic voice (blog bylines kept); fixed a spaced-hyphen dash + en-dash ranges;
+  `_headers` now points at the real hero video.
+- **`site.js` loads on all 37 pages** (a shared behavior layer; new file, no
+  cache-buster needed). `data/` (Ty's Waymaker `.docx`) stays untracked — commit
+  with `git add src public`, never `-A`.
