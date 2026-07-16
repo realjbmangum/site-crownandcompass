@@ -100,7 +100,7 @@
   <section class="section bone2">
     <div class="wrap">
       <div class="sec-head"><p class="kicker kicker-rule">The Shelf</p><h2>Where we have been, and where we are headed.</h2><p class="sec-sub">The books the brotherhood reads through. Pick one up on your own, or read it with us when it comes back around.</p></div>
-      <div class="book-grid">
+      <div class="book-grid" id="bookShelf">
 
         <div class="card book-card">
           <div class="cover has-cover" style="background-image:url('img/covers/the-barbarian-way.jpg');"><div class="ct">The Barbarian Way</div><div class="ca">Erwin Raphael McManus</div></div>
@@ -253,21 +253,69 @@
   </div>
 </footer>
 <script>
-(function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){
-  if(!d||!d.title)return;
-  var set=function(sel,val){var n=document.querySelectorAll(sel);for(var i=0;i<n.length;i++)n[i].textContent=val;};
-  set('[data-current-book-title]',d.title);
-  if(d.author)set('[data-current-book-author]',d.author);
-  var cover=document.querySelector('[data-current-book-cover]');
-  if(cover){
-    if(d.cover_url){cover.style.backgroundImage="url(\""+String(d.cover_url).replace(/"/g,'')+"\")";cover.classList.add('has-cover');}
-    else{cover.classList.remove('has-cover');cover.style.backgroundImage='';}
+(function(){
+  var SITE_GUIDES={
+    'disciplines-of-a-godly-man':'reading-guide.html',
+    'the-barbarian-way':'guide-the-barbarian-way.html',
+    'stepping-up':'guide-stepping-up.html',
+    'they-were-christians':'guide-they-were-christians.html',
+    'm46-crash-course':'guide-m46-crash-course.html',
+    'counterfeit-gods':'guide-counterfeit-gods.html',
+    'a-million-little-miracles':'guide-a-million-little-miracles.html',
+    'under-par':'guide-under-par.html',
+    'maximized-manhood':'guide-maximized-manhood.html',
+    'the-man-in-the-mirror':'guide-the-man-in-the-mirror.html'
+  };
+  function guideHref(b){ return SITE_GUIDES[b.slug] || b.guide_url || null; }
+  function cleanCss(u){ return String(u||'').replace(/["'()]/g,''); }
+  function el(tag,cls,txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
+  function tagsOf(b){ try{ var t=JSON.parse(b.pillar_tags||'[]'); return Array.isArray(t)?t:[]; }catch(e){ return []; } }
+
+  function applyCurrent(b){
+    if(!b||!b.title)return;
+    var set=function(sel,val){var n=document.querySelectorAll(sel);for(var i=0;i<n.length;i++)n[i].textContent=val;};
+    set('[data-current-book-title]',b.title);
+    if(b.author)set('[data-current-book-author]',b.author);
+    var cover=document.querySelector('[data-current-book-cover]');
+    if(cover){ if(b.cover_url){cover.style.backgroundImage="url(\""+cleanCss(b.cover_url)+"\")";cover.classList.add('has-cover');} else {cover.classList.remove('has-cover');cover.style.backgroundImage='';} }
+    var buy=document.querySelector('[data-current-book-buy]');
+    if(buy&&b.buy_url)buy.setAttribute('href',b.buy_url);
+    var guide=document.querySelector('[data-current-book-guide]');
+    if(guide){ var g=guideHref(b); if(g)guide.setAttribute('href',g); else guide.style.display='none'; }
   }
-  var buy=document.querySelector('[data-current-book-buy]');
-  if(buy&&d.buy_url)buy.setAttribute('href',d.buy_url);
-  var guide=document.querySelector('[data-current-book-guide]');
-  if(guide){if(d.guide_url)guide.setAttribute('href',d.guide_url);else guide.style.display='none';}
-}).catch(function(){});}catch(e){}})();
+
+  function card(b){
+    var c=el('div','card book-card');
+    var cov=el('div','cover');
+    if(b.cover_url){ cov.className='cover has-cover'; cov.style.backgroundImage="url(\""+cleanCss(b.cover_url)+"\")"; }
+    cov.appendChild(el('div','ct',b.title));
+    cov.appendChild(el('div','ca',b.author));
+    c.appendChild(cov);
+    var tags=tagsOf(b);
+    if(tags.length){ var tg=el('div','tags'); tags.forEach(function(t){ tg.appendChild(el('span','tag',t)); }); c.appendChild(tg); }
+    c.appendChild(el('h3',null,b.title));
+    c.appendChild(el('p','by',b.author));
+    if(b.description)c.appendChild(el('p','desc',b.description));
+    var row=el('div','row');
+    if(b.buy_url){ var a=el('a','btn btn-ember btn-sm','Get the book'); a.href=b.buy_url; a.target='_blank'; a.rel='noopener'; row.appendChild(a); }
+    var g=guideHref(b);
+    if(g){ var a2=el('a','btn btn-ghost btn-sm','Reading Guide'); a2.href=g; row.appendChild(a2); }
+    if(row.childNodes.length)c.appendChild(row);
+    return c;
+  }
+
+  try{
+    fetch('/api/reading-list').then(function(r){return r.json();}).then(function(d){
+      if(!d)return;
+      applyCurrent(d.current);
+      var grid=document.getElementById('bookShelf');
+      if(grid && d.shelf && d.shelf.length){
+        grid.innerHTML='';
+        d.shelf.forEach(function(b){ grid.appendChild(card(b)); });
+      }
+    }).catch(function(){});
+  }catch(e){}
+})();
 </script>
 <script src="/site.js" defer></script>
 </body>
