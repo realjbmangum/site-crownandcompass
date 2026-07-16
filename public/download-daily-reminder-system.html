@@ -4,16 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Daily Reminder System · Crown and Compass</title>
-<link rel="stylesheet" href="proto.css?v=9" />
+<link rel="stylesheet" href="proto.css?v=10" />
 <style>
   .backlink{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:24px;}
-  .backlink:hover{color:var(--ember);}
+  .backlink:hover{color:var(--ember-dark);}
   .print-actions{margin-top:30px;}
   .print-note{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-top:14px;}
 
   .block{margin-top:20px;}
   .setup{background:var(--bone-2);border:1px solid var(--line);padding:28px 32px;}
-  .setup .lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:0 0 6px;}
+  .setup .lab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ember-dark);margin:0 0 6px;}
   .setup ol{margin:16px 0 0;padding-left:22px;}
   .setup li{font-family:var(--body);font-size:17px;line-height:1.6;color:var(--muted);margin-bottom:13px;}
   .setup li:last-child{margin-bottom:0;}
@@ -21,7 +21,7 @@
 
   .anchor{border:1px solid var(--line);background:var(--bone);padding:26px 30px;margin-top:16px;}
   .anchor .top{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:16px;}
-  .anchor .ak{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);}
+  .anchor .ak{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ember-dark);}
   .anchor h3{font-size:1.4rem;margin:6px 0 0;}
   .anchor .time{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 12px;white-space:nowrap;}
   .anchor .purpose{font-family:var(--body);font-size:17px;line-height:1.6;color:var(--muted);margin:0 0 18px;max-width:64ch;}
@@ -30,14 +30,14 @@
   .verses{list-style:none;margin:0;padding:0;}
   .verses li{font-family:var(--body);font-size:16px;line-height:1.55;color:var(--ink);padding:11px 0;border-top:1px solid var(--line-2);}
   .verses li:first-child{border-top:0;}
-  .verses .ref{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:3px;}
+  .verses .ref{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ember-dark);display:block;margin-bottom:3px;}
 
   .prompts{margin:0;padding-left:22px;}
   .prompts li{font-family:var(--body);font-size:17px;line-height:1.55;color:var(--muted);margin-bottom:11px;}
   .prompts li:last-child{margin-bottom:0;}
 
   .closer{background:var(--charcoal);color:var(--bone);padding:14px 18px;margin-top:16px;font-family:var(--body);font-size:16px;line-height:1.55;}
-  .closer .ref{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);display:block;margin-bottom:5px;}
+  .closer .ref{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember-light);display:block;margin-bottom:5px;}
 
   @media print{
     @page{size:portrait;margin:13mm;}

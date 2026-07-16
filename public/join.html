@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Join · Crown and Compass</title>
-<link rel="stylesheet" href="proto.css?v=9" />
+<link rel="stylesheet" href="proto.css?v=10" />
 <style>
   .join-grid{display:grid;grid-template-columns:1fr;gap:42px;align-items:start;}
   @media(min-width:900px){.join-grid{grid-template-columns:1fr 25rem;gap:56px;}}
@@ -13,7 +13,7 @@
   .steps li{position:relative;padding:0 0 26px 56px;}
   .steps li:last-child{padding-bottom:0;}
   .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;
-    width:36px;height:36px;border:1px solid var(--ember);color:var(--ember);
+    width:36px;height:36px;border:1px solid var(--ember);color:var(--ember-dark);
     font-family:var(--display);font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;background:transparent;}
   .steps li:not(:last-child)::after{content:"";position:absolute;left:17.5px;top:44px;bottom:6px;width:1px;background:var(--line);}
   .steps li h4{margin:6px 0 6px;font-family:var(--display);font-size:18px;font-weight:600;color:var(--ink);}

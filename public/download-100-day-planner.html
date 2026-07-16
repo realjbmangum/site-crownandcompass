@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The 100-Day Planner · Crown and Compass</title>
-<link rel="stylesheet" href="proto.css?v=9" />
+<link rel="stylesheet" href="proto.css?v=10" />
 <style>
   /* toolbar */
   .planner-toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:28px;}
@@ -31,11 +31,11 @@
   /* week blocks */
   .week-block{border:1px solid var(--line);background:var(--bone);padding:26px 26px 14px;margin-bottom:22px;}
   .week-head{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:4px;}
-  .week-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ember);margin:0 0 8px;}
+  .week-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ember-dark);margin:0 0 8px;}
   .week-name{font-size:1.5rem;margin:0 0 8px;}
   .week-desc{font-family:var(--body);font-size:15.5px;line-height:1.6;color:var(--muted);margin:0 0 14px;max-width:64ch;}
-  .week-practice{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;border-left:2px solid var(--ember);
-    background:rgba(192,85,42,.05);padding:10px 0 10px 14px;margin:0;font-family:var(--body);font-size:14.5px;line-height:1.55;color:var(--muted);}
+  .week-practice{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;border:1px solid var(--line);
+    background:var(--bone-2);padding:12px 16px;margin:0;font-family:var(--body);font-size:14.5px;line-height:1.55;color:var(--muted);}
   .week-practice b{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ember-dark);white-space:nowrap;flex-shrink:0;}
   .week-practice span{flex:1;min-width:220px;}
 
@@ -48,9 +48,9 @@
   .day-line{border-bottom:1px solid var(--line);min-height:30px;}
   .day-box{justify-self:center;width:18px;height:18px;border:1.5px solid var(--muted-2);margin-bottom:3px;}
   .day-final{background:rgba(192,85,42,.06);margin:6px -10px 0;padding:14px 10px 6px;}
-  .day-final .day-no{color:var(--ember);font-weight:600;}
-  .day-final .day-line{border-bottom-color:var(--ember);}
-  .day-final .day-box{border-color:var(--ember);}
+  .day-final .day-no{color:var(--ember-dark);font-weight:600;}
+  .day-final .day-line{border-bottom-color:var(--ember-dark);}
+  .day-final .day-box{border-color:var(--ember-dark);}
 
   @media(max-width:560px){
     .week-block{padding:20px 18px 10px;}

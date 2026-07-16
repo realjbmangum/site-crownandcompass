@@ -24,6 +24,19 @@ export async function POST({ request, locals }: APIContext) {
       });
     }
 
+    // Length caps: keep a bad actor from bloating D1 rows / SendGrid payloads.
+    if (
+      name.trim().length > 200 ||
+      email.trim().length > 254 ||
+      (how_you_heard?.trim().length ?? 0) > 200 ||
+      (message?.trim().length ?? 0) > 2000
+    ) {
+      return new Response(JSON.stringify({ error: 'One of those fields is too long.' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     // @ts-ignore — D1 binding injected by Cloudflare runtime
     const db = locals.runtime?.env?.DB;
     if (!db) {

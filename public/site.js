@@ -6,6 +6,17 @@
 (function () {
   'use strict';
 
+  /* ---- 0) Skip-to-content link -------------------------------------- */
+  var main = document.querySelector('main');
+  if (main) {
+    if (!main.id) main.id = 'main-content';
+    var skip = document.createElement('a');
+    skip.className = 'skip-link';
+    skip.href = '#' + main.id;
+    skip.textContent = 'Skip to content';
+    document.body.insertBefore(skip, document.body.firstChild);
+  }
+
   /* ---- 1) Mobile nav ------------------------------------------------ */
   var header = document.querySelector('header.site-header');
   var bar = header && header.querySelector('.bar');

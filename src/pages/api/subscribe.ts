@@ -18,9 +18,13 @@ export async function POST({ request, locals }: APIContext) {
     if (!emailRegex.test(email.trim())) {
       return json({ error: 'Please enter a valid email address.' }, 400);
     }
+    if (email.trim().length > 254) {
+      return json({ error: 'That email is too long.' }, 400);
+    }
 
     const clean = email.trim().toLowerCase();
-    const heard = source?.trim() ? `Newsletter (${source.trim()})` : 'Newsletter';
+    const src = (source || '').trim().slice(0, 200);
+    const heard = src ? `Newsletter (${src})` : 'Newsletter';
 
     // @ts-ignore — D1 binding injected by Cloudflare runtime
     const db = locals.runtime?.env?.DB;

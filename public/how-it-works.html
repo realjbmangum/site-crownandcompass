@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>How It Works · Crown and Compass</title>
-<link rel="stylesheet" href="proto.css?v=9" />
+<link rel="stylesheet" href="proto.css?v=10" />
 <style>
   .page-head h1{font-size:clamp(2.25rem,5.5vw,3.75rem);margin-top:14px;}
-  .step .num{font-family:var(--mono);font-size:13px;letter-spacing:.22em;color:var(--ember);margin-bottom:12px;}
+  .step .num{font-family:var(--mono);font-size:13px;letter-spacing:.22em;color:var(--ember-dark);margin-bottom:12px;}
   .step h2{margin:0;}
   .move{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);}
   .move:last-child{border-bottom:none;}
@@ -18,11 +18,11 @@
   /* six-week rhythm, same arc as home's Rhythm section */
   .rhythm-grid{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line-dark);border-bottom:none;}
   .rhythm-grid .wk{padding:26px 20px;border-bottom:1px solid var(--line-dark);border-right:1px solid var(--line-dark);}
-  .rhythm-grid .wk .n{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ember);}
+  .rhythm-grid .wk .n{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--ember-light);}
   .rhythm-grid .wk h4{font-family:var(--display);font-weight:600;font-size:19px;margin:10px 0 0;color:var(--bone);}
   .rhythm-grid .wk p{font-family:var(--body);font-size:14px;line-height:1.5;color:var(--on-dark-mute);margin:8px 0 0;}
-  .rhythm-grid .wk.last{background:var(--ember);}
-  .rhythm-grid .wk.last .n{color:var(--charcoal);} .rhythm-grid .wk.last p{color:#f4e4da;}
+  .rhythm-grid .wk.last{background:var(--ember-dark);}
+  .rhythm-grid .wk.last .n{color:var(--bone);} .rhythm-grid .wk.last p{color:#f4e4da;}
   @media(max-width:720px){.rhythm-grid{grid-template-columns:repeat(2,1fr);}}
 
   .firsttime{background:var(--bone);border:1px solid var(--line-strong);padding:36px 36px;}
