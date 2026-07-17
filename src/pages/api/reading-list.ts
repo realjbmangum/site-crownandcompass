@@ -28,14 +28,19 @@ export async function GET({ locals }: APIContext) {
       .first();
     const currentId = (current && current.id) ?? -1;
 
+    // The shelf shows every book that has actually been read (a past cycle) OR
+    // has a curated blurb, except the current one. So a book you add and later
+    // rotate out lands on the shelf automatically, described or not.
     const { results } = await db
       .prepare(
         `SELECT ${cols},
                 (SELECT MAX(rc.id) FROM reading_cycles rc
                   WHERE rc.book_id = b.id AND rc.status = 'past') AS last_past
            FROM books b
-          WHERE b.description IS NOT NULL AND b.description <> ''
-            AND b.id <> ?
+          WHERE b.id <> ?
+            AND ( (b.description IS NOT NULL AND b.description <> '')
+                  OR EXISTS (SELECT 1 FROM reading_cycles rc2
+                              WHERE rc2.book_id = b.id AND rc2.status = 'past') )
           ORDER BY last_past DESC, b.title`
       )
       .bind(currentId)
