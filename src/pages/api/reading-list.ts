@@ -14,7 +14,9 @@ export async function GET({ locals }: APIContext) {
     const db = locals.runtime?.env?.DB;
     if (!db) return json({ current: null, shelf: [] }, cache);
 
-    const cols = 'b.id, b.title, b.author, b.slug, b.cover_url, b.buy_url, b.guide_url, b.description, b.pillar_tags';
+    const cols =
+      "b.id, b.title, b.author, b.slug, b.cover_url, b.buy_url, b.guide_url, b.description, b.pillar_tags, " +
+      "(SELECT 1 FROM book_guides bg WHERE bg.book_id = b.id AND bg.status = 'published' LIMIT 1) AS has_guide";
 
     const current = await db
       .prepare(

@@ -266,7 +266,12 @@
     'maximized-manhood':'guide-maximized-manhood.html',
     'the-man-in-the-mirror':'guide-the-man-in-the-mirror.html'
   };
-  function guideHref(b){ return SITE_GUIDES[b.slug] || b.guide_url || null; }
+  function guideHref(b){
+    if(SITE_GUIDES[b.slug]) return SITE_GUIDES[b.slug];
+    if(b.guide_url) return b.guide_url;
+    if(b.has_guide) return 'https://app.thecrownandcompass.org/guide/'+b.slug;
+    return null;
+  }
   function cleanCss(u){ return String(u||'').replace(/["'()]/g,''); }
   function el(tag,cls,txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
   function tagsOf(b){ try{ var t=JSON.parse(b.pillar_tags||'[]'); return Array.isArray(t)?t:[]; }catch(e){ return []; } }
