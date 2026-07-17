@@ -231,3 +231,24 @@ live verification in a real browser. Commits `141a7fe` + `2c6274e` on `main`.
 - **`site.js` loads on all 37 pages** (a shared behavior layer; new file, no
   cache-buster needed). `data/` (Ty's Waymaker `.docx`) stays untracked — commit
   with `git add src public`, never `-A`.
+
+### July 15-17, 2026 — reading list from D1 + guide links + WCAG contrast
+
+- **Design/security review Tier 1** (impeccable + design + security skills, both
+  repos): the ember accent failed WCAG AA as small text and as the button fill
+  everywhere. Retokenized `proto.css` — `--ember-dark` for small text/buttons on
+  light grounds, `--ember-light` for small text on dark grounds; darkened
+  `--muted-2`. Swept per-page inline labels, rhythm grid, planner, directory pill.
+  Also: hide `.signin` under 940px (390px header was overcrowded), skip-to-content
+  link via `site.js`, removed the 100-day-planner side-stripe, baseline security
+  headers + form length caps. **Bumped `proto.css?v=9 → v=10`.**
+- **Reading list is dynamic from D1.** New `/api/reading-list` (current book +
+  "where we've been" shelf = books with a past cycle OR a blurb, except current).
+  `reading-list.html` rebuilds the shelf from it (hardcoded cards = no-JS
+  fallback); a slug→site-guide map + `has_guide` from D1 keep guide links right.
+  The current-book "Reading Guide" button links to the **app** guide
+  (`app.thecrownandcompass.org/guide/<slug>`) when a guide is published there.
+- Current-book cover uses `background-size: contain` (was cropping square covers).
+- The `books.description` column + `book_guides` table live in the shared D1
+  (owned by the app repo's schema). Applied via `wrangler --remote`.
+- **Reminder: any `proto.css` change must bump the `?v=` on all 37 pages.**
