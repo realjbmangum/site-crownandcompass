@@ -65,6 +65,26 @@ export async function POST({ request, locals }: APIContext) {
       )
       .run();
 
+    // Also put the man on the member app's roster as an applicant, so he can be
+    // invited into a Watch from its /admin/members page — the app shares this
+    // D1. DO NOTHING on conflict: an existing member (any status) is never
+    // touched by a public form. And never let this write sink the join itself:
+    // the subscriber row and the notification email still matter without it.
+    let onRoster = false;
+    try {
+      const res = await db
+        .prepare(
+          `INSERT INTO members (name, email, role, status)
+           VALUES (?, ?, 'member', 'applied')
+           ON CONFLICT(email) DO NOTHING`
+        )
+        .bind(name.trim(), email.trim().toLowerCase())
+        .run();
+      onRoster = (res.meta?.changes ?? 0) > 0;
+    } catch (err) {
+      console.error('join: could not record applicant on the members roster:', err);
+    }
+
     // SendGrid notifications
     const sendgridKey = (locals.runtime?.env?.SENDGRID_API_KEY as string) || '';
     const notifyEmail = (locals.runtime?.env?.NOTIFICATION_EMAIL as string) || '';
@@ -87,6 +107,7 @@ export async function POST({ request, locals }: APIContext) {
           <tr><td style="${label}">How they heard</td><td style="${value}">${safeHow}</td></tr>
           <tr><td style="${label}">Message</td><td style="${value}">${safeMessage}</td></tr>
         </table>
+        ${onRoster ? '<p style="margin:20px 0 0;font-size:14px;color:#5b5445;line-height:1.6;">He is on the Members roster in the app as Applied — send his invite from there to place him in a Watch.</p>' : ''}
       `;
 
       // Warm, plain confirmation for the person who reached out.
