@@ -204,3 +204,78 @@ Expect curved type to be the weak point — text on an arc is the hardest case f
 any generator. If the artwork is right and the lettering is mangled, generate the
 art alone and set the type in vector afterwards. Zilla Slab and IBM Plex Mono
 map onto the display and citation registers.
+
+---
+
+# Part Two — The Photographic Register
+
+Everything above governs **emblems**: merch, coins, prints. Engraved line,
+bone ink, pre-1700 objects.
+
+**The site's photography is a different system, and the two must not be
+confused.** An engraved seal on a blog post would look like clip art. A
+photograph on a coin is impossible. One rule carries across, and it is the
+important one — *objects carry the argument*. Everything else differs.
+
+## Where these images appear
+
+Blog hero images and card thumbnails, set as a filled background behind a dark
+overlay. Note that until a real photograph exists, `.imgph::after` renders the
+`data-label` on screen as `IMAGE · <label>`. **So the label is visible UI, not
+a private note.** Write it as a sentence a reader could see, because sometimes
+they will.
+
+## The five rules
+
+**1. One light source, warm and small.** A lamp. A lantern on a porch rail. A
+phone glowing face down. Low lamplight on a table. Golden hour on a hillside.
+Never overhead daylight, never a flash, never an evenly lit room. The single
+light is what makes a photograph feel like a moment somebody is actually
+living in rather than a stock image of a concept.
+
+**2. Dusk, evening, or night.** Almost without exception. The brightest thing
+in the catalogue is golden hour on a dry trail. Darkness is doing real work
+here: these posts are read by men at the end of a day, and the images should
+look like the hour they are being read in.
+
+**3. People are implied, seen from behind, or absent.** Four men around a table
+photographed from behind. One figure walking a ridge. An empty porch with the
+family out. **No faces, no eye contact, no models.** A face makes the reader
+watch someone else; an empty chair makes him take the seat.
+
+**4. Everything is worn.** Worn wood, a cluttered desk, dusty boots, a stack of
+used books, an unfinished manuscript. Nothing new, nothing styled, nothing
+staged. Wear is what says a real man has been here.
+
+**5. One object carries the argument.** This is the rule shared with the
+emblems, and it is the difference between a photograph and decoration. A
+wedding ring set down on a table. A phone face down in a dark room. The object
+states the post's tension before a word is read.
+
+## What breaks it
+
+- Faces, eye contact, models, anything that reads as stock photography
+- Daylight, overhead lighting, bright evenly lit rooms
+- New, clean, styled or staged objects
+- Literal illustration of the title — a post about sedation does not want a
+  photograph of a drink. It wants the single lit window in a dark street.
+- Text baked into the image (the page sets its own type)
+- Engraved or illustrated treatments — those belong to Part One
+
+## Writing an image prompt
+
+Name the object, the light, the hour, and the wear. Ten to twenty words is
+usually enough, and the existing labels are the model:
+
+> a phone glowing in a dark room, face down on a table
+> four men around a table at night, seen from behind, warm lamplight
+> a wedding ring resting on a worn wooden table
+> an unfinished manuscript on a cluttered desk
+
+For a generator, extend that with the register: photographic, natural light,
+shallow depth of field, muted and warm, film grain, no text, no faces.
+
+**Write the prompt from the post's argument, not its title.** The post about
+men numbing themselves wants a single lit window in a dark street with every
+other house asleep — the isolation the piece is actually about. A photograph
+of a glass on a bar would illustrate the subject and miss the point.
