@@ -74,6 +74,47 @@ Litotes weaken your voice. State the positive truth.
 
 ---
 
+## The Second Rule: NO THROAT-CLEARING
+
+Announcing that a good line is coming, instead of saying it.
+
+This is the most reliable tell of machine-written prose, and it survives every
+other edit because it *feels* like craft. It is not. **The drumroll weakens the
+sentence it introduces**, because it sets a bar the sentence then has to clear.
+Cut the announcement and the line lands on its own.
+
+**Never write:**
+
+| Slop | Write |
+|---|---|
+| "Here is the part that gets me. Nobody sets out to do this." | "Nobody sets out to do this." |
+| "The question I keep coming back to is this one. If your son quit tomorrow..." | "If your son quit tomorrow..." |
+| "Here is the thing most men miss." | *(just say the thing)* |
+| "And that is when it hit me." | *(describe what hit you)* |
+| "The truth is, most men are tired." | "Most men are tired." |
+| "Let me be honest with you." | *(be honest)* |
+| "What nobody tells you is..." | *(tell them)* |
+
+The family resemblance: every one of them is a sentence **about** the next
+sentence. Delete it and check whether anything was lost. Almost never is.
+
+**The test.** Read the paragraph without its first sentence. If it is stronger —
+or the same — that sentence was throat-clearing, and it goes.
+
+**Why this one matters more than it looks.** A reader cannot always say why prose
+feels generated, but this is usually what they are reacting to. A man writing
+from his own life does not narrate his own arrival at a thought. He just says the
+thought. The signposting creeps in when a writer is filling a shape rather than
+saying something, which is exactly the condition to catch and stop.
+
+**One legitimate exception.** A genuine turn, where the next thing actually
+contradicts what came before, earns a short pivot: "I agreed with all of it. Then
+I sat with the part underneath it." That is doing structural work, not clearing
+a throat. The difference is whether the sentence carries information — a real
+change of direction — or only anticipation.
+
+---
+
 ## Writing Style
 
 ### Embrace:
