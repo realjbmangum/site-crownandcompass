@@ -151,6 +151,29 @@ a.card,.card.hover{cursor:pointer;}
 .prose a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(192,85,42,.45);transition:text-decoration-color .2s,color .2s;}
 .prose a:hover{color:var(--ember-dark);text-decoration-color:var(--ember-dark);}
 
+/* --- Long-form article furniture -------------------------------------------
+   Added for the blog. A scripture block is a QUOTED passage, so it is set
+   apart rather than styled loud: an ember rule down the left, the display
+   face, and the reference in the mono register the rest of the site uses for
+   sourcing. Same two-register idea as the emblem work - the passage and its
+   citation never share a size. */
+.prose .scripture{
+  margin:2rem 0;padding:.35rem 0 .35rem 1.35rem;
+  border-left:2px solid var(--ember);
+  font-family:var(--display);font-size:1.14em;line-height:1.55;color:var(--ink);
+}
+.prose .scripture cite{
+  display:block;margin-top:.6rem;
+  font-family:var(--mono);font-size:11px;font-style:normal;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);
+}
+/* A single line worth stopping on. Heavier than body, quieter than a heading. */
+.prose .pull{
+  margin:1.9rem 0;font-family:var(--display);font-size:1.22em;
+  line-height:1.4;color:var(--ink);font-weight:600;
+}
+@media(max-width:640px){.prose .scripture{padding-left:1rem;}}
+
 /* header / footer chrome (shared) */
 .site-header{position:sticky;top:0;z-index:30;background:var(--ink);color:var(--bone);border-bottom:1px solid var(--line-dark);}
 .site-header .bar{display:flex;align-items:center;justify-content:space-between;height:76px;}
