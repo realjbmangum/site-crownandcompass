@@ -114,6 +114,23 @@ it. The relationship between the objects *is* the sentence — that is why a
 still life beats a landscape or a diagram: the idea arrives instantly, with no
 interpretive work.
 
+**Two conditions on that sentence, and they do the real work.**
+
+*The objects must be touching.* One object in a setting is not two objects. If
+the second thing in your sentence is the ground, a field, a room, a horizon or
+the sky, you have written a scene and the argument has quietly gone missing.
+
+*The verb must be one you can see at 44mm.* Driven, split, cut, cast down,
+pinned, crushed, laid across — a strike, not a state. A key *turning* in a lock
+and a furrow *bending* around a stone both pass the sentence test on paper and
+fail on the plate, because the action lives in a detail that disappears the
+moment the design shrinks. Write the verb, then ask whether a stranger across a
+room could name it.
+
+The placard is the one archetype these two conditions cannot govern, because it
+carries no illustration. There the force has to live in the sentence itself, and
+the verse still has to survive the concrete-imagery filter above.
+
 Corollary: a scene makes the viewer hunt for the point, and a diagram hides it
 in a detail. Both also fail at coin scale.
 
@@ -167,6 +184,9 @@ That is a constraint to design *to*, not around.
 - An emblem intended for a coin that will not read at 44mm
 - A verse with no drawable object
 - A design whose argument cannot be stated as X-doing-something-to-Y
+- Two objects that never touch, or a verb that vanishes at 44mm
+- A horizon, a ground plane, a room or a field — objects sit on the plate, not
+  in a place
 - Pure white ink
 - A mid-size chest graphic
 
