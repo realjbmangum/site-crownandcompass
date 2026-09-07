@@ -64,6 +64,7 @@
      caption and every input at width:100%. Both have to be undone here or the
      radio fills the row and the option text is squeezed into a column two
      words wide. */
+  .field[hidden]{display:none;}
   .intent-choices{display:flex;flex-direction:column;gap:12px;margin-top:10px;}
   .intent-choices .choice{
     display:flex;align-items:flex-start;gap:11px;cursor:pointer;
@@ -161,7 +162,6 @@
               <input type="email" id="email" name="email" placeholder="you@example.com" />
             </div>
             <div class="field">
-            <div class="field">
               <label>What are you looking for?</label>
               <div class="intent-choices">
                 <label class="choice"><input type="radio" name="intent" value="join" checked /><span><strong>Join a Watch</strong> &mdash; read with a group that already meets</span></label>
@@ -170,6 +170,13 @@
               </div>
               <p class="form-note" style="margin-top:10px;">Both are real doors. A Watch you lead is your men, your hour, your city.</p>
             </div>
+            <div class="field lead-only" id="leadFields" hidden>
+              <label for="city">City / State</label>
+              <input type="text" id="city" name="city" placeholder="Where you would meet" />
+              <label for="men" style="margin-top:14px;">Tell us about the men you would gather</label>
+              <textarea id="men" name="men" placeholder="Who they are, how you know them, and why now"></textarea>
+            </div>
+            <div class="field">
               <label for="how">How did you hear about us?</label>
               <input type="text" id="how" name="how" placeholder="A friend, word of mouth, just found it" />
             </div>
@@ -209,6 +216,13 @@
   var f = document.getElementById('joinForm');
   if (!f) return;
   var msg = document.getElementById('joinMsg');
+  // Only a man who says he is leading gets asked where and who.
+  var leadFields = document.getElementById('leadFields');
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="intent"]'), function (r) {
+    r.addEventListener('change', function () {
+      if (leadFields) leadFields.hidden = (r.value !== 'start');
+    });
+  });
   var btn = f.querySelector('button[type="submit"]');
   function show(text, isError) {
     msg.textContent = text;
@@ -226,6 +240,14 @@
     try {
       var picked = f.querySelector('input[name="intent"]:checked');
       var intent = picked ? picked.value : 'unsure';
+      // A man starting his own Watch has to say where and who. Folded into the
+      // note so it lands where a chapter enquiry always landed.
+      if (intent === 'start') {
+        var city = (document.getElementById('city') || {}).value || '';
+        var men = (document.getElementById('men') || {}).value || '';
+        var extra = (city.trim() ? 'City: ' + city.trim() + '.' : '') + (city.trim() && men.trim() ? ' ' : '') + men.trim();
+        if (extra) message = extra + (message ? '\n\n' + message : '');
+      }
       var r = await fetch('/api/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
