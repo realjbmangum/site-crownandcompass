@@ -1,247 +1,207 @@
-# Crown and Compass — Brand Standards
+---
+entity:   crownandcompass
+surface:  brand-standards
+derived:  2026-09-06
+source:   public/proto.css, verified against thecrownandcompass.org
+---
 
-> Reference for all design, content, and asset decisions. Keep this file current.
-> Last updated: Feb 21, 2026
+# Crown and Compass: Brand Standards
+
+Derived from the live stylesheet and verified against production. Where this document
+and the shipped site ever disagree, **the site is right and this file is the bug.**
+See Provenance for what changed and why.
 
 ---
 
-## 1. Brand Essence
+## 0. Read this before you write any CSS
 
-**Who we are:** A peer-led Christian men's community built around reading, honest conversation, and The Walk.
+The site was rebuilt from a dark palette to a light one. The stylesheet kept the old
+variable names as **compatibility aliases** so older screens would not break:
+
+```css
+--bg-base: var(--bone);      /* was #0f1117 near-black, now #F1EBDC bone */
+--text-primary: var(--ink);  /* was #f0ebe2 cream,      now #16130D ink  */
+--accent: var(--ember);      /* was #c9853a amber,      now #C0552A ember */
+```
+
+**This is the trap.** Every old variable name still resolves, so nothing errors and
+nothing looks broken in the editor. It simply produces the opposite result. A near-black
+card lands on a bone page, and cream text lands on cream.
+
+**Use the real names.** `--ink`, `--bone`, `--charcoal`, `--ember`. Treat every alias in
+the "compat" block as deprecated. If you find a hex code hardcoded anywhere, that is a
+bug regardless of which palette it belongs to.
+
+---
+
+## 1. Brand essence
+
+Unchanged, and it was never the problem.
+
+**Who we are:** A peer-led Christian men's community built around reading, honest
+conversation, and The Walk.
 
 **Positioning:** Not performance. Not a platform. A table where men sit as equals.
 
-**Tone:** Contemplative. Honest. Quietly confident. Like a letter from an older brother, not a TED Talk.
+**Tone:** Contemplative. Honest. Quietly confident. Like a letter from an older brother,
+not a TED talk.
 
-**Primary reference:** C.S. Lewis, Dallas Willard, Thomas à Kempis — literary, unhurried, weighty.
-
----
-
-## 2. Logo
-
-### Current State
-The logo mark is an inline SVG compass rose rendered in `--accent` amber. No external file dependency. No white background. Renders cleanly on any dark surface.
-
-**Source:** `src/components/Header.astro` (inline SVG — the authoritative version)
-
-### Logo Mark Description
-- Circle border (compass perimeter)
-- Four cardinal point arrows — North dominant (full amber), others at 55% opacity
-- Inner ring at 35% opacity
-- Center dot
-- All paths use `currentColor` — inherits amber from CSS
-
-### Logo Lockup (header)
-```
-[compass rose mark 28×28] Crown & Compass
-```
-- Mark: `color: var(--accent)` (#c9853a amber)
-- Wordmark: EB Garamond 600, `var(--text-primary)` (#f0ebe2)
-- Gap: 0.625rem
-
-### Future Vector Logo (for print, social, large format)
-
-When Brian is ready to commission or build a real vector logo, use this brief:
-
-**Brief for designer/Figma:**
-- Concept: Crown sitting atop or integrated into a compass rose. The crown should not be decorative — it should feel earned.
-- Style: Clean geometric. Not ornate. Think Filson, not Harry Potter.
-- Palette: Amber (#c9853a) mark on transparent background. Works on dark and light.
-- Variants needed:
-  - Horizontal lockup (mark + wordmark) — primary
-  - Mark-only (square, for social avatars, favicons)
-  - Stacked (mark above wordmark) — for print/patches
-- Clear space: 1× mark height on all sides
-- Minimum size: 24px mark height (do not render smaller)
-- File formats: SVG source, PNG @1x/2x/3x transparent, favicon.ico
+**Reference authors:** C.S. Lewis, Dallas Willard, Thomas à Kempis. Literary, unhurried,
+weighty.
 
 ---
 
-## 3. Color Palette
+## 2. Colour
 
-| Role | Variable | Hex | Usage |
-|------|----------|-----|-------|
-| Background | `--bg-base` | `#0f1117` | Page background, hero |
-| Card | `--bg-card` | `#1a1a20` | Content cards, section alt-bg |
-| Surface | `--bg-surface` | `#22222a` | Elevated elements, questions card |
-| Text primary | `--text-primary` | `#f0ebe2` | Headings, body text |
-| Text muted | `--text-muted` | `#8a8070` | Secondary text, nav links |
-| Amber (accent) | `--accent` | `#c9853a` | CTAs, labels, borders, logo |
-| Amber hover | `--accent-light` | `#e8a055` | Hover states |
-| Border | `--border` | `#2e2c26` | Section dividers, card borders |
+The ground is paper, not night. Warm off-white with dark brown-black type, and a single
+burnt-orange accent.
 
-**Atmosphere:** Near-black backgrounds with amber warmth. Like firelight in a dark room.
+| Role | Variable | Hex | Notes |
+|---|---|---|---|
+| Primary text, and the mark | `--ink` | `#16130D` | Brown-black, not pure black |
+| Primary ground | `--bone` | `#F1EBDC` | The paper |
+| Second ground | `--bone-2` | `#E7DEC9` | Alternating sections |
+| Depth | `--charcoal` | `#2C2B29` | Blocks and quotes |
+| Accent | `--ember` | `#C0552A` | **Rules, borders, large display only** |
+| Accent, small text on light | `--ember-dark` | `#A5451E` | AA-safe |
+| Accent, button hover on light | `--ember-darker` | `#8A3A16` | |
+| Accent, small text on dark | `--ember-light` | `#E0764A` | AA-safe on ink or charcoal |
+| Muted text | `--muted` | `#5b5445` | On bone |
+| Muted, both grounds | `--muted-2` | `#615a4b` | AA on bone and bone-2 |
+| Body text on dark | `--on-dark` | `#cfc7b3` | |
 
----
+**The accessibility rule is load-bearing and easy to get wrong.** `--ember` fails AA at
+small sizes. It exists for hairlines, borders and large display type. Small coloured text
+uses `--ember-dark` on a light ground and `--ember-light` on a dark one. There are four
+ember variables precisely because one is not enough, so pick by context rather than by
+which looks closest.
 
-## 4. Typography
+Hairlines are `--line`, `--line-2` and `--line-strong` on bone, `--line-dark` on dark.
 
-### Display / Headings
-- Font: **EB Garamond**
-- Weights: 400 (italic), 500, 600, 700
-- Character: Literary. C.S. Lewis-era. Slows the reader down.
-- Use for: Hero headline, section headings, pull quotes, avatar numbers, nav drawer links
-
-### Body / UI
-- Font: **DM Sans**
-- Weights: 300 (body), 400, 500 (labels/buttons)
-- Character: Clean, readable. Does not compete with Garamond.
-- Use for: Body paragraphs, nav links, buttons, labels, metadata
-
-### Scale
-```
-h1: clamp(2.5rem, 6vw, 5rem)
-h2: clamp(1.75rem, 4vw, 2.5rem)
-h3: clamp(1.25rem, 2.5vw, 1.5rem)
-body: 1.0625rem / 1.7
-```
-
-### Rules
-- Headings: Garamond only
-- All caps labels: DM Sans 500, letter-spacing 0.08–0.1em, amber color
-- No mixing weights within a typographic role
+**Atmosphere:** warm paper with a single ember. Old book, not firelit room.
 
 ---
 
-## 5. Graphic Language
+## 3. Typography
 
-### Grain Texture
-CSS-only SVG turbulence filter applied via `.grain-bg` utility. Opacity: 0.035. Adds analog warmth — references old paper, leather, woodgrain. Use on hero sections.
+| Role | Variable | Family |
+|---|---|---|
+| Display and headings | `--display` | **Zilla Slab**, Georgia, serif |
+| Body | `--body` | **Spectral**, Georgia, serif |
+| Labels and kickers | `--mono` | **IBM Plex Mono**, ui-monospace |
 
-### Amber Border Accent
-Left border on scripture blocks, pull quotes. 3px solid `--accent`. Visual anchor for important content.
+Two serifs and a mono. The display face is a slab, which is the deliberate change from
+the old system: it carries weight at large sizes without the delicacy that made the
+previous headline face feel decorative.
 
-### Compass Rose Motif
-The compass is the brand mark. Use sparingly as decorative element:
-- Section dividers (small centered compass SVG)
-- Watermarks at low opacity on image sections
-- Do NOT overuse — it loses meaning if it appears on every element
+**Kickers and all-caps labels are mono**, not sans: 12px, weight 500, letter-spacing
+`.3em`, uppercase, in `--ember-dark`. This is the most distinctive typographic move on
+the site and the easiest to get wrong by reaching for a sans-serif.
 
-### Numbers / Ordinals
-Large Garamond numerals (01, 02, 03) in amber at low opacity. Used on avatar cards. Creates rhythm and visual interest without photography. Can extend to other card types.
+Body is 17px at 1.7 line height. Headings run at `line-height: 1.04` with
+`letter-spacing: -.01em` and `text-wrap: balance`.
 
-### No Photography (v1)
-The site does not rely on photography. The atmospheric video hero is the only motion element. All other visuals are typographic or CSS-based. This is intentional — it keeps the site fast, authoritative, and timeless.
-
-**When photography is added:** It should be dark, atmospheric, honest. Weathered hands on a book. A fire at night. A man walking a trail. Never posed, never stock-looking. Shoot in golden hour or firelight.
-
----
-
-## 6. Graphical Assets Wishlist
-
-These assets would strengthen the site. Ordered by priority.
-
-### Priority 1 — Logo Vector (immediate need)
-- [ ] Commission or create in Figma/Illustrator from the brief in Section 2
-- [ ] Export SVG — update Header.astro inline SVG with the real paths
-- [ ] Export PNG @3x transparent — store at `public/logo.png` for OG images, etc.
-
-### Priority 2 — Hero Video (in progress)
-- [ ] Generate 5–10s seamless loop via Runway Gen-3 / Kling / Luma
-- [ ] Prompt in: `prompts/hero-video-prompt.md`
-- [ ] Current placeholder: `public/bg2.mp4` — working but needs improvement
-- [ ] Final file: `public/hero-bg.mp4` (update `index.astro` `src` when ready)
-
-### Priority 3 — OG Image
-- [ ] Dark card: `#0f1117` background, compass rose mark centered, "Crown and Compass" in Garamond, tagline below in DM Sans
-- [ ] Size: 1200×630
-- [ ] Tool: Figma or generate via Satori in build step
-- [ ] Store at: `public/og-image.png`
-- [ ] Update `SEOHead.astro` `og:image` once created
-
-### Priority 4 — Favicon
-- [ ] Compass rose mark only (no wordmark)
-- [ ] Export: `public/favicon.ico` + `public/favicon.svg`
-- [ ] Currently using Astro default — this is the easiest swap
-
-### Priority 5 — Section Imagery (future)
-- [ ] 2–3 atmospheric photographs for about page and compass page backgrounds
-- [ ] See Section 5 photography direction above
-- [ ] AI generation prompts below
+**Never** stack more than these three families on a page.
 
 ---
 
-## 7. AI Image Generation Prompts
+## 4. Spacing
 
-Use these for Midjourney, Ideogram, Flux, or Runway still generation.
-
-### General Atmospheric (hero alternates, section bgs)
-```
-dark forest clearing at dusk, warm amber firelight glow from off-screen,
-ground fog, ancient oak trees, no people, ultra-wide cinematic,
-color palette: near-black and deep amber, film grain, 4k
-```
-
-### Man + Book / Reading
-```
-a man's hands holding an open leather-bound book near a campfire at night,
-dark moody lighting, amber and shadow, close crop, no face shown,
-photorealistic, film grain, cinematic
-```
-
-### Brotherhood / Fellowship (abstract)
-```
-silhouettes of two men walking a forest trail at sunrise, backlit,
-warm orange light through trees, no faces, contemplative mood,
-wide shot, cinematic grain
-```
-
-### Compass / Navigation (object)
-```
-aged brass compass on weathered wood, shallow depth of field,
-warm light from the left, dark background, amber and brown tones,
-product photography style, film grain
-```
-
-### Crown (object / symbol)
-```
-a simple iron crown resting on stone, harsh directional light,
-dramatic shadow, dark stone background, no ornamentation,
-austere, powerful, cinematic still life
-```
+A 4pt scale, named by relationship rather than by value, so the names survive a
+re-scaling: `--space-2xs` 4px through `--space-4xl` 96px. Use the token, never a literal.
 
 ---
 
-## 8. Voice Quick Reference
+## 5. Logo
 
-Full guide: `AI/CC/brand/voice.md`
+An inline SVG compass rose in `--ink`, not amber. No external file, no white background.
 
-**The character:** Barnabas — the encourager, the one who sees potential, the friend who walks alongside.
+**Source of truth:** `src/components/Header.astro`. The inline SVG is authoritative.
 
-**Tone:**
-- Contemplative, not urgent
-- Questions over declarations
-- Alongside, not above
-- Weight without heaviness
-- Honest, not polished
+- Circle perimeter, four cardinal arrows with north dominant, inner ring at low opacity,
+  centre dot
+- All paths use `currentColor`, so the mark inherits whatever colour its container sets
+- Lockup is mark at 28×28, then the wordmark in `--display`, with a 0.625rem gap
 
-**Never:**
-- Emojis
-- Litotes ("not bad", "not the worst", "not unlike")
-- Drill sergeant commands ("DO THIS. NOW.")
-- Hype / hustle language
-- Polished "content" voice
-
-**Model authors:** C.S. Lewis, Dallas Willard, Thomas à Kempis, Eugene Peterson
+**If a real vector logo is ever commissioned:** a crown integrated into a compass rose,
+earned rather than decorative. Clean and geometric, Filson rather than Harry Potter. Mark
+on transparent, working on both bone and ink grounds. Horizontal lockup as primary,
+mark-only for avatars and favicons, stacked for print. Clear space of one mark height,
+minimum 24px, delivered as SVG plus transparent PNG at 1x/2x/3x.
 
 ---
 
-## 9. Do's and Don'ts
+## 6. Graphic language
 
-### Do
+**Grain.** CSS-only SVG turbulence via `.grain-bg`, opacity 0.035. Analog warmth,
+referencing paper and leather.
+
+**Ember rule.** A 3px left border in `--ember` on scripture blocks and pull quotes. The
+visual anchor for weight.
+
+**Compass motif.** The mark doubles as a divider and a low-opacity watermark. Use it
+sparingly; it stops meaning anything if it appears on every element.
+
+**Ordinals.** Large `--display` numerals at low opacity, for rhythm without photography.
+
+**Imagery is governed by `design-grammar.md`, not by this file.** That document is the
+one the routines actually read, and it holds the photographic register, the sentence
+test, and the reject list. This file used to carry its own set of image prompts written
+for the old dark palette, and they contradicted it. They have been removed rather than
+updated, because two documents giving image direction is how the contradiction happened
+in the first place.
+
+---
+
+## 7. Voice
+
+Governed by `brand/voice.md` in this repo. Do not restate it here.
+
+The two rules that get broken most: **no litotes**, and **no throat-clearing**. Both are
+stated with their fixes in the voice file.
+
+---
+
+## 8. Do and do not
+
+**Do**
 - Let negative space breathe
-- Use amber sparingly — it only works because it's surrounded by dark
-- Trust the typography — a great Garamond headline needs no decoration
-- Write like you're talking to one man, not an audience
-- Keep the site fast — no large unoptimized images
+- Use ember sparingly. It works because everything around it is quiet, not because it is
+  surrounded by dark
+- Trust the typography. A good slab headline needs no decoration
+- Write to one man, not to an audience
+- Keep the site fast
 
-### Don't
-- Add icons for icon's sake (no icon libraries)
-- Use gradients (except subtle bg-to-transparent on video overlay)
-- Create elaborate section layouts that compete with text
-- Add animations beyond the scroll reveal and scroll cue
-- Stack more than two font families on one page
+**Do not**
+- Hardcode a hex. Every colour is a token
+- Reach for a compat alias. They resolve to the opposite of what their names suggest
+- Add icon libraries
+- Use gradients
+- Add animation beyond the scroll reveal and the scroll cue
+- Stack more than the three families above
 
 ---
 
-*This document is the authoritative design reference for Crown and Compass. Update it when design decisions change.*
+## 9. Provenance
+
+**Derived 6 September 2026** from `public/proto.css`, verified against the live stylesheet
+served by thecrownandcompass.org. The repo and production agree.
+
+**What this replaces.** The previous version was dated 21 February 2026 and carried the
+line "keep this file current". It described a dark design system that no longer exists:
+a `#0f1117` near-black ground, `#f0ebe2` cream text, EB Garamond and DM Sans, and a
+`#c9853a` amber accent. Every one of those values was wrong by the time anyone read it.
+
+**Why it was worse than simply stale.** The rebuild kept the old variable names as compat
+aliases, so a reader following the old document would write `--bg-base` and `--text-primary`
+and get correct-looking code that rendered inverted. A document that is obviously broken
+gets fixed. This one looked right.
+
+**What was removed rather than corrected.** Section 7 of the old file held five AI image
+prompts, all written for the dark palette ("near-black and deep amber", "dark moody
+lighting"). They contradicted `design-grammar.md`, which governs imagery and which the
+content routines actually read. Two files giving image direction is the failure, so the
+prompts are gone rather than rewritten.
+
+**Re-derive this file whenever `proto.css` changes its palette or type block**, and date
+it when you do. A standards document with no date beside it is not a fact.
