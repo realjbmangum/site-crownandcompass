@@ -195,7 +195,7 @@
       var r = await fetch('/api/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, how_you_heard: 'Start a chapter', message: message })
+        body: JSON.stringify({ name: name, email: email, how_you_heard: 'Start a chapter', message: message, intent: 'start' })
       });
       var d = await r.json().catch(function () { return {}; });
       if (r.ok) {
