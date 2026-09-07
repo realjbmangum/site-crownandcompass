@@ -60,6 +60,10 @@
   .opt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted-2);text-transform:none;}
   .alt-line{margin-top:22px;padding-top:18px;border-top:1px solid var(--line-2);}
   .alt-line a:hover{text-decoration:underline;}
+  .intent-choices{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+  .intent-choices .choice{display:flex;align-items:flex-start;gap:10px;font-family:var(--body);font-size:15px;line-height:1.45;color:var(--ink);cursor:pointer;}
+  .intent-choices .choice input{margin-top:4px;flex:none;accent-color:var(--ember);}
+  .intent-choices .choice strong{font-weight:600;}
 </style>
 </head>
 <body>
@@ -144,6 +148,15 @@
               <input type="email" id="email" name="email" placeholder="you@example.com" />
             </div>
             <div class="field">
+            <div class="field">
+              <label>What are you looking for?</label>
+              <div class="intent-choices">
+                <label class="choice"><input type="radio" name="intent" value="join" checked /><span><strong>Join a Watch</strong> &mdash; read with a group that already meets</span></label>
+                <label class="choice"><input type="radio" name="intent" value="start" /><span><strong>Start my own Watch</strong> &mdash; lead a group of men you already know</span></label>
+                <label class="choice"><input type="radio" name="intent" value="unsure" /><span><strong>Not sure yet</strong> &mdash; show me how it works</span></label>
+              </div>
+              <p class="form-note" style="margin-top:10px;">Both are real doors. A Watch you lead is your men, your hour, your city.</p>
+            </div>
               <label for="how">How did you hear about us?</label>
               <input type="text" id="how" name="how" placeholder="A friend, word of mouth, just found it" />
             </div>
@@ -198,10 +211,12 @@
     btn.disabled = true;
     btn.textContent = 'Sending...';
     try {
+      var picked = f.querySelector('input[name="intent"]:checked');
+      var intent = picked ? picked.value : 'unsure';
       var r = await fetch('/api/join', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, how_you_heard: how, message: message })
+        body: JSON.stringify({ name: name, email: email, how_you_heard: how, message: message, intent: intent })
       });
       var d = await r.json().catch(function () { return {}; });
       if (r.ok) {

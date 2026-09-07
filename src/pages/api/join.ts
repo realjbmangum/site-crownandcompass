@@ -7,7 +7,7 @@ import { brandEmail } from '../../lib/email-template';
 export async function POST({ request, locals }: APIContext) {
   try {
     const body = await request.json();
-    const { name, email, how_you_heard, message } = body as Record<string, string>;
+    const { name, email, how_you_heard, message, intent } = body as Record<string, string>;
 
     if (!name?.trim() || !email?.trim()) {
       return new Response(JSON.stringify({ error: 'Name and email are required.' }), {
@@ -37,6 +37,12 @@ export async function POST({ request, locals }: APIContext) {
       });
     }
 
+    // What the man is actually asking for. Anything unrecognised becomes
+    // 'unsure' rather than a guess — a wrong guess here puts him in somebody
+    // else's Watch, which is the bug this field exists to stop.
+    const INTENTS = ['join', 'start', 'unsure'];
+    const wants = INTENTS.includes((intent || '').trim()) ? intent.trim() : 'unsure';
+
     // @ts-ignore — D1 binding injected by Cloudflare runtime
     const db = locals.runtime?.env?.DB;
     if (!db) {
@@ -49,19 +55,21 @@ export async function POST({ request, locals }: APIContext) {
 
     await db
       .prepare(
-        `INSERT INTO subscribers (name, email, how_you_heard, message)
-         VALUES (?, ?, ?, ?)
+        `INSERT INTO subscribers (name, email, how_you_heard, message, intent)
+         VALUES (?, ?, ?, ?, ?)
          ON CONFLICT(email) DO UPDATE SET
            name = excluded.name,
            how_you_heard = excluded.how_you_heard,
            message = excluded.message,
+           intent = excluded.intent,
            updated_at = CURRENT_TIMESTAMP`
       )
       .bind(
         name.trim(),
         email.trim().toLowerCase(),
         how_you_heard?.trim() || null,
-        message?.trim() || null
+        message?.trim() || null,
+        wants
       )
       .run();
 
@@ -74,11 +82,11 @@ export async function POST({ request, locals }: APIContext) {
     try {
       const res = await db
         .prepare(
-          `INSERT INTO members (name, email, role, status)
-           VALUES (?, ?, 'member', 'applied')
+          `INSERT INTO members (name, email, role, status, intent)
+           VALUES (?, ?, 'member', 'applied', ?)
            ON CONFLICT(email) DO NOTHING`
         )
-        .bind(name.trim(), email.trim().toLowerCase())
+        .bind(name.trim(), email.trim().toLowerCase(), wants)
         .run();
       onRoster = (res.meta?.changes ?? 0) > 0;
     } catch (err) {
@@ -104,6 +112,7 @@ export async function POST({ request, locals }: APIContext) {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #DCD3BC;">
           <tr><td style="${label}">Name</td><td style="${value}">${safeName}</td></tr>
           <tr><td style="${label}">Email</td><td style="${value}"><a href="mailto:${safeEmail}" style="color:#C0552A;text-decoration:none;">${safeEmail}</a></td></tr>
+          <tr><td style="${label}">Wants</td><td style="${value}"><strong>${wants === 'start' ? 'To start his own Watch' : wants === 'join' ? 'To join a Watch' : 'Not sure yet'}</strong></td></tr>
           <tr><td style="${label}">How they heard</td><td style="${value}">${safeHow}</td></tr>
           <tr><td style="${label}">Message</td><td style="${value}">${safeMessage}</td></tr>
         </table>
