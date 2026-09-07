@@ -60,10 +60,23 @@
   .opt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted-2);text-transform:none;}
   .alt-line{margin-top:22px;padding-top:18px;border-top:1px solid var(--line-2);}
   .alt-line a:hover{text-decoration:underline;}
-  .intent-choices{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
-  .intent-choices .choice{display:flex;align-items:flex-start;gap:10px;font-family:var(--body);font-size:15px;line-height:1.45;color:var(--ink);cursor:pointer;}
-  .intent-choices .choice input{margin-top:4px;flex:none;accent-color:var(--ember);}
-  .intent-choices .choice strong{font-weight:600;}
+  /* These sit inside .field, which styles every label as a mono uppercase
+     caption and every input at width:100%. Both have to be undone here or the
+     radio fills the row and the option text is squeezed into a column two
+     words wide. */
+  .intent-choices{display:flex;flex-direction:column;gap:12px;margin-top:10px;}
+  .intent-choices .choice{
+    display:flex;align-items:flex-start;gap:11px;cursor:pointer;
+    font-family:var(--body);font-size:15px;line-height:1.5;color:var(--ink);
+    font-weight:400;text-transform:none;letter-spacing:normal;margin-bottom:0;
+  }
+  .intent-choices .choice input[type="radio"]{
+    width:auto;min-width:0;flex:0 0 auto;margin:5px 0 0;padding:0;
+    accent-color:var(--ember);
+  }
+  .intent-choices .choice span{flex:1 1 auto;}
+  .intent-choices .choice strong{font-weight:600;color:var(--ink);}
+  .intent-choices .choice:hover strong{color:var(--ember-dark);}
 </style>
 </head>
 <body>
