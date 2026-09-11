@@ -232,7 +232,7 @@ function bibleGatewayHref(ref) {
 }
 
 function renderPage(d, protoVersion) {
-  const canonical = `${CANONICAL_ORIGIN}/guide-${d.slug}.html`;
+  const canonical = `${CANONICAL_ORIGIN}/guide-${d.slug}`;
   const pageTitle = `${d.title} Discussion Questions · Crown and Compass`;
 
   const jsonLd = {
