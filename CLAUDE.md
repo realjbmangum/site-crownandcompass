@@ -113,6 +113,26 @@ For the build, export sized versions (a small header mark, a hero-size one) in a
    - Output directory: `dist`
 3. Add custom domain when ready
 
+## URLs and routing (`public/_routes.json`, `public/_redirects`)
+
+One URL per document: **extensionless, no trailing slash** (`/about`), with `/`
+for home. The sitemap, every canonical tag, every JSON-LD `url` and every
+internal link use that form. `/about.html` and `/about/` both 308 to it.
+
+`public/_routes.json` is committed on purpose and sends **only `/api/*`** to the
+Astro worker. Without it the adapter generates `include: ["/*"]`, every page
+request wakes the worker, misses (there are no Astro pages), and is answered
+from `env.ASSETS.fetch()` — a path that skips `_redirects` entirely, which is
+why `/about/` used to return 200 instead of redirecting. The adapter leaves an
+existing `_routes.json` alone, so this file wins over the generated one.
+
+**If you ever add a server-rendered Astro page or endpoint, add it to
+`include` or it will 404.**
+
+`public/_redirects` holds the one placeholder rule `/:page/ /:page 308`. It
+needs no edit when a page is added. The `.html` → clean 308 is Cloudflare's own
+behavior, not a rule here; do not remove it as an entry point, old links use it.
+
 ## Session Log
 
 ### Feb 21, 2026 — Session 1
@@ -252,3 +272,38 @@ live verification in a real browser. Commits `141a7fe` + `2c6274e` on `main`.
 - The `books.description` column + `book_guides` table live in the shared D1
   (owned by the app repo's schema). Applied via `wrangler --remote`.
 - **Reminder: any `proto.css` change must bump the `?v=` on all 37 pages.**
+
+### Sep 11, 2026 — SEO pack 001 (one URL per page)
+
+Five fixes from Simone Park's SEO pack 001. The theme is that the site had been
+offering three addresses for each document — `/about`, `/about.html`, `/about/` —
+and its structured data picked whichever it liked.
+
+- **Internal links now use the canonical path.** 1,102 hrefs said `about.html`
+  while the sitemap, the canonical tag and the JSON-LD said `/about`; Pages 308s
+  the `.html` form, so every click was a two-hop trip. `gen-guide-page.mjs`
+  emitted the same nav, so it was fixed too. The `.html` 308 stays as the legacy
+  entry point.
+- **45 JSON-LD `url` values now match their canonical tag.** The generator built
+  its canonical with `.html` and reused it for the Book schema; one line fixed
+  both.
+- **Trailing slash 308s to the non-slash form.** This needed a routing change,
+  not just a rule — see the routing section above. Short version: the adapter's
+  `include: ["/*"]` sent pages to the worker, which missed and answered from
+  `env.ASSETS.fetch()`, a path that never reads `_redirects`. Committed
+  `public/_routes.json` narrows the worker to `/api/*`; `public/_redirects` has
+  the one rule. It also fixed a real bug — relative asset paths under `/about/`
+  resolved to `/about/assets/…`, so that URL served a page with a broken logo.
+- **Home `og:type` is `website`**, not `article`. Only the root. Every other
+  page still carries the same copy-pasted `article`, hubs included; separating
+  the real posts from the hubs is a judgement call left for later.
+- **Home `Organization` gained `@id`, `logo` (`assets/cc-black.png`), `image`
+  and `sameAs`**, and `WebSite` now names it as publisher. `sameAs` lists only
+  `x.com/realjbmangum`, the handle the join page already gives out — nothing
+  else is claimed anywhere in the repo. No `SearchAction`: there is no search
+  endpoint, and describing one that does not exist is worse than none.
+
+Verified against `wrangler pages dev dist`: all 51 pages answer 200 on the clean
+URL and 308 (single hop) from both the `.html` and trailing-slash forms, `/`
+stays 200, the 404 page still 404s, `_headers` still applies, and the three
+`/api/*` routes still reach the worker.
