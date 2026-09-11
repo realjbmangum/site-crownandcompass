@@ -113,6 +113,26 @@ For the build, export sized versions (a small header mark, a hero-size one) in a
    - Output directory: `dist`
 3. Add custom domain when ready
 
+## URLs and routing (`public/_routes.json`, `public/_redirects`)
+
+One URL per document: **extensionless, no trailing slash** (`/about`), with `/`
+for home. The sitemap, every canonical tag, every JSON-LD `url` and every
+internal link use that form. `/about.html` and `/about/` both 308 to it.
+
+`public/_routes.json` is committed on purpose and sends **only `/api/*`** to the
+Astro worker. Without it the adapter generates `include: ["/*"]`, every page
+request wakes the worker, misses (there are no Astro pages), and is answered
+from `env.ASSETS.fetch()` — a path that skips `_redirects` entirely, which is
+why `/about/` used to return 200 instead of redirecting. The adapter leaves an
+existing `_routes.json` alone, so this file wins over the generated one.
+
+**If you ever add a server-rendered Astro page or endpoint, add it to
+`include` or it will 404.**
+
+`public/_redirects` holds the one placeholder rule `/:page/ /:page 308`. It
+needs no edit when a page is added. The `.html` → clean 308 is Cloudflare's own
+behavior, not a rule here; do not remove it as an entry point, old links use it.
+
 ## Session Log
 
 ### Feb 21, 2026 — Session 1

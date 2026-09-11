@@ -1,0 +1,13 @@
+# One URL per document. The sitemap, the canonical tags and the internal links
+# all use the extensionless, no-trailing-slash form, so anything else has to be
+# a redirect rather than a second address that answers 200.
+#
+# The trailing-slash form served the page outright before this file existed, and
+# it also broke the relative asset paths in the markup (`/about/` resolves
+# `assets/cc-white.png` to `/about/assets/cc-white.png`), so this fixes a real
+# rendering bug as well as the duplicate URL.
+#
+# One placeholder rule covers the whole flat site; there is nothing to add here
+# when a page is added. Cloudflare Pages redirects `/about.html` to `/about`
+# on its own, so the legacy `.html` entry points keep working without a rule.
+/:page/  /:page  308
