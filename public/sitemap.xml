@@ -133,6 +133,10 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://thecrownandcompass.org/fight-club-with-books</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://thecrownandcompass.org/download-daily-tracker</loc>
     <priority>0.5</priority>
   </url>
