@@ -10,4 +10,10 @@
 # One placeholder rule covers the whole flat site; there is nothing to add here
 # when a page is added. Cloudflare Pages redirects `/about.html` to `/about`
 # on its own, so the legacy `.html` entry points keep working without a rule.
+#
+# /reading-guide is the stable hub for "the book we are reading now." It 308s
+# to the current public guide. Swap the destination when the cycle changes;
+# archived guides keep their own /guide-<slug> URL.
+/reading-guide/  /guide-killing-kryptonite  308
+/reading-guide   /guide-killing-kryptonite  308
 /:page/  /:page  308
