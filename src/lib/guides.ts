@@ -23,18 +23,35 @@ export const SITE_GUIDE_PATHS: Record<string, string> = {
   'the-man-in-the-mirror': '/guide-the-man-in-the-mirror',
 };
 
-function isStaleHub(url: string): boolean {
+function pathOf(url: string): string {
+  if (!url.startsWith('http')) return url;
   try {
-    const path = url.startsWith('http') ? new URL(url).pathname : url;
-    return path === '/reading-guide' || path === '/reading-guide.html';
+    return new URL(url).pathname;
   } catch {
-    return false;
+    return url;
   }
+}
+
+function isStaleHub(url: string): boolean {
+  const path = pathOf(url);
+  return path === '/reading-guide' || path === '/reading-guide.html';
+}
+
+/** Member-app path (`/guide/<slug>`). 404s on the public site, which uses `/guide-<slug>`. */
+function isAppGuidePath(url: string, slug: string): boolean {
+  const path = pathOf(url).replace(/\/$/, '');
+  return path === `/guide/${slug}`;
 }
 
 export function resolveGuideUrl(slug: unknown, dbGuideUrl: unknown): string | null {
   const fromDb = typeof dbGuideUrl === 'string' ? dbGuideUrl.trim() : '';
   const known = typeof slug === 'string' ? SITE_GUIDE_PATHS[slug] : undefined;
-  if (fromDb && !isStaleHub(fromDb)) return fromDb;
+  // Public pages win over a null D1 value, the old hub URL, and the app path
+  // `/guide/<slug>` (which 404s on this site). A real public/absolute D1 URL
+  // still wins when it is none of those.
+  const dbIsAppPath = typeof slug === 'string' && isAppGuidePath(fromDb, slug);
+  if (fromDb && !isStaleHub(fromDb) && !(known && dbIsAppPath)) {
+    return fromDb;
+  }
   return known ?? null;
 }

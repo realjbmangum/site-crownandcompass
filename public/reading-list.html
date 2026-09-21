@@ -297,8 +297,8 @@
     'killing-kryptonite':'/guide-killing-kryptonite'
   };
   function guideHref(b){
-    if(b.guide_url) return b.guide_url;
     if(SITE_GUIDES[b.slug]) return SITE_GUIDES[b.slug];
+    if(b.guide_url) return b.guide_url;
     if(b.has_guide) return 'https://app.thecrownandcompass.org/guide/'+b.slug;
     return null;
   }
