@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { resolvePublicGuideUrl } from '../../lib/site-guides';
 
 const EMPTY = { title: null };
 
@@ -33,7 +34,10 @@ export async function GET({ locals }: APIContext) {
       slug: row.slug ?? null,
       cover_url: row.cover_url ?? null,
       buy_url: row.buy_url ?? null,
-      guide_url: row.guide_url ?? null,
+      guide_url: resolvePublicGuideUrl(
+        typeof row.slug === 'string' ? row.slug : null,
+        typeof row.guide_url === 'string' ? row.guide_url : null
+      ),
     });
   } catch (err) {
     console.error('current-book API error:', err);
