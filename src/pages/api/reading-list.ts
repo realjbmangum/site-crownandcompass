@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { resolveGuideUrl } from '../../lib/guides';
 
 // Public reading list for the shelf: the current book plus the "where we have
 // been" shelf. The shelf is every book with a blurb except the current one,
@@ -46,7 +47,18 @@ export async function GET({ locals }: APIContext) {
       .bind(currentId)
       .all();
 
-    return json({ current: current ?? null, shelf: results ?? [] }, cache);
+    const withGuides = (book: { slug?: unknown; guide_url?: unknown } | null | undefined) => {
+      if (!book) return null;
+      return { ...book, guide_url: resolveGuideUrl(book.slug, book.guide_url) };
+    };
+
+    return json(
+      {
+        current: withGuides(current),
+        shelf: (results ?? []).map(withGuides),
+      },
+      cache
+    );
   } catch (err) {
     console.error('reading-list API error:', err);
     return json({ current: null, shelf: [] }, cache);
