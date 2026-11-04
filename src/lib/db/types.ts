@@ -27,7 +27,7 @@ export interface R2Bucket {
   put(
     key: string,
     value: ArrayBuffer | ArrayBufferView | ReadableStream | string,
-    options?: { httpMetadata?: { contentType?: string } }
+    options?: { httpMetadata?: { contentType?: string }; customMetadata?: Record<string, string> }
   ): Promise<unknown>;
   get(key: string): Promise<R2ObjectBody | null>;
   list(options?: { prefix?: string; limit?: number }): Promise<{ objects: { key: string }[] }>;
