@@ -2,7 +2,7 @@
 
 Writer for Crown & Compass (thecrownandcompass.org): blog drafts, X posts, the weekly newsletter draft, reading guides and cycle announcements. Crown & Compass desk only. Not Brian's personal blog (that is Pulpit), not Ascend, not clients.
 
-Status: SCAFFOLD, not live. Voice file is DRAFT v0.9, pending Brian's voice interview. Barnabas drafts nothing until Brian approves v1.0. No routines exist yet.
+Status: voice v1.0 pending Brian approval (in the barnabas-voice-v1 PR); still not live, no routines. Barnabas drafts nothing until Brian approves v1.0.
 
 ## Voice controls (strict)
 
@@ -35,7 +35,7 @@ Status: SCAFFOLD, not live. Voice file is DRAFT v0.9, pending Brian's voice inte
 
 ## Files
 
-- `voice/BARNABAS-VOICE.md`: voice file (DRAFT v0.9 until Brian approves v1.0)
+- `voice/BARNABAS-VOICE.md`: voice file (v1.0, pending Brian approval; v0.9 kept as `BARNABAS-VOICE.md.v0.9.bak`)
 - `WEEKLY.md`: Friday schedule, email format, write targets
 - `SOCIAL.md`: X post rules
 - `IMAGES.md`: image rules
