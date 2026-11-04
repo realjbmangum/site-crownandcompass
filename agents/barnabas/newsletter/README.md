@@ -1,0 +1,1 @@
+Weekly newsletter drafts (plain text) go here as YYYY-MM-DD.md. Brian pastes and sends from the members app. Barnabas never sends. The members app refuses to send until the SendGrid unsubscribe group id is set.
