@@ -16,4 +16,31 @@
 # archived guides keep their own /guide-<slug> URL.
 /reading-guide/  /guide-killing-kryptonite  308
 /reading-guide   /guide-killing-kryptonite  308
+/blog-post   /blog/the-long-walk  301
+/blog-post/  /blog/the-long-walk  301
+
+# Essays now render from D1 at /blog/<slug>. The old root URLs 301 there.
+# chasing-dopamine and wife-feel-loved stay on their current pages.
+/fight-club-with-books    /blog/fight-club-with-books    301
+/fight-club-with-books/   /blog/fight-club-with-books    301
+/travel-schedule-idol     /blog/travel-schedule-idol     301
+/travel-schedule-idol/    /blog/travel-schedule-idol     301
+/so-does-sedation         /blog/so-does-sedation         301
+/so-does-sedation/        /blog/so-does-sedation         301
+/fifteen-percent-no-friends   /blog/fifteen-percent-no-friends   301
+/fifteen-percent-no-friends/  /blog/fifteen-percent-no-friends   301
+/the-long-walk            /blog/the-long-walk            301
+/the-long-walk/           /blog/the-long-walk            301
+/projects-priorities      /blog/projects-priorities      301
+/projects-priorities/     /blog/projects-priorities      301
+/question-cut-through     /blog/question-cut-through     301
+/question-cut-through/    /blog/question-cut-through     301
+/verse-in-your-pocket     /blog/verse-in-your-pocket     301
+/verse-in-your-pocket/    /blog/verse-in-your-pocket     301
+/falling-in-love-again    /blog/falling-in-love-again    301
+/falling-in-love-again/   /blog/falling-in-love-again    301
+/prioritize-your-mind     /blog/prioritize-your-mind     301
+/prioritize-your-mind/    /blog/prioritize-your-mind     301
+/blog/:slug/              /blog/:slug                    301
+
 /:page/  /:page  308
