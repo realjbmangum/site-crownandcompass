@@ -195,14 +195,19 @@ a.card,.card.hover{cursor:pointer;}
 .nav-menu a{display:block;padding:11px 22px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark);white-space:nowrap;}
 .nav-menu a:hover{color:var(--bone);background:rgba(241,235,220,.06);}
 @media(max-width:940px){.nav a:not(.btn-nav){display:none;}.nav-more{display:none;}}
+/* Keep the brand name on one line next to Join + the menu button on phones */
+@media(max-width:440px){.site-header .brand{gap:9px;}.site-header .brand img{height:34px!important;}.site-header .brand .name{font-size:15px;letter-spacing:.05em;white-space:nowrap;}.nav a.btn-nav{padding:10px 14px;}}
 
-.site-footer{background:var(--charcoal);color:var(--bone);padding:14px 0;}
-.site-footer .brand img{height:22px!important;}
+.site-footer{background:var(--charcoal);color:var(--bone);padding:34px 0 22px;}
+.site-footer .brand img{height:34px!important;}
 .site-footer .ft{display:flex;justify-content:space-between;align-items:center;gap:18px 24px;flex-wrap:wrap;}
 .site-footer .name{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.08em;text-transform:uppercase;}
 .site-footer .ft-links{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-dark-mute);}
 .site-footer .ft-links a{color:var(--on-dark-mute);} .site-footer .ft-links a:hover{color:var(--bone);}
 .site-footer .cr{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(241,235,220,.4);}
+.site-footer .ft-base{margin-top:26px;padding-top:18px;border-top:1px solid var(--line-dark);}
+.site-footer .ft-base .cr{margin:0;line-height:1.8;}
+.site-footer .ft-base a{color:var(--on-dark-mute);} .site-footer .ft-base a:hover{color:var(--bone);}
 
 /* emblem placeholder (real logo-white.png / logo-ink.png drop in for the build) */
 .emblem-ph{display:inline-flex;align-items:center;justify-content:center;color:currentColor;}
