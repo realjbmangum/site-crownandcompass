@@ -1,0 +1,82 @@
+{
+  "key_layout": "blog/YYYY/MM/<slug>/NN.ext",
+  "public_path": "/media/<key>",
+  "bucket_production": "crownandcompass-media",
+  "bucket_preview": "crownandcompass-media-preview",
+  "excluded_slugs": [
+    "chasing-dopamine",
+    "wife-feel-loved"
+  ],
+  "objects": [
+    {
+      "slug": "projects-priorities",
+      "key": "blog/2025/11/projects-priorities/01.jpg",
+      "source": "public/img/the-desk.jpg",
+      "content_type": "image/jpeg",
+      "alt": "My projects are killing my priorities"
+    },
+    {
+      "slug": "fifteen-percent-no-friends",
+      "key": "blog/2025/11/fifteen-percent-no-friends/01.jpg",
+      "source": "public/img/two-men.jpg",
+      "content_type": "image/jpeg",
+      "alt": "Fifteen percent of men have no close friends"
+    },
+    {
+      "slug": "prioritize-your-mind",
+      "key": "blog/2025/11/prioritize-your-mind/01.jpg",
+      "source": "public/img/evening-study.jpg",
+      "content_type": "image/jpeg",
+      "alt": "You say you prioritize your mind"
+    },
+    {
+      "slug": "falling-in-love-again",
+      "key": "blog/2025/12/falling-in-love-again/01.jpg",
+      "source": "public/img/the-porch.jpg",
+      "content_type": "image/jpeg",
+      "alt": "Falling in love again"
+    },
+    {
+      "slug": "question-cut-through",
+      "key": "blog/2025/12/question-cut-through/01.jpg",
+      "source": "public/img/online-meeting.jpg",
+      "content_type": "image/jpeg",
+      "alt": "The question that cut through"
+    },
+    {
+      "slug": "the-long-walk",
+      "key": "blog/2025/12/the-long-walk/01.jpg",
+      "source": "public/img/the-trail.jpg",
+      "content_type": "image/jpeg",
+      "alt": "a narrow trail through dry hills at golden hour, one figure walking"
+    },
+    {
+      "slug": "verse-in-your-pocket",
+      "key": "blog/2025/12/verse-in-your-pocket/01.jpg",
+      "source": "public/img/scripture.jpg",
+      "content_type": "image/jpeg",
+      "alt": "The verse in your pocket"
+    },
+    {
+      "slug": "so-does-sedation",
+      "key": "blog/2026/09/so-does-sedation/01.jpg",
+      "source": "public/img/so-does-sedation.jpg",
+      "content_type": "image/jpeg",
+      "alt": "So does sedation"
+    },
+    {
+      "slug": "travel-schedule-idol",
+      "key": "blog/2026/09/travel-schedule-idol/01.jpg",
+      "source": "public/img/travel-schedule-idol.jpg",
+      "content_type": "image/jpeg",
+      "alt": "An idol with a travel schedule"
+    },
+    {
+      "slug": "fight-club-with-books",
+      "key": "blog/2026/09/fight-club-with-books/01.png",
+      "source": "public/img/fight-club-with-books.png",
+      "content_type": "image/png",
+      "alt": "Fight Club with books"
+    }
+  ]
+}

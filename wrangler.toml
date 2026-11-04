@@ -3,7 +3,26 @@ compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "dist"
 
+# Production bindings. Preview deployments override DB and MEDIA below so a
+# preview build cannot read or write the shared crownandcompass database
+# (members app) or the production media bucket.
 [[d1_databases]]
 binding = "DB"
 database_name = "crownandcompass"
 database_id = "e6c99627-f2a8-48be-9157-5747f5caaf63"
+preview_database_id = "07b68b52-0c76-41aa-9a45-a020b323a455"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "crownandcompass-media"
+preview_bucket_name = "crownandcompass-media-preview"
+
+# Pages preview environment. Bindings are not inherited, so both are set.
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "crownandcompass-preview"
+database_id = "07b68b52-0c76-41aa-9a45-a020b323a455"
+
+[[env.preview.r2_buckets]]
+binding = "MEDIA"
+bucket_name = "crownandcompass-media-preview"

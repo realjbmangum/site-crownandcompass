@@ -1,0 +1,155 @@
+---
+export const prerender = false;
+
+import SiteFrame from '../../components/SiteFrame.astro';
+import { legacyHtml } from '../../lib/content/fallback';
+import { displayAuthor, formatLongDate, readMinutes } from '../../lib/content/posts';
+import { renderBody } from '../../lib/content/render';
+import { blogEnv } from '../../lib/db/types';
+import { getPublished, relatedPosts } from '../../lib/db/posts';
+import type { PostRow } from '../../lib/content/posts';
+
+const slug = Astro.params.slug ?? '';
+const origin = 'https://thecrownandcompass.org';
+const env = blogEnv(Astro.locals);
+let post: PostRow | null = null;
+let failed = false;
+if (!env.DB) failed = true;
+else {
+  try {
+    post = await getPublished(env.DB, slug);
+  } catch (err) {
+    console.error('blog post:', err);
+    failed = true;
+  }
+}
+if (failed || !post) {
+  const fallback = await legacyHtml(Astro.locals, Astro.request, slug);
+  if (fallback) return fallback;
+}
+if (!post) {
+  Astro.response.status = 404;
+}
+const related: PostRow[] = post && env.DB ? await relatedPosts(env.DB, post.slug, post.tag).catch(() => []) : [];
+const canonical = `${origin}/blog/${slug}`;
+const image = post?.hero_image_key ? `${origin}/media/${post.hero_image_key}` : undefined;
+const html = post ? renderBody(post.body) : '';
+const jsonLd = post
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.description,
+      url: canonical,
+      mainEntityOfPage: canonical,
+      datePublished: post.pub_date,
+      dateModified: (post.updated_at || post.pub_date).slice(0, 10),
+      author: { '@type': 'Person', name: displayAuthor(post.author) },
+      publisher: { '@type': 'Organization', name: 'Crown and Compass', url: origin },
+      ...(image ? { image } : {}),
+    }
+  : undefined;
+if (post) Astro.response.headers.set('Cache-Control', 'public, max-age=60');
+
+function heroStyle(key: string): string {
+  return `background-image:url('/media/${key}');background-size:cover;background-position:center;background-repeat:no-repeat;`;
+}
+---
+<SiteFrame
+  title={post ? `${post.title} · Crown and Compass` : 'Not found · Crown and Compass'}
+  description={post ? post.description : 'That essay is not on the shelf.'}
+  canonical={post ? canonical : `${origin}/blog`}
+  image={image}
+  imageAlt={post?.hero_image_alt ?? undefined}
+  jsonLd={jsonLd}
+>
+  {post ? (
+    <>
+      <section class="section bone article-head">
+        <div class="wrap narrow" style="margin:0 auto;">
+          <a class="back-link" href="/blog">&larr; All articles</a>
+          {post.tag && <span class="tag">{post.tag}</span>}
+          <h1 class="article-title">{post.title}</h1>
+          <div class="byline">
+            <span>By {displayAuthor(post.author)}</span>
+            <span class="dot"></span>
+            <span>{formatLongDate(post.pub_date)}</span>
+            <span class="dot"></span>
+            <span>{readMinutes(post.body)} min read</span>
+          </div>
+        </div>
+        {post.hero_image_key && (
+          <div class="wrap">
+            <div class="imgph dark hero-img filled" role="img" aria-label={post.hero_image_alt ?? ''} style={heroStyle(post.hero_image_key)}></div>
+          </div>
+        )}
+      </section>
+      <section class="section bone article-body">
+        <div class="wrap">
+          <div class="prose" set:html={html} />
+          <div class="share">
+            <span>Share</span>
+            <a class="share-copy" role="button" tabindex="0" style="cursor:pointer;">Copy link</a>
+            <a class="share-email" href="mailto:">Share with a friend</a>
+          </div>
+        </div>
+      </section>
+      {related.length > 0 && (
+        <section class="section bone2">
+          <div class="wrap">
+            <div class="sec-head"><p class="kicker kicker-rule">Keep reading</p><h2>More from the walk.</h2></div>
+            <div class="related-grid">
+              {related.map((row) => (
+                <a class="card" href={`/blog/${row.slug}`}>
+                  {row.tag && <span class="tag">{row.tag}</span>}
+                  <h3 style="font-size:20px;margin:12px 0 8px;">{row.title}</h3>
+                  <p class="ex" style="font-family:var(--body);font-size:15px;line-height:1.6;color:var(--muted);margin:0;">{row.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+      <section class="section ink center">
+        <div class="wrap narrow" style="margin:0 auto;">
+          <p class="kicker" style="justify-content:center;display:flex;">The Next Cycle</p>
+          <h2>Read the next book with us.</h2>
+          <p class="sec-sub" style="max-width:46ch;margin:14px auto 28px;">One book every six weeks, online, with men who mean it. Tell us a little about you and a real person will write back with the next book and how to join.</p>
+          <a href="/join" class="btn btn-ember">Join the Brotherhood</a>
+        </div>
+      </section>
+    </>
+  ) : (
+    <section class="section bone">
+      <div class="wrap narrow" style="margin:0 auto;">
+        <p class="kicker kicker-rule">The Blog</p>
+        <h1>That essay is not on the shelf.</h1>
+        <p class="prose" style="margin-top:18px;"><a href="/blog">Back to the journal.</a></p>
+      </div>
+    </section>
+  )}
+</SiteFrame>
+<script>
+  (function () {
+    function wire() {
+      document.querySelectorAll('.share-copy').forEach(function (el) {
+        var original = el.textContent;
+        el.addEventListener('click', function () {
+          navigator.clipboard.writeText(window.location.href).then(function () {
+            el.textContent = 'Copied';
+            setTimeout(function () { el.textContent = original; }, 1600);
+          });
+        });
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+        });
+      });
+      document.querySelectorAll('.share-email').forEach(function (el) {
+        el.setAttribute('href', 'mailto:?subject=' + encodeURIComponent(document.title) +
+          '&body=' + encodeURIComponent('Thought you might want to read this. ' + window.location.href));
+      });
+    }
+    if (document.readyState !== 'loading') wire();
+    else document.addEventListener('DOMContentLoaded', wire);
+  })();
+</script>
