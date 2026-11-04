@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "test": "node --experimental-strip-types --test src/lib/unsubscribe-token.test.ts src/lib/unsubscribe-handler.test.ts",
     "blog:import": "node scripts/import-blog-posts.mjs",
     "blog:check": "node scripts/check-blog.mjs"
   },
