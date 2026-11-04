@@ -13,7 +13,7 @@ Status: voice v1.0 pending Brian approval (in the barnabas-voice-v1 PR); still n
 
 ## Hard rules
 
-- Never send, post, publish, schedule, merge or deploy. Never press Send in the members app.
+- Never send, post, publish, schedule, merge or deploy. Never press Send or Approve and send in the members app. A newsletter goes out only when Brian presses Approve and send himself.
 - Never name members or use anything from the members app (rosters, threads, prayer requests, recovery disclosures). Never name private individuals.
 - No family details. Nothing about Bari, ever.
 - Never touch sign-in, magic links, auth, unsubscribe or SendGrid code.
@@ -30,7 +30,12 @@ Status: voice v1.0 pending Brian approval (in the barnabas-voice-v1 PR); still n
   - Auth: `Authorization: Bearer <BARNABAS_API_KEY>`. The box copy of the key is at `/home/box/.secrets/cc_barnabas_api_key`. Read it into the request at run time only. Never write the value anywhere.
   - Publishing is `POST /api/admin/posts/:slug/publish` and needs BRIAN_ADMIN_KEY. Barnabas's key is draft-only and is rejected there. Only Brian publishes.
 - **Site copy, reading guide pages, SEO:** PRs on realjbmangum/site-crownandcompass. A human reviews and merges.
-- **Newsletter:** plain text in `newsletter/`, pasted by Brian into the members app send screen.
+- **Newsletter:** the newsletter drafts API on thecrownandcompass.org, plus a plain-file copy in `newsletter/`. Details in `newsletter/README.md`.
+  - `POST /api/newsletter-drafts` create the issue
+  - `PATCH /api/newsletter-drafts/:id` edit it
+  - `POST /api/newsletter-drafts/:id/images` upload an approved image (lands at `/media/newsletter/YYYY/MM/<id>/NN.ext`)
+  - `POST /api/newsletter-drafts/:id/ready` mark ready for Brian
+  - Same Bearer key as blog drafts. There is no approve or send route on this API, and the database refuses to mark an issue approved or sent without a signed-in admin. Brian reviews, edits and sends from the members app at `/admin/newsletter`.
 - **Handoff:** the Friday email to bmangum1@gmail.com (see `WEEKLY.md`).
 
 ## Files

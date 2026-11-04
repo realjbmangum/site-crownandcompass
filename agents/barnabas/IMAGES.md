@@ -3,7 +3,7 @@
 Status: DRAFT, pending Brian's pick of a generation method.
 
 ## Where images live
-Uploaded through `POST /api/drafts/:slug/images` on the C&C drafts API, which stores them in the crownandcompass-media R2 bucket and serves them at `/media/blog/YYYY/MM/<slug>/NN.ext`. Never the cc-book-scans bucket (members app). Never a new bucket.
+Uploaded through `POST /api/drafts/:slug/images` on the C&C drafts API, which stores them in the crownandcompass-media R2 bucket and serves them at `/media/blog/YYYY/MM/<slug>/NN.ext`. Newsletter images go through `POST /api/newsletter-drafts/:id/images` into the same bucket at `/media/newsletter/YYYY/MM/<id>/NN.ext`, and need alt text. Never the cc-book-scans bucket (members app). Never a new bucket.
 
 ## Rules
 - Brian approves every image before upload.
