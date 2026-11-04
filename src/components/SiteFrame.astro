@@ -1,0 +1,89 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogType?: string;
+  image?: string;
+  imageAlt?: string;
+  jsonLd?: unknown;
+}
+const {
+  title,
+  description,
+  canonical,
+  ogType = 'article',
+  image = 'https://thecrownandcompass.org/img/open-graph.jpg',
+  imageAlt = 'Crown and Compass',
+  jsonLd,
+} = Astro.props;
+const json = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : '';
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content="Crown and Compass" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+{json && <script type="application/ld+json" set:html={json} />}
+<link rel="stylesheet" href="/proto.css?v=12" />
+<link rel="stylesheet" href="/blog-pages.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src="/assets/cc-white.png" alt="" style="height:46px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <nav class="nav">
+      <a href="/about">About</a>
+      <a href="/how-it-works">How It Works</a>
+      <a href="/reading-list">Reading</a>
+      <a href="/blog" class="active">Blog</a>
+      <div class="nav-more">
+        <button class="more-btn" type="button" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-menu">
+          <a href="/resources">Resources</a>
+          <a href="/find-a-chapter">Find a Chapter</a>
+          <a href="/start-a-chapter">Start a Chapter</a>
+          <a href="/faq">FAQ</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+      <a class="signin" href="https://app.thecrownandcompass.org">Sign in</a>
+      <a class="btn-nav" href="/join">Join</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <slot />
+</main>
+<footer class="site-footer">
+  <div class="wrap ft">
+    <a class="brand" href="/" style="color:var(--bone);">
+      <img src="/assets/cc-white.png" alt="" style="height:40px;width:auto;" />
+      <span class="name">Crown &amp; Compass</span>
+    </a>
+    <div class="ft-links">
+      <a href="/about">About</a><a href="/how-it-works">How It Works</a><a href="/reading-list">Reading</a><a href="/blog">Blog</a><a href="/resources">Resources</a><a href="/find-a-chapter">Find a Chapter</a><a href="/start-a-chapter">Start a Chapter</a><a href="/faq">FAQ</a><a href="/contact">Contact</a>
+    </div>
+  </div>
+  <div class="wrap ft-base"><p class="cr">&copy; 2026 Crown &amp; Compass &middot; A Christian men&rsquo;s brotherhood &middot; <a href="/contact">Contact us</a></p></div>
+</footer>
+<script src="/site.js" defer></script>
+</body>
+</html>

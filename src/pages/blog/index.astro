@@ -1,0 +1,158 @@
+---
+export const prerender = false;
+
+import SiteFrame from '../../components/SiteFrame.astro';
+import { legacyHtml } from '../../lib/content/fallback';
+import { formatCardDate } from '../../lib/content/posts';
+import { blogEnv } from '../../lib/db/types';
+import { listPublished } from '../../lib/db/posts';
+import type { PostRow } from '../../lib/content/posts';
+
+const origin = 'https://thecrownandcompass.org';
+const description = 'Honest writing for Christian men on brotherhood, marriage, calling, and discipline. The Crown and Compass journal, one thought worth sitting with each week.';
+let posts: PostRow[] | null = null;
+let failed = false;
+const env = blogEnv(Astro.locals);
+if (!env.DB) failed = true;
+else {
+  try {
+    posts = await listPublished(env.DB);
+  } catch (err) {
+    console.error('blog index:', err);
+    failed = true;
+  }
+}
+// No table yet, or the table is still empty: keep serving the static index
+// so a deploy that lands before the load does not blank the journal.
+if (failed || (posts && posts.length === 0)) {
+  const fallback = await legacyHtml(Astro.locals, Astro.request, null);
+  if (fallback) return fallback;
+  posts = posts ?? [];
+}
+const rows = posts ?? [];
+const preferred = ['Faith', 'Brotherhood', 'Calling', 'Discipline', 'Marriage', 'Fatherhood', 'Being'];
+const present = new Set(rows.map((row) => row.tag).filter((tag): tag is string => !!tag));
+const topics = [
+  ...preferred.filter((tag) => present.has(tag)),
+  ...[...present].filter((tag) => !preferred.includes(tag)).sort(),
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: "Christian Men's Devotional Blog",
+  headline: 'The Crown and Compass Journal',
+  description,
+  url: `${origin}/blog`,
+  isPartOf: { '@type': 'WebSite', name: 'Crown and Compass', url: origin },
+  publisher: { '@type': 'Organization', name: 'Crown and Compass', url: origin },
+};
+Astro.response.headers.set('Cache-Control', 'public, max-age=60');
+
+function heroStyle(row: PostRow): string {
+  if (!row.hero_image_key) return '';
+  const url = `/media/${row.hero_image_key}`;
+  return `background-image:url('${url}');background-size:cover;background-position:center;background-repeat:no-repeat;`;
+}
+---
+<SiteFrame
+  title="Christian Men's Devotional Blog · Crown and Compass"
+  description={description}
+  canonical={`${origin}/blog`}
+  ogType="website"
+  jsonLd={jsonLd}
+>
+  <section class="section bone">
+    <div class="wrap">
+      <p class="kicker kicker-rule">The Blog</p>
+      <h1 style="font-size:clamp(2.25rem,5vw,3.4rem);">Honest reads for men.</h1>
+      <p class="prose" style="max-width:54ch;margin-top:18px;">Longer articles and short daily reads.</p>
+      {topics.length > 0 && (
+        <div class="topics" role="group" aria-label="Filter posts by topic">
+          <button type="button" class="tag tag-filter" aria-pressed="true" data-filter="">All</button>
+          {topics.map((topic) => (
+            <button type="button" class="tag tag-filter" aria-pressed="false" data-filter={topic}>{topic}</button>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section bone2" style="padding-top:0;padding-bottom:104px;margin-top:-40px;">
+    <div class="wrap">
+      {rows.length === 0 ? (
+        <p class="empty-shelf">Essays will land here once they are published.</p>
+      ) : (
+        <div class="cards">
+          {rows.map((row) => (
+            <a class="card post-card" href={`/blog/${row.slug}`}>
+              <div class="imgph dark filled" style={heroStyle(row)}></div>
+              {row.tag && <span class="tag">{row.tag}</span>}
+              <h3>{row.title}</h3>
+              <p class="ex">{row.description}</p>
+              <p class="meta">Article &middot; {formatCardDate(row.pub_date)}</p>
+              <span class="read">Read the post</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section bone center">
+    <div class="wrap">
+      <p class="kicker kicker-rule" style="justify-content:center;display:flex;">Pass it on</p>
+      <h2>Know a man who needs this?</h2>
+      <p class="sec-sub" style="max-width:44ch;margin:14px auto 24px;">Send him one honest read. That is how most men find their way in.</p>
+      <div class="share center">
+        <span>Share</span>
+        <a class="share-copy" role="button" tabindex="0" style="cursor:pointer;">Copy link</a>
+        <a class="share-email" href="mailto:">Share with a friend</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ink center">
+    <div class="wrap narrow" style="margin:0 auto;">
+      <p class="kicker" style="justify-content:center;display:flex;">The Next Cycle</p>
+      <h2>Read the next book with us.</h2>
+      <p class="sec-sub" style="max-width:46ch;margin:14px auto 28px;">One book every six weeks, online, with men who mean it. Tell us a little about you and a real person will write back with the next book and how to join.</p>
+      <a href="/join" class="btn btn-ember">Join the Brotherhood</a>
+    </div>
+  </section>
+</SiteFrame>
+<script>
+  (function () {
+    function wireShare() {
+      document.querySelectorAll('.share-copy').forEach(function (el) {
+        var original = el.textContent;
+        el.addEventListener('click', function () {
+          navigator.clipboard.writeText(window.location.href).then(function () {
+            el.textContent = 'Copied';
+            setTimeout(function () { el.textContent = original; }, 1600);
+          });
+        });
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+        });
+      });
+      document.querySelectorAll('.share-email').forEach(function (el) {
+        el.setAttribute('href', 'mailto:?subject=' + encodeURIComponent(document.title) +
+          '&body=' + encodeURIComponent('Thought you might want to read this. ' + window.location.href));
+      });
+    }
+    var btns = document.querySelectorAll('.tag-filter');
+    var cards = document.querySelectorAll('a.post-card');
+    Array.prototype.forEach.call(btns, function (b) {
+      b.addEventListener('click', function () {
+        var f = b.getAttribute('data-filter');
+        Array.prototype.forEach.call(btns, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        Array.prototype.forEach.call(cards, function (c) {
+          var t = c.querySelector('.tag');
+          c.style.display = (!f || (t && t.textContent.trim() === f)) ? '' : 'none';
+        });
+      });
+    });
+    if (document.readyState !== 'loading') wireShare();
+    else document.addEventListener('DOMContentLoaded', wireShare);
+  })();
+</script>

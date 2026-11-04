@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "blog:import": "node scripts/import-blog-posts.mjs",
+    "blog:check": "node scripts/check-blog.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^11.0.0",
