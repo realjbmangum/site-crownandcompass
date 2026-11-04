@@ -1,0 +1,1 @@
+Read-only snapshots taken 2026-11-04 from realjbmangum/site-crownandcompass brand/. The site repo is the source of truth. Where these use labeled takeaways ("Here's what I'm learning"), BARNABAS-VOICE.md wins.
