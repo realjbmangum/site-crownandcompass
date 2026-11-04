@@ -4,7 +4,7 @@ import { fail } from './http';
 export function mapNewsletterDbError(err: unknown): Response {
   const msg = err instanceof Error ? err.message : String(err);
   console.error('newsletter db error:', msg);
-  if (/no such table: newsletter_versions|no such column: (author|current_rev|issue_date)/i.test(msg)) {
+  if (/no such table: newsletter(s|_versions|_activity_log)\b|no such column: (author|current_rev|issue_date)/i.test(msg)) {
     return fail('the newsletter pipeline migration has not been applied to this database yet', 503);
   }
   if (msg.includes('only a signed-in admin can approve')) return fail('only a signed-in admin can approve or send a newsletter', 403);
