@@ -35,7 +35,7 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="proto.css?v=11" />
+<link rel="stylesheet" href="proto.css?v=12" />
 <style>
   .page-head h1{font-size:clamp(2.25rem,5.5vw,3.75rem);margin-top:14px;}
   .step .num{font-family:var(--mono);font-size:13px;letter-spacing:.22em;color:var(--ember-dark);margin-bottom:12px;}
@@ -82,6 +82,7 @@
           <a href="/find-a-chapter">Find a Chapter</a>
           <a href="/start-a-chapter">Start a Chapter</a>
           <a href="/faq">FAQ</a>
+          <a href="/contact">Contact</a>
         </div>
       </div>
       <a class="signin" href="https://app.thecrownandcompass.org">Sign in</a>
@@ -217,9 +218,10 @@
       <span class="name">Crown &amp; Compass</span>
     </a>
     <div class="ft-links">
-      <a href="/about">About</a><a href="/how-it-works">How It Works</a><a href="/reading-list">Reading</a><a href="/blog">Blog</a><a href="/resources">Resources</a><a href="/find-a-chapter">Find a Chapter</a><a href="/start-a-chapter">Start a Chapter</a><a href="/faq">FAQ</a>
+      <a href="/about">About</a><a href="/how-it-works">How It Works</a><a href="/reading-list">Reading</a><a href="/blog">Blog</a><a href="/resources">Resources</a><a href="/find-a-chapter">Find a Chapter</a><a href="/start-a-chapter">Start a Chapter</a><a href="/faq">FAQ</a><a href="/contact">Contact</a>
     </div>
   </div>
+  <div class="wrap ft-base"><p class="cr">&copy; 2026 Crown &amp; Compass &middot; A Christian men&rsquo;s brotherhood &middot; <a href="/contact">Contact us</a></p></div>
 </footer>
 <script>
 (function(){try{fetch('/api/current-book').then(function(r){return r.json();}).then(function(d){if(!d||!d.title)return;var t=document.querySelectorAll('[data-current-book-title]');for(var i=0;i<t.length;i++)t[i].textContent=d.title;if(d.author){var a=document.querySelectorAll('[data-current-book-author]');for(var j=0;j<a.length;j++)a[j].textContent=d.author;}}).catch(function(){});}catch(e){}})();

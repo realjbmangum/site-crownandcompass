@@ -16,4 +16,6 @@
 # archived guides keep their own /guide-<slug> URL.
 /reading-guide/  /guide-killing-kryptonite  308
 /reading-guide   /guide-killing-kryptonite  308
+/blog-post   /the-long-walk  301
+/blog-post/  /the-long-walk  301
 /:page/  /:page  308
