@@ -41,6 +41,9 @@
 /falling-in-love-again/   /blog/falling-in-love-again    301
 /prioritize-your-mind     /blog/prioritize-your-mind     301
 /prioritize-your-mind/    /blog/prioritize-your-mind     301
-/blog/:slug/              /blog/:slug                    301
+# /blog and /blog/:slug are Function routes, so this file does not run for
+# them. src/middleware.ts 308s those trailing slashes. This rule is the
+# fallback for a request that misses the Function, same 308 as /:page/ below.
+/blog/:slug/              /blog/:slug                    308
 
 /:page/  /:page  308
